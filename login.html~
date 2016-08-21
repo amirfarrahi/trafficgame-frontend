@@ -93,7 +93,7 @@
               if($('#re-form')[0].checkValidity()){
                 
                 $.ajax({
-                   url: 'http://localhost:3000/users',
+                   url: 'https://mighty-inlet-46722.herokuapp.com/users',
                    dataType: 'jsonp',
 		             async : false,
                    type: 'POST',
