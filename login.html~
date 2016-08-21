@@ -62,12 +62,13 @@
      	  $('#login').click( function () {
              if($('#lo-form')[0].checkValidity()){
                 $.ajax({
-                   url: 'http://mighty-inlet-46722.herokuapp.com/authenticate',
-                   dataType: 'json',
-		   async : false,
-                   type: 'POST',
-                   contentType: 'application/json; charset=utf-8',
-                   data: JSON.stringify({ "email": $('#lo-email').val(), "password": $('#lo-pass').val() }) 
+                   url: 'http://localhost:3000/authenticate',
+                   crossDomain:true,
+                   dataType: 'jsonp',
+		             type: 'POST',
+                 //  contentType: 'application/json; charset=utf-8',
+             //      data: JSON.stringify({ "email": $('#lo-email').val(), "password": $('#lo-pass').val() }),
+                   data: { "email": $('#lo-email').val(), "password": $('#lo-pass').val() } 
                 }).done(function(msg) {
                   
                   //   alert(msg.id);
@@ -93,8 +94,8 @@
               if($('#re-form')[0].checkValidity()){
                 
                 $.ajax({
-                   url: 'http://mighty-inlet-46722.herokuapp.com/users',
-                   dataType: 'json',
+                   url: 'http://localhost:3000/users',
+                   dataType: 'jsonp',
 		   async : false,
                    type: 'POST',
                    contentType: 'application/json; charset=utf-8',
