@@ -68,7 +68,7 @@
                    dataType: 'json',
 		             type: 'POST',
                    contentType: 'application/json; charset=utf-8',
-                   data: JSON.stringify({ "email": $('#lo-email').val(), "password": $('#lo-pass').val() }),
+                   data: JSON.stringify({ "email": $('#lo-email').val(), "password": $('#lo-pass').val() })//,
              //      data: { "email": $('#lo-email').val(), "password": $('#lo-pass').val() } 
                 }).done(function(msg) {
                   
