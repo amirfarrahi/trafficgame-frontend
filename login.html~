@@ -64,11 +64,11 @@
                 $.ajax({
                    url: 'http://localhost:3000/authenticate',
                    crossDomain:true,
-                   dataType: 'jsonp',
+                   dataType: 'json',
 		             type: 'POST',
-                 //  contentType: 'application/json; charset=utf-8',
-             //      data: JSON.stringify({ "email": $('#lo-email').val(), "password": $('#lo-pass').val() }),
-                   data: { "email": $('#lo-email').val(), "password": $('#lo-pass').val() } 
+                   contentType: 'application/json; charset=utf-8',
+                   data: JSON.stringify({ "email": $('#lo-email').val(), "password": $('#lo-pass').val() }),
+             //      data: { "email": $('#lo-email').val(), "password": $('#lo-pass').val() } 
                 }).done(function(msg) {
                   
                   //   alert(msg.id);
