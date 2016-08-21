@@ -239,7 +239,7 @@ var trafficflag;
   //  alert(JSON.stringify(uinfo));
    // alert(myObject.auth_token);
          $.ajax({
-                   url: 'http://localhost:3000/nodes',
+                   url: 'https://mighty-inlet-46722.herokuapp.com/nodes',
                    dataType: 'json',
                    type: 'GET',
                    async: false,
@@ -263,7 +263,7 @@ var trafficflag;
                   });
                   
          $.ajax({
-                   url: 'http://localhost:3000/activeconditions',
+                   url: 'https://mighty-inlet-46722.herokuapp.com/activeconditions',
                    dataType: 'json',
                    type: 'GET',
                    async: false,
@@ -284,7 +284,7 @@ var trafficflag;
                   });                  
                   
                          $.ajax({
-                   url: 'http://localhost:3000/getuserhrrate',
+                   url: 'https://mighty-inlet-46722.herokuapp.com/getuserhrrate',
                    dataType: 'json',
                    type: 'GET',
                    async: false,
@@ -343,7 +343,7 @@ var trafficflag;
                    $("#conbtn").prop("disabled",true);
                  
                    $.ajax({
-                   url: 'http://localhost:3000/games',
+                   url: 'https://mighty-inlet-46722.herokuapp.com/games',
                    dataType: 'json',
 		             async : false,
                    type: 'POST',
@@ -360,7 +360,7 @@ var trafficflag;
                 });
               };
                   $.ajax({
-                     url: 'http://localhost:3000/games/'+ gameid,
+                     url: 'https://mighty-inlet-46722.herokuapp.com/games/'+ gameid,
                      dataType: 'json',
 		               async : false,
                      type: 'PUT',
@@ -467,7 +467,7 @@ var trafficflag;
              if(trafficpolyline!= null)  trafficpolyline.setMap(null);
             calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,gtm);
                $.ajax({
-                  url: 'http://localhost:3000/updateuserloc',
+                  url: 'https://mighty-inlet-46722.herokuapp.com/updateuserloc',
                      dataType: 'json',
 		               async : false,
                      type: 'PUT',
@@ -496,7 +496,7 @@ var trafficflag;
              $("#answergrp").empty();
              qid=-1;
               $.ajax({
-                   url: 'http://localhost:3000/nodequestion/' + currnode  ,
+                   url: 'https://mighty-inlet-46722.herokuapp.com/nodequestion/' + currnode  ,
                    dataType: 'json',
 		             async : false,
                    type: 'GET',
@@ -522,7 +522,7 @@ var trafficflag;
                   if (nextnode==endnode) status=1; 
                   else status=0;     
                   $.ajax({
-                     url: 'http://localhost:3000/games/'+ gameid,
+                     url: 'https://mighty-inlet-46722.herokuapp.com/games/'+ gameid,
                      dataType: 'json',
 		               async : false,
                      type: 'PUT',
@@ -593,7 +593,7 @@ var trafficflag;
         //   alert(startnode);
         //   alert (currnode);
        /*           $.ajax({
-                   url: 'http://localhost:3000/getroute',
+                   url: 'https://mighty-inlet-46722.herokuapp.com/getroute',
                    dataType: 'json',
 		             async : false,
                    type: 'POST',
@@ -843,7 +843,7 @@ var trafficflag;
           }
           else {$('#myModal').modal('toggle');}  
               $.ajax({
-                   url: 'http://localhost:3000/userfeeds',
+                   url: 'https://mighty-inlet-46722.herokuapp.com/userfeeds',
                    dataType: 'json',
 		             async : false,
                    type: 'POST',
