@@ -62,8 +62,9 @@
      	  $('#login').click( function () {
              if($('#lo-form')[0].checkValidity()){
                 $.ajax({
-                   url: 'http://localhost:3000/authenticate',
+                   url: 'http://mighty-inlet-46722.herokuapp.com/authenticate',
                    crossDomain:true,
+                   headers: { 'Access-Control-Allow-Origin': '*'},
                    dataType: 'json',
 		             type: 'POST',
                    contentType: 'application/json; charset=utf-8',
@@ -96,7 +97,7 @@
                 $.ajax({
                    url: 'http://localhost:3000/users',
                    dataType: 'jsonp',
-		   async : false,
+		             async : false,
                    type: 'POST',
                    contentType: 'application/json; charset=utf-8',
                    data: JSON.stringify({ "name":$('#username').val() ,"email": $('#email').val(), "password": $('#password').val(), 
