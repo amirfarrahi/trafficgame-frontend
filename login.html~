@@ -52,7 +52,7 @@
   </div>
  
 </div>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js'></script>
+    <script src='js/jquery.min.js'></script>
 
 
         <script src="js/index.js"></script>
@@ -62,9 +62,7 @@
      	  $('#login').click( function () {
              if($('#lo-form')[0].checkValidity()){
                 $.ajax({
-                   url: 'http://mighty-inlet-46722.herokuapp.com/authenticate',
-                   crossDomain:true,
-                   headers: { 'Access-Control-Allow-Origin': '*'},
+                   url: 'https://mighty-inlet-46722.herokuapp.com/authenticate',
                    dataType: 'json',
 		             type: 'POST',
                    contentType: 'application/json; charset=utf-8',
