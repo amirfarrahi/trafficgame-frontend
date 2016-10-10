@@ -38,7 +38,7 @@
         var myObject = JSON.parse(uinfo);
 
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/questions',
+                   url: 'http://localhost:3000/questions',
                    dataType: 'json',
                    type: 'GET',
                    async: false,
@@ -59,12 +59,13 @@
                   });
                 })
                   .fail(function(msg) {
+
                   alert("failed");
                              
                   });
                   
                    $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/answers',
+                   url: 'http://localhost:3000/answers',
                    dataType: 'json',
                    type: 'GET',
                    async: false,
