@@ -45,7 +45,7 @@ var map;
       
           $( document ).ready(function() {
            
-
+var infowindow;
 
           
           $('#hist').click(function() {
@@ -58,7 +58,7 @@ var contentString = '<div id="content">'+
             '</table></div>';
         
 var    iwlatlng = new google.maps.LatLng(38.919652, -76.930737);
-         var infowindow = new google.maps.InfoWindow({
+          infowindow = new google.maps.InfoWindow({
           content: contentString,
           position:iwlatlng
         });  

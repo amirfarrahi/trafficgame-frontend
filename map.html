@@ -48,30 +48,25 @@ var map;
 var infowindow;
 
           
-          $('#hist').click(function() {
+         $('#iwo').click(function() {
 
-var contentString = '<div id="content">'+
+         var contentString = '<div id="content">'+
             '<table class="table table-striped">'+'<tr><th>Mode</th><th>Mile</th><th>Cost</th><th>Travel Time</th></tr>'+
             '<tr><td>Car</td><td>50</td><td>50 $</td><td>50 min</td></tr>'+
             '<tr><td>Bike</td><td>50</td><td>0 $</td><td>94 min</td></tr>'+     
             '<tr><td>Metro</td><td>50</td><td>5 $</td><td>67 min</td></tr>'+       
             '</table></div>';
         
-var    iwlatlng = new google.maps.LatLng(38.919652, -76.930737);
+         var    iwlatlng = new google.maps.LatLng(38.919652, -76.930737);
           infowindow = new google.maps.InfoWindow({
           content: contentString,
           position:iwlatlng
-        });  
-       infowindow.open(map);
-           
-         
-          
-       
-
+          });  
+         infowindow.open(map);
           });
           
       $('#hist1').click(function() {
-infowindow.close();
+
           });          
           
           });
