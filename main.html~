@@ -363,7 +363,7 @@ var busflag=0;
                   });
                   
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/'+eee,
+                   url: 'https://mighty-inlet-46722.herokuapp.com/nodes/'+eee,
                    dataType: 'json',
                    type: 'GET',
                    async: false,
