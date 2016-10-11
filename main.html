@@ -173,6 +173,8 @@
  <a id="loc" class="navbar-brand" href="#">Players Location</a> </div> 
  </div> </nav>
 
+
+<div id="ccc" class="col-md-12 map">
 <div id="gmap" class="col-md-12 map">
 </div>
 
@@ -204,6 +206,8 @@
 </div>
 </div>
 <div id="gmaploc" class="col-md-12 map"></div>
+
+</div>
 <div id="animation" class="col-md-12 hidden"><img id="ride" class="center-block" src="" ></div>
 </div>
 <div class="row">
@@ -224,11 +228,12 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
 
-<script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+ crossorigin="anonymous"></script>
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
     async defer></script>
-    <script src="js/markerwithlabel.js"></script>
+
 
       <script>
     
@@ -333,7 +338,7 @@ var busflag=0;
                    url: 'https://mighty-inlet-46722.herokuapp.com/nodes/'+sss ,
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
+                   async: true,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -350,8 +355,8 @@ var busflag=0;
           				 start = srcmyLatlng;
           				 srcmarker = new google.maps.Marker({
           				 position: srcmyLatlng,
-          				 title:data.name,
-          				 icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + data.name + '|FF0000|000000'
+          				 title:data.name//,
+          			//	 icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + data.name + '|FF0000|000000'
                       });
                       srcmarker.setMap(map);  
           
@@ -369,7 +374,7 @@ var busflag=0;
                    url: 'https://mighty-inlet-46722.herokuapp.com/nodes/9',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
+                   async: true,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -384,8 +389,8 @@ var busflag=0;
           				 desmyLatlng = new google.maps.LatLng(lat,lon);
           				 desmarker = new google.maps.Marker({
           				 position: desmyLatlng,
-          				 title:data.name,
-          				 icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + data.name + '|FF0000|000000'
+          				 title:data.name//,
+          				// icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + data.name + '|FF0000|000000'
        
           				 });
           				 desmarker.setMap(map); 
@@ -401,7 +406,7 @@ var busflag=0;
                    url: 'https://mighty-inlet-46722.herokuapp.com/activeconditions',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
+                   async: true,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -426,7 +431,7 @@ var busflag=0;
                    url: 'https://mighty-inlet-46722.herokuapp.com/getuserhrrate',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
+                   async: true,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -441,9 +446,9 @@ var busflag=0;
                              
                   });  
          
-                     $("#histtab").hide();
-                     $("#gmaploc").hide(); //addClass('hidden');
-        //$("#histtab").addClass('hidden'); 
+                 //   $("#histtab").toggle();
+                    $("#gmaploc").hide();
+                    $("#histtab").hide(); 
       
        $('#myModal').on('hidden.bs.modal', function () {
 
@@ -455,6 +460,11 @@ var busflag=0;
 $("#gmap").hide();
 $("#gmaploc").hide();
 $("#histtab").show();
+google.maps.event.trigger(hmap, 'resize');
+hmap.setZoom( hmap.getZoom() );
+//$('#gmap').css('display','none');
+//$("#gmaploc").hide();
+//$('#gmaploc').css('display','none');
       //   $("#gmap").addClass('hidden');
       //   $("#gmaploc").addClass('hidden');
       //  $("#histtab").removeClass('hidden');
@@ -466,12 +476,16 @@ $("#histtab").show();
            // $("#gmaploc").show();
            // $("#gmap").addClass('hidden');
           //  $("#histtab").addClass('hidden');
-           $("#gmaploc").show();//removeClass('hidden');           
+           $("#gmaploc").show();//removeClass('hidden');   
+google.maps.event.trigger(maploc, 'resize');
+maploc.setZoom( maploc.getZoom() ); 
+        
+         
               $.ajax({
                    url: 'https://mighty-inlet-46722.herokuapp.com/listuserloc',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
+                   async: true,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -512,9 +526,11 @@ $("#histtab").show();
        });
        $('#main').click(function() {
          $("#histtab").hide();//addClass('hidden');
+                  $("#gmaploc").hide();//addClass('hidden');
          $("#gmap").show();//removeClass('hidden');
 
-         $("#gmaploc").hide();//addClass('hidden');
+
+
        });
 
 
@@ -548,15 +564,13 @@ $("#histtab").show();
               $("#startbtn").prop("disabled",true);
               if (tm==2) $("#car").prop("disabled",true);
               if (tm==3) $("#car").prop("disabled",true);
-              $("#gmap").addClass('hidden');
+              $("#ccc").hide();//addClass('hidden');
               budget=(budget-cost).toFixed(2);
               $("#budget").text(budget+ ' $');
             
               ttime=traveltime+ttime;
            
               $("#ttime").text(ttime.toFixed(2) +' min');
-              $("#histtab").addClass('hidden');
-              $("#gmaploc").addClass('hidden');
               $("#animation").removeClass('hidden');
               $('#ride').attr("src",tmimagelink);
               $("#routegrp").addClass('hidden');
@@ -650,7 +664,7 @@ $("#histtab").show();
           desmarker = new google.maps.Marker({
           position: desmyLatlng,
           title:this.getAttribute("data-name"),
-          icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + this.getAttribute("data-name") + '|FF0000|000000'
+       //   icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + this.getAttribute("data-name") + '|FF0000|000000'
        
           });
           desmarker.setMap(map); 
@@ -670,7 +684,7 @@ $("#histtab").show();
           srcmarker = new google.maps.Marker({
           position: srcmyLatlng,
           title:this.getAttribute("data-name"),
-          icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + this.getAttribute("data-name") + '|FF0000|000000'
+    //      icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + this.getAttribute("data-name") + '|FF0000|000000'
           });
           srcmarker.setMap(map);  
           $("#srcbtn").text(this.getAttribute("data-name"));
@@ -695,7 +709,7 @@ $("#histtab").show();
         
              $("#startbtn").prop("disabled",false);
          //    $("#trafficnews").text('');
-             $("#gmap").removeClass('hidden');
+             $("#ccc").show();//removeClass('hidden');
              $("#animation").addClass('hidden');
              $("#routegrp").removeClass('hidden');
          //    $("#tmbtn button").removeClass('hidden');
@@ -704,7 +718,7 @@ $("#histtab").show();
              $("#car").click();
              if (start==desmyLatlng) {
               $('#ride').attr("src",'img/gameover.jpg');
-               $("#gmap").addClass('hidden');
+              
                $("#animation").removeClass('hidden');
                $("#tmbtn button").prop("disabled",true);
                $("#traveltime").text('');
@@ -999,6 +1013,10 @@ $("#histtab").show();
          destination: pointB,
          provideRouteAlternatives:true,
          travelMode: travel_mode //google.maps.TravelMode.DRIVING
+      //   drivingOptions: {
+      //     departureTime: new Date(/* now, or future date */)
+      //   }
+
          };
          
          if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) {
