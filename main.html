@@ -278,8 +278,9 @@ var busflag=0;
           zoom: 11,
           zoomControl: true
         });
+        var myLatlng1 = new google.maps.LatLng(38.9072, -77.0369);
          hmap = new google.maps.Map(document.getElementById('gmaphist'), {
-          center: myLatlng,
+          center: myLatlng1,
           zoom: 11,
           zoomControl: true
         }); 
@@ -438,8 +439,9 @@ var busflag=0;
                              
                   });  
          
-         $("#gmaploc").addClass('hidden');
-        $("#histtab").addClass('hidden'); 
+                     $("#histtab").hide();
+                     $("#gmaploc").hide(); //addClass('hidden');
+        //$("#histtab").addClass('hidden'); 
       
        $('#myModal').on('hidden.bs.modal', function () {
 
@@ -448,17 +450,21 @@ var busflag=0;
        });
        
        $('#hist').click(function() {
-
-         $("#gmap").addClass('hidden');
-         $("#gmaploc").addClass('hidden');
-        $("#histtab").removeClass('hidden');
+$("#gmap").hide();
+$("#gmaploc").hide();
+$("#histtab").show();
+      //   $("#gmap").addClass('hidden');
+      //   $("#gmaploc").addClass('hidden');
+      //  $("#histtab").removeClass('hidden');
        });
         $('#loc').click(function() {
         
-
-            $("#gmap").addClass('hidden');
-            $("#histtab").addClass('hidden');
-            $("#gmaploc").removeClass('hidden');           
+            $("#gmap").hide();
+            $("#histtab").hide();
+           // $("#gmaploc").show();
+           // $("#gmap").addClass('hidden');
+          //  $("#histtab").addClass('hidden');
+           $("#gmaploc").show();//removeClass('hidden');           
               $.ajax({
                    url: 'https://mighty-inlet-46722.herokuapp.com/listuserloc',
                    dataType: 'json',
@@ -503,10 +509,10 @@ var busflag=0;
            
        });
        $('#main').click(function() {
-         $("#histtab").addClass('hidden');
-         $("#gmap").removeClass('hidden');
+         $("#histtab").hide();//addClass('hidden');
+         $("#gmap").show();//removeClass('hidden');
 
-         $("#gmaploc").addClass('hidden');
+         $("#gmaploc").hide();//addClass('hidden');
        });
 
 
