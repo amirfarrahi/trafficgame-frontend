@@ -147,8 +147,8 @@
 
 
 </div>
-<div class="col-md-3" data-toggle="tooltip" title="The amount of time that you have spent in THIS trip."><span class="label label-default">Time elapsed:</span>
-<span id="ttime" ><strong></strong></span>
+<div class="col-md-3" data-toggle="tooltip" title="The amount of time that you have spent in THIS trip."><span class="hidden label label-default">Time elapsed:</span>
+<span class="hidden" id="ttime" ><strong></strong></span>
 </div> 
 
 </div>
@@ -1088,7 +1088,7 @@ $("#histtab").show();
             totalmilage=parseFloat(roadresult[routeindex].legs[0].distance.text);
             $("#distance").text(totalmilage+ ' miles');        
             var durationinmin=roadresult[routeindex].legs[0].duration.value/60;
-            cost=totalmilage*0.16 +14;
+            if (conditionid==1) cost=totalmilage*0.16 +15;
             if (conditionid==4) cost=cost*0.5;
             if (conditionid==2 || conditionid==4 ) durationinmin=durationinmin+totalmilage;
             for (i = 0; i < legs.length; i++) {

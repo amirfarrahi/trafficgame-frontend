@@ -1088,7 +1088,7 @@ $("#histtab").show();
             totalmilage=parseFloat(roadresult[routeindex].legs[0].distance.text);
             $("#distance").text(totalmilage+ ' miles');        
             var durationinmin=roadresult[routeindex].legs[0].duration.value/60;
-            cost=totalmilage*0.16 +14;
+            if (conditionid==1) cost=totalmilage*0.16 +15;
             if (conditionid==4) cost=cost*0.5;
             if (conditionid==2 || conditionid==4 ) durationinmin=durationinmin+totalmilage;
             for (i = 0; i < legs.length; i++) {
@@ -1115,7 +1115,7 @@ $("#histtab").show();
             $("#traveltime").text(durationinmin.toFixed(2) + ' min');
             traveltime=durationinmin;
             if (tm==2) cost=0;
-            if (gtm==3) cost=5;
+            if (tm==3) cost=totalmilage*0.318;
             $("#cost").text(cost.toFixed(2)+ ' $');
             $("#budget").text((budget-cost).toFixed(2)+ ' $');
            
