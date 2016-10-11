@@ -165,11 +165,12 @@
 
 
 <nav class="navbar navbar-default"> <div class="container-fluid"> 
- <div class="navbar-header"> <a id="hist" class="navbar-brand" href="#">History</a> </div> 
+ <div class="navbar-header"> <a id="hist" class="navbar-brand" href="#">Trip History</a> </div> 
  <div class="col-md-4"> </div>
  <div class="navbar-header"> <a id="main" class="navbar-brand" href="#">Main</a> </div> 
   <div class="col-md-4"> </div>
- <div class="navbar-header" data-toggle="tooltip" title="Location of other players"> <a id="loc" class="navbar-brand" href="#">Players Loc</a> </div> 
+ <div class="navbar-header" data-toggle="tooltip" title="Location of other players">
+ <a id="loc" class="navbar-brand" href="#">Players Location</a> </div> 
  </div> </nav>
 
 <div id="gmap" class="col-md-12 map">
@@ -257,6 +258,7 @@ var index=0;
 var nextnode;
 var r1,r2;
 var gtm=-1;
+var tm=0;
 var tmname="";
 var tmimagelink;
 var acclink='img/accident.jpg';
@@ -364,7 +366,7 @@ var busflag=0;
                   });
                   
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/nodes/'+eee,
+                   url: 'https://mighty-inlet-46722.herokuapp.com/nodes/9',
                    dataType: 'json',
                    type: 'GET',
                    async: false,
@@ -464,7 +466,7 @@ $("#histtab").show();
            // $("#gmaploc").show();
            // $("#gmap").addClass('hidden');
           //  $("#histtab").addClass('hidden');
-           $("#gmaploc").removeClass('hidden');           
+           $("#gmaploc").show();//removeClass('hidden');           
               $.ajax({
                    url: 'https://mighty-inlet-46722.herokuapp.com/listuserloc',
                    dataType: 'json',
@@ -544,6 +546,8 @@ $("#histtab").show();
               playsteps=playsteps+1;
               infowindow.close();
               $("#startbtn").prop("disabled",true);
+              if (tm==2) $("#car").prop("disabled",true);
+              if (tm==3) $("#car").prop("disabled",true);
               $("#gmap").addClass('hidden');
               budget=(budget-cost).toFixed(2);
               $("#budget").text(budget+ ' $');
@@ -556,7 +560,7 @@ $("#histtab").show();
               $("#animation").removeClass('hidden');
               $('#ride').attr("src",tmimagelink);
               $("#routegrp").addClass('hidden');
-               $("#tmbtn button").prop("disabled",true);
+           //    $("#tmbtn button").addClass('hidden');//hide();//prop("disabled",true);
                if (playsteps==1) $("#histtable").empty();
                $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+cost.toFixed(2) +" $</td><td>"
                +totalmilage.toFixed(2)+" m</td><td>"+traveltime +" min</td></tr>");
@@ -694,7 +698,7 @@ $("#histtab").show();
              $("#gmap").removeClass('hidden');
              $("#animation").addClass('hidden');
              $("#routegrp").removeClass('hidden');
-             $("#tmbtn button").prop("disabled",false);
+         //    $("#tmbtn button").removeClass('hidden');
              calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,this.value,hmap);
              start=temp;
              $("#car").click();
@@ -1110,7 +1114,7 @@ $("#histtab").show();
             durationinmin=durationinmin+30;
             $("#traveltime").text(durationinmin.toFixed(2) + ' min');
             traveltime=durationinmin;
-            if (gtm==2) cost=0;
+            if (tm==2) cost=0;
             if (gtm==3) cost=5;
             $("#cost").text(cost.toFixed(2)+ ' $');
             $("#budget").text((budget-cost).toFixed(2)+ ' $');
