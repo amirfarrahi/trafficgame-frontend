@@ -65,8 +65,32 @@ var infowindow;
          infowindow.open(map);
           });
           
+         
+  //tzOffset = (now.getTimezoneOffset() + 60) * 60e3
+ // hhmm = departure.split(':')
+ // time = new Date
+ // time.setHours   hhmm[0]
+ // time.setMinutes hhmm[1]
+ // ms = time.getTime() - tzOffset
+ // ms += 24 * 60 * 60e3  if ms < now.getTime()
+ // departureTime = new Date ms
+          
       $('#hist1').click(function() {
 
+
+
+   var d = new Date()
+var n = (d.getTimezoneOffset()+60) * 60e3;
+var dep='07:00';
+var hhmm = dep.split(':')
+var time = new Date();
+  time.setHours(hhmm[0]);
+  time.setMinutes(hhmm[1]);
+  var ms = time.getTime() - n;
+  if (ms < d.getTime()) ms += 24 * 60 * 60e3 ;
+
+  var departureTime = new Date(ms);
+  alert(departureTime);
           });          
           
           });
