@@ -283,6 +283,7 @@ var tr3='';
 var lookupon=0;
 var cnt;
 
+
       function initMap() {
         myLatlng = new google.maps.LatLng(38.9072, -77.0369);
         map = new google.maps.Map(document.getElementById('gmap'), {
@@ -835,6 +836,7 @@ if (lookupon==1) {
                           $("#startbtn").prop("disabled",false);
 
 
+
     
         
                 
@@ -1005,9 +1007,7 @@ if (lookupon==1) {
        {
        
     
-         var vtotalmilage;
-            var vdurationinmin;
-            var cost;
+      
          var dirseroption={
          origin: pointA,
          destination: pointB,
@@ -1035,17 +1035,7 @@ if (lookupon==1) {
            
 /*********************************/           
            
-            polyline = new google.maps.Polyline({
-           					path: [],
-           					strokeColor: '#0000FF',
-           					strokeWeight: 3
-           });
-           
-           trafficpolyline = new google.maps.Polyline({
-           					path: [],
-           					strokeColor: '#FF0000',
-           					strokeWeight: 3
-           });    
+         
            var roadresult=response.routes;
            var tmpr=[];
            var qqq;
@@ -1078,10 +1068,13 @@ if (lookupon==1) {
             if (roadresult.length>1) myRoute= roadresult[0].legs[0];
             if (roadresult.length>1)      legs= roadresult[routeindex].legs;
             else legs= roadresult[0].legs;
+            var vtotalmilage;
+                var vdurationinmin;
+            var vcost1;
             vtotalmilage=parseFloat(roadresult[routeindex].legs[0].distance.text);
            vdurationinmin=roadresult[0].legs[0].duration.value/60;
          
-            if (conditionid==1) vcost=vtotalmilage*0.16 +15;
+             vcost1=vtotalmilage*0.16 +15;
             if (conditionid==4) vcost=vcost*0.5;
             var vdurationinmin;
             if (conditionid==2 || conditionid==4 ) vdurationinmin=vdurationinmin+vtotalmilage;
@@ -1098,11 +1091,13 @@ if (lookupon==1) {
              }
             }
          
+            
+        
             if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
             vdurationinmin=vdurationinmin+30;
             vtraveltime=vdurationinmin;
-            if (tm==2) vcost=0;
-            if (tm==3) vcost=vtotalmilage*0.318;
+            if (tm==2) vcost1=0;
+            if (tm==3) vcost1=vtotalmilage*0.318;
 
            
          var www='';
@@ -1114,7 +1109,7 @@ if (lookupon==1) {
       //  cnt.push('<tr><td>Bike</td><td>'+'</td><td>'+vcost.toFixed(2) +' $</td><td>' + ' min</td></tr>');
          if (travel_mode==google.maps.DirectionsTravelMode.DRIVING) 
          www='<tr><td>Car</td>';
-        cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+vcost.toFixed(2)+' $</td><td>' +
+        cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+' $</td><td>' +
         vtraveltime.toFixed(2) +' min</td></tr>');
 
             
