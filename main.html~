@@ -1109,7 +1109,7 @@ if (lookupon==1) {
       //  cnt.push('<tr><td>Bike</td><td>'+'</td><td>'+vcost.toFixed(2) +' $</td><td>' + ' min</td></tr>');
          if (travel_mode==google.maps.DirectionsTravelMode.DRIVING) 
          www='<tr><td>Car</td>';
-        cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+' $</td><td>' +
+        cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+vcost1+' $</td><td>' +
         vtraveltime.toFixed(2) +' min</td></tr>');
 
             
