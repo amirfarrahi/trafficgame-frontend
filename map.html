@@ -28,6 +28,7 @@
       // When the user clicks the marker, an info window opens.
 
 var map;
+var cnt=[];
 
       function initMap() {
         var myLatlng = new google.maps.LatLng(38.9072, -77.0369);
@@ -35,14 +36,51 @@ var map;
           zoom: 11,
           center: myLatlng
         });
-
-   
-
+        directionsService = new google.maps.DirectionsService;
 }
     
     
   
-      
+   function calculateAndDisplayRoute1(directionsService, pointA, pointB,travel_mode,callbackfunc) 
+       {
+       
+         var ee;
+         var i;
+       
+         var dirseroption={
+         origin: pointA,
+         destination: pointB,
+         provideRouteAlternatives:true,
+         travelMode: travel_mode //google.maps.TravelMode.DRIVING
+     
+         };
+         
+         if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) {
+            dirseroption={
+               origin: pointA,
+               destination: pointB,
+               travelMode: 'TRANSIT',
+               transitOptions:{
+                 modes: ['SUBWAY']  
+               },
+               provideRouteAlternatives:true
+            };
+        }; 
+          
+         directionsService.route(dirseroption, function(response, status) {
+         
+           if (status === google.maps.DirectionsStatus.OK) {
+           ee=ee+'<tr><td>Car</td><td>'+'</td><td>'+' $</td><td>' + ' min</td></tr>'+
+         '<tr><td>Bike</td><td>'+'</td><td>'+' $</td><td>' + ' min</td></tr>'+
+         '<tr><td>Metro</td><td>'+'</td><td>'+' $</td><td>' + ' min</td></tr>';
+         cnt.push(ee);
+        callbackfunc(cnt);
+   } 
+
+ });
+ 
+
+ }
           $( document ).ready(function() {
            
 var infowindow;
@@ -76,23 +114,39 @@ var infowindow;
  // departureTime = new Date ms
           
       $('#hist1').click(function() {
+cnt=[];
+var    iwlatlng1 = new google.maps.LatLng(38.919652, -76.930737);
+var    iwlatlng2 = new google.maps.LatLng(38.919652, -76.930737);
+calculateAndDisplayRoute1(directionsService,iwlatlng1,iwlatlng2,google.maps.DirectionsTravelMode.DRIVING,function 
+(w) {
+	
+});
+calculateAndDisplayRoute1(directionsService,iwlatlng1,iwlatlng2,google.maps.DirectionsTravelMode.DRIVING,function 
+(w) {
+	
+});
+calculateAndDisplayRoute1(directionsService,iwlatlng1,iwlatlng2,google.maps.DirectionsTravelMode.DRIVING,function 
+(w) {
+	
+	alert(w.length);
+});
 
-
-
+/*
    var d = new Date()
 var n = (d.getTimezoneOffset()+60) * 60e3;
 var dep='07:00';
 var hhmm = dep.split(':')
 var time = new Date();
-  time.setHours(hhmm[0]);
+  time.setHours(hhmm[0]);j
   time.setMinutes(hhmm[1]);
   var ms = time.getTime() - n;
   if (ms < d.getTime()) ms += 24 * 60 * 60e3 ;
 
   var departureTime = new Date(ms);
   alert(departureTime);
-          });          
+          });    */       
           
+          });
           });
     </script>
     

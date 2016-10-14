@@ -280,7 +280,8 @@ var busflag=0;
 var tr1='';
 var tr2='';
 var tr3='';
-var gtmbtncntr=0;
+var lookupon=0;
+var cnt;
 
       function initMap() {
         myLatlng = new google.maps.LatLng(38.9072, -77.0369);
@@ -558,6 +559,7 @@ map.setZoom( map.getZoom() );
              
 
               gtmbtncntr=0;
+              lookupon=0;
               playsteps=playsteps+1;
               infowindow.close();
               pretripmile=totalmilage;
@@ -704,6 +706,9 @@ map.setZoom( map.getZoom() );
          $('#myModal').modal('toggle');  
        });       
 
+
+
+
          
        $("#tmbtn button").click(function() {
        
@@ -772,83 +777,43 @@ map.setZoom( map.getZoom() );
  
 //infowindow.close();
 
-
- calculateAndDisplayRoute1(directionsService2,directionsDisplay1,start,desmyLatlng,google.maps.DirectionsTravelMode.DRIVING,0,map,0);
+cnt=[];
+lookupon++;
+ calculateAndDisplayRoute1(directionsService2,directionsDisplay1,start,desmyLatlng,google.maps.DirectionsTravelMode.DRIVING,
+ 0,map,0,function (w){
+  calculateAndDisplayRoute1(directionsService2,directionsDisplay1,start,desmyLatlng,google.maps.DirectionsTravelMode.BICYCLING,
+ 0,map,0,function (w){
  
- 
-  
- // calculateAndDisplayRoute1(directionsService2,directionsDisplay1,start,desmyLatlng,google.maps.DirectionsTravelMode.BICYCLING,0,map,1);
-    
- //  calculateAndDisplayRoute1(directionsService2,directionsDisplay1,start,desmyLatlng,google.maps.DirectionsTravelMode.TRANSIT,0,map,2);
-    
-
-//alert(tr1);
-
-//alert(rw1);
-
-                     //          
+    calculateAndDisplayRoute1(directionsService2,directionsDisplay1,start,desmyLatlng,google.maps.DirectionsTravelMode.TRANSIT,
+ 0,map,0,function (w){
 
 
-                          $("#startbtn").prop("disabled",false);
-        //   alert(startnode);
-        //   alert (currnode);
-       /*           $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/getroute',
-                   dataType: 'json',
-		             async : false,
-                   type: 'POST',
-                   contentType: 'application/json; charset=utf-8',
-                   data: JSON.stringify({ "condition_id": conditionid,"travel_mod":tm,"status":0,"origin":currnode,
-                   "destination":endnode,"current_loc_type":"N","location_id":currnode  }),
-                   headers: { 'Authorization' : myObject.auth_token       } 
-          }).done(function(msg) {
-                //   alert(JSON.stringify(msg));
-                    var start,end;
-                    var lat,lon;
-                    
-                    $("#traveltime").text('');
-                    $("#cost").text('');
-                    if (msg.traveltime!=null) {
-                      traveltime=msg.traveltime;
-                      $("#traveltime").text(traveltime+ ' minutes');
-                    }
-                    $("#cost").text('');
-                    if (msg.cost!=null) { 
-                      cost=msg.cost;
-                      $("#cost").text(cost+ ' $');
-                    }
-                    if (msg.comingedge!=null) {
-                       curredge= msg.comingedge;
-                       edgeaccind=msg.accind;
-                    }
-                    
-                    
-                    if (msg.wp.length!=0) { 
-                    		$("#startbtn").prop("disabled",false);
-                    		nextnode=msg.wp[1].name;
-                    		for (var i = 0; i < msg.wp.length; i++){
-                          lat=msg.wp[i].location[0];
-                          lon=msg.wp[i].location[1];
-                          var gpoint=new google.maps.LatLng(lat, lon);
-                          waypts.push({location:gpoint,stopover:false}); 
-                          if (i==0)               start = new google.maps.LatLng(lat, lon);
-                          if (i==msg.wp.length-1) end = new google.maps.LatLng(lat, lon);
-                        } */
 
-                
-                    //    start = srcmyLatlng;
-                 //      directionsDisplay1.setDirections({routes: []});
-                //       calculateAndDisplayRoute(directionsService,directionsDisplay1,start,end,waypts,gtm,1);
-                  /*  }
-                    else $("#startbtn").prop("disabled",true);
-             
-                   
-    		 })
-          .fail(function(msg) {
-                    alert("fail");
-          });
-       */
+
+ var contentString='<div id="content">'+'<table class="table table-striped">'+
+'<tr><th>Mode</th><th>Mile</th><th>Cost</th><th>Travel Time</th></tr>'+w+'</table></div>';
+         
+if (lookupon==1) {
+         var    iwlatlng = new google.maps.LatLng(38.919652, -76.930737);
+             infowindow = new google.maps.InfoWindow({
+            content: contentString,
+          position:iwlatlng
+          });  
        
+             
+         infowindow.open(map);
+         }
+   
+            
+
+
+
+
+ 
+ });
+ }); 
+ });
+                    $("#startbtn").prop("disabled",false);
        });
         var t1,t2;
        $(document).on('change', 'input:radio[id^="r"]', function (event) {
@@ -860,53 +825,22 @@ map.setZoom( map.getZoom() );
           $("#r2").attr('checked', false);
           return false;
           }
- //   alert(this.value);
-                      //            if(t1 != null)       t1.setMap(null);
-       if(polyline!= null)  polyline.setMap(null);
+     if(polyline!= null)  polyline.setMap(null);
         if(trafficpolyline!= null)  trafficpolyline.setMap(null);
 
        routeselectedindex=this.value;
        calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,gtm,this.value,map);
 
 
-               
-       
-                     //          
-
-
                           $("#startbtn").prop("disabled",false);
-                    //   if (Number(this.value)==1) {  
 
-                                //         start=test2;
-        //    calculateAndDisplayRoute(directionsService,directionsDisplay2,srcmyLatlng,desmyLatlng,waypts,gtm,Number(this.value));
-                       //    t1.setMap(null);
 
-        
-                 //         t2=new google.maps.DirectionsRenderer(r2); 
-                //    }
-                    
-                                          
-                 //     if (Number(this.value)==0) {  
-                                        //         t1.setMap(null);
-          
-                                                 //  start=test1;
-         //   calculateAndDisplayRoute(directionsService,directionsDisplay1,srcmyLatlng,desmyLatlng,waypts,gtm,Number(this.value));
-           
-                 //         t1=new google.maps.DirectionsRenderer(r1); 
-                 //   }
+    
         
                 
         }); 
          
-        
-        function uniqBy(a, key) {
-    var seen = {};
-    return a.filter(function(item) {
-        var k = key(item);
-        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
-    })
-}
-        
+  
       
       
          function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB,travel_mode,routeindex,imap) 
@@ -1066,16 +1000,14 @@ map.setZoom( map.getZoom() );
 
 
 /*****************************************************************/
-       function calculateAndDisplayRoute1(directionsService, directionsDisplay, pointA, pointB,travel_mode,routeindex,imap,mindex) 
+       function calculateAndDisplayRoute1(directionsService, directionsDisplay, pointA, pointB,travel_mode,routeindex,imap
+       ,mindex,callbackfunc) 
        {
        
-      
-       var funcr='';
-       var x;
-       var z;
-      gtmbtncntr++;
-         //infowindow.close();
-       
+    
+         var vtotalmilage;
+            var vdurationinmin;
+            var cost;
          var dirseroption={
          origin: pointA,
          destination: pointB,
@@ -1100,44 +1032,97 @@ map.setZoom( map.getZoom() );
          directionsService.route(dirseroption, function(response, status) {
 
            if (status === google.maps.DirectionsStatus.OK) {
+           
+/*********************************/           
+           
+            polyline = new google.maps.Polyline({
+           					path: [],
+           					strokeColor: '#0000FF',
+           					strokeWeight: 3
+           });
+           
+           trafficpolyline = new google.maps.Polyline({
+           					path: [],
+           					strokeColor: '#FF0000',
+           					strokeWeight: 3
+           });    
+           var roadresult=response.routes;
+           var tmpr=[];
+           var qqq;
+           if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) {
+   /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/ 
+           ropt=roadresult.length
+          for (qqq=0;qqq<ropt;qqq++) 
+             tmpr.push(roadresult[qqq]);
+        var tmpindex=[];
+        var li1,li2;
+       for (li1=0;li1<ropt;li1++) 
+          if (JSON.stringify(tmpr[li1].legs[0]).indexOf('BUS')!=-1) 
+           {
+            tmpindex.push(li1);
+           }
+           for (var i = tmpindex.length -1; i >= 0; i--)
+             tmpr.splice(tmpindex[i],1);
+             roadresult=[];
+             if (tmpr.length>0) roadresult.push(tmpr[0]);
+             }
+       /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/ 
+            if (roadresult.length<1) 
+				{ 
+				callbackfunc(cnt);    
+            return;
+            } 
+            var ropt=roadresult.length;
+            if (ropt>3)  ropt=3;
+            var myRoute;
+            if (roadresult.length>1) myRoute= roadresult[0].legs[0];
+            if (roadresult.length>1)      legs= roadresult[routeindex].legs;
+            else legs= roadresult[0].legs;
+            vtotalmilage=parseFloat(roadresult[routeindex].legs[0].distance.text);
+           vdurationinmin=roadresult[0].legs[0].duration.value/60;
          
-         funcr=funcr+
-         '<tr><td>Car</td><td>'+'</td><td>'+' $</td><td>' + ' min</td></tr>'+
-         '<tr><td>Bike</td><td>'+'</td><td>'+' $</td><td>' + ' min</td></tr>'+
-         '<tr><td>Metro</td><td>'+'</td><td>'+' $</td><td>' + ' min</td></tr>';
-        
-          //  if (mindex==0) tr1='<tr><td>Car</td><td>'+vtotalmilage+'</td><td>'+vcost+' $</td><td>' +vtraveltime+  ' min</td></tr>';
-         //   if (mindex==1) tr1='<tr><td>Bike</td><td>'+vtotalmilage.toFixed(2)+'</td><td>'+vcost.toFixed(2)+' $</td><td>' +vtraveltime.toFixed(2)+
-       //     ' min</td></tr>';
-        //    if (mindex==2) tr1='<tr><td>Metro</td><td>'+vtotalmilage.toFixed(2)+'</td><td>'+vcost.toFixed(2)+' $</td><td>' +vtraveltime.toFixed(2)+
-       //     ' min</td></tr>';
-  //alert(funcr);
- /*    
-     if (gtmbtncntr==3) {
-     */
-     if (gtmbtncntr==1) {
-      tmpstr='<div id="content">'+ '<table class="table table-striped">'+
-'<tr><th>Mode</th><th>Mile</th><th>Cost</th><th>Travel Time</th></tr>'+funcr+'</table></div>';
-         var contentString = tmpstr;
-
-         var    iwlatlng = new google.maps.LatLng(38.919652, -76.930737);
-          infowindow = new google.maps.InfoWindow({
-          content: contentString,
-          position:iwlatlng
-          });  
-        
-         infowindow.open(map);
-   
+            if (conditionid==1) vcost=vtotalmilage*0.16 +15;
+            if (conditionid==4) vcost=vcost*0.5;
+            var vdurationinmin;
+            if (conditionid==2 || conditionid==4 ) vdurationinmin=vdurationinmin+vtotalmilage;
+            for (i = 0; i < legs.length; i++) {
+              var steps = legs[i].steps;
+              for (j = 0; j < steps.length; j++) {
+                var nextSegment = steps[j].path;
+                for (k = 0; k < nextSegment.length; k++) {
+                if ((steps[j].instructions.search('I-66 E')!=-1) && (playsteps>3) &&((conditionid==3 || conditionid==5 )) ) {
+            																trafficflag=1;
+            															   }            
+                
+               }
+             }
             }
-   
+         
+            if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
+            vdurationinmin=vdurationinmin+30;
+            vtraveltime=vdurationinmin;
+            if (tm==2) vcost=0;
+            if (tm==3) vcost=vtotalmilage*0.318;
+
+           
+         var www='';
+        if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) 
+        www='<tr><td>Metro</td>';
+      //  cnt.push('<tr><td>Metro</td><td>'+'</td><td>'+ vcost.toFixed(2)+' $</td><td>' + vtraveltime +' min</td></tr>');
+         if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) 
+         www='<tr><td>Bike</td>';
+      //  cnt.push('<tr><td>Bike</td><td>'+'</td><td>'+vcost.toFixed(2) +' $</td><td>' + ' min</td></tr>');
+         if (travel_mode==google.maps.DirectionsTravelMode.DRIVING) 
+         www='<tr><td>Car</td>';
+        cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+vcost.toFixed(2)+' $</td><td>' +
+        vtraveltime.toFixed(2) +' min</td></tr>');
+
+            
+        
    } 
- //  alert(funcr);
-
+         callbackfunc(cnt);   
+   
   });
-  
-
-
-//alert(funcr);
 
 } ;
     
