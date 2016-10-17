@@ -99,7 +99,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-           <h4 class="modal-title" id="QuestionLabel">what went wrong?</h4>
+           <h4 class="modal-title" id="QuestionLabel">What went wrong?</h4>
         </div>
         <div class="modal-body">
           <form>
@@ -242,7 +242,6 @@ var ttime=0;
 var start;
 var pretripcost;
 var pretripmile;
-var pretriptraveltime;
 var polyline,trafficpolyline;
 var myLatlng;
 var srcmyLatlng=-1;
@@ -272,6 +271,7 @@ var directionsService,directionsService2,directionsServicehist;
 var directionsDisplay1,directionsDisplay2;
 var curredge=-1;
 var edgeaccind=-1;
+var kir=-1;
 var temp;
 var delay=0;
 var trafficflag;
@@ -282,6 +282,9 @@ var tr2='';
 var tr3='';
 var lookupon=0;
 var cnt;
+var predistance=0;
+var precost=0;
+var pretraveltime=0.0;
 
 
       function initMap() {
@@ -342,7 +345,7 @@ var cnt;
    var infowindow;
 
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/nodes/' +sss ,
+                   url: 'https://mighty-inlet-46722.herokuapp.com/nodes/' +'3',
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -454,6 +457,12 @@ var cnt;
                   });  
          
                  //   $("#histtab").toggle();
+                  //  
+google.maps.event.addListener(map, 'idle', function(){
+    //loaded fully
+    $("#car").click();
+ //  alert('r');
+});
                     $("#gmaploc").hide();
                     $("#histtab").hide(); 
       
@@ -558,7 +567,7 @@ map.setZoom( map.getZoom() );
 
         $('#startbtn').click(function() {
              
-
+                     //   alert(kir);
               gtmbtncntr=0;
               lookupon=0;
               playsteps=playsteps+1;
@@ -579,9 +588,7 @@ map.setZoom( map.getZoom() );
               $("#routegrp").addClass('hidden');
 
                if (playsteps==1) $("#histtable").empty();
-               $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+cost.toFixed(2) +" $</td><td>"
-               +totalmilage.toFixed(2)+" m</td><td>"+traveltime +" min</td></tr>");
-               
+        
                if (conditionid==5 && trafficflag ) {
                   var sysdate=new Date()
                   var pieces = worktime.trim().split(':')
@@ -664,19 +671,26 @@ map.setZoom( map.getZoom() );
              $("#ccc").show();//removeClass('hidden');
              $("#animation").addClass('hidden');
              $("#routegrp").removeClass('hidden');
+  
+  
          //    $("#tmbtn button").removeClass('hidden');
+               $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ precost.toFixed(2) + " $</td><td>"
+               + kir.toFixed(2) +" min</td><td>"+predistance  +" m</td></tr>");
              calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
            //   if (playsteps==1) $("#histtable").empty();
-    
+            //  alert(totalmilage);
+            
              //  $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+pretripcost.toFixed(2) +" $</td><td>"
              //  +pretripmile.toFixed(2)+" m</td><td>"+pretriptraveltime +" min</td></tr>");
              start=temp;
             // $("#car").click();
           //   alert(pretripmile-totalmilage);
+      
           //   alert(pretripmile);
              if (start==desmyLatlng) {
            //   $('#ride').attr("src",'img/gameover.jpg');
-              
+        
+               
                $("#gmap").removeClass('hidden');
                infowindow.close();
                $("#tmbtn button").prop("disabled",true);
@@ -939,8 +953,12 @@ if (lookupon==1) {
             var myRoute;
             if (roadresult.length>1) myRoute= roadresult[routeindex].legs[0];
             else myRoute= roadresult[0].legs[0];
-         //   console.log(JSON.stringify(myRoute.steps));
+          // alert(JSON.stringify(myRoute.steps));
             if (myRoute.steps.length>1) temp=myRoute.steps[1].start_point; else temp=pointB;
+            predistance=parseFloat(myRoute.steps[0].distance.text);
+         //  alert(JSON.stringify(myRoute.steps[0].distance));
+        //   alert(JSON.stringify(myRoute.steps[1].distance));
+        //   alert(JSON.stringify(myRoute.steps[2].distance));
             var bounds = new google.maps.LatLngBounds();
             var tbounds = new google.maps.LatLngBounds();
             var legs;
@@ -949,12 +967,29 @@ if (lookupon==1) {
             if (roadresult.length>1)      legs= roadresult[routeindex].legs;
             else legs= roadresult[0].legs;
             totalmilage=parseFloat(roadresult[routeindex].legs[0].distance.text);
-       //     alert(totalmilage);
+         //   alert(totalmilage);
             $("#distance").text(totalmilage+ ' miles');        
             var durationinmin=roadresult[routeindex].legs[0].duration.value/60;
-            if (conditionid==1) cost=totalmilage*0.16 +15;
-            if (conditionid==4) cost=cost*0.5;
-            if (conditionid==2 || conditionid==4 ) durationinmin=durationinmin+totalmilage;
+            var pretraveltime=myRoute.steps[0].duration.value/parseFloat(60);
+            kir=pretraveltime;
+
+          //  alert(pretraveltime);
+          //  alert(JSON.stringify(myRoute.steps[0].duration));
+       //     alert(JSON.stringify(myRoute.steps[1]));
+
+
+            
+              cost=totalmilage*0.16 +15;
+              precost=predistance*0.16
+            
+            if (conditionid==4) { 
+              precost=precost*0.5;
+              cost=cost*0.5;
+            }
+            if (conditionid==2 || conditionid==4 )  {
+              durationinmin=durationinmin+totalmilage;
+              pretraveltime=pretraveltime+predistance;
+            }
             for (i = 0; i < legs.length; i++) {
               var steps = legs[i].steps;
               for (j = 0; j < steps.length; j++) {
@@ -978,21 +1013,28 @@ if (lookupon==1) {
             durationinmin=durationinmin+30;
             $("#traveltime").text(durationinmin.toFixed(2) + ' min');
             traveltime=durationinmin;
-            if (tm==2) cost=0;
-            if (tm==3) cost=totalmilage*0.318;
+            if (tm==2) { 
+              cost=0;
+              precost=0;
+            }
+            if (tm==3)  {
+              cost=totalmilage*0.318;
+              precost=predistance*0.318;
+            }
             $("#cost").text(cost.toFixed(2)+ ' $');
             $("#budget").text((budget-cost).toFixed(2)+ ' $');
            
             $("#ttime").text((traveltime+ttime).toFixed(2) +' min');
-     
+         //   callbackinfo({rcost:cost,rdistance:totalmilage,rtraveltime:traveltime});
     
-    
+
     } else {
       window.alert('No route is available');
       $("#startbtn").prop("disabled",true);
        $("#budget").text(budget.toFixed(2)+ ' $');
               $("#ttime").text(ttime.toFixed(2) +' min');
               $("#distance").text("");
+            //  callbackinfo({});
     }
   });
 } ;
