@@ -460,8 +460,8 @@ var pretraveltime=0.0;
                   //  
 google.maps.event.addListener(map, 'idle', function(){
     //loaded fully
-   // $("#car").click();
-   alert('r');
+    $("#car").click();
+ //  alert('r');
 });
                     $("#gmaploc").hide();
                     $("#histtab").hide(); 
