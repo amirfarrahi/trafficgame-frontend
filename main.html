@@ -276,15 +276,14 @@ var temp;
 var delay=0;
 var trafficflag;
 var playsteps=0;
-var busflag=0;
-var tr1='';
-var tr2='';
-var tr3='';
+
 var lookupon=0;
 var cnt;
 var predistance=0;
 var precost=0;
 var pretraveltime=0.0;
+var pbflag=0;
+var bikeflag=0;
 
 
       function initMap() {
@@ -574,8 +573,8 @@ map.setZoom( map.getZoom() );
               infowindow.close();
               pretripmile=totalmilage;
               $("#startbtn").prop("disabled",true);
-              if (tm==2) $("#car").prop("disabled",true);
-              if (tm==3) $("#car").prop("disabled",true);
+              if (tm==2) bikeflag=1; //$("#car").prop("disabled",true);
+              if (tm==3) pbflag=1;//$("#car").prop("disabled",true);
               $("#ccc").hide();//addClass('hidden');
               budget=(budget-cost).toFixed(2);
               $("#budget").text(budget+ ' $');
@@ -667,28 +666,20 @@ map.setZoom( map.getZoom() );
         function revert(){
         
              $("#startbtn").prop("disabled",false);
-         //    $("#trafficnews").text('');
-             $("#ccc").show();//removeClass('hidden');
+            $("#ccc").show();//removeClass('hidden');
              $("#animation").addClass('hidden');
              $("#routegrp").removeClass('hidden');
   
+              $('#pb').prop("disabled",false);
+			     $('#bike').prop("disabled",false);
+			     $('#car').prop("disabled",false);
+         
   
-         //    $("#tmbtn button").removeClass('hidden');
-               $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ precost.toFixed(2) + " $</td><td>"
+              $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ precost.toFixed(2) + " $</td><td>"
                + kir.toFixed(2) +" min</td><td>"+predistance  +" m</td></tr>");
              calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
-           //   if (playsteps==1) $("#histtable").empty();
-            //  alert(totalmilage);
-            
-             //  $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+pretripcost.toFixed(2) +" $</td><td>"
-             //  +pretripmile.toFixed(2)+" m</td><td>"+pretriptraveltime +" min</td></tr>");
-             start=temp;
-            // $("#car").click();
-          //   alert(pretripmile-totalmilage);
-      
-          //   alert(pretripmile);
+           start=temp;
              if (start==desmyLatlng) {
-           //   $('#ride').attr("src",'img/gameover.jpg');
         
                
                $("#gmap").removeClass('hidden');
@@ -780,21 +771,16 @@ map.setZoom( map.getZoom() );
            if ( srcmyLatlng==-1 || desmyLatlng==-1 || gtm==-1) 
           {          
           alert('choose source, destination and travel mode');
-       //   $("#r1").attr('checked', false);
-        //  $("#r2").attr('checked', false);
+       
           return false;
           };
-  //  alert(gtm);
-                      //            if(t1 != null)       t1.setMap(null);
+
 
         if(polyline!= null)  polyline.setMap(null);
         if(trafficpolyline!= null)  trafficpolyline.setMap(null);
         calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,gtm,0,map);
        
-  // var tbhtml=[];    
-  //tr1=
- 
-//infowindow.close();
+
 
 cnt=[];
 lookupon++;
@@ -1039,6 +1025,11 @@ if (lookupon==1) {
               $("#distance").text("");
             //  callbackinfo({});
     }
+    
+           if (pbflag==1)  $('#car').prop("disabled",true);
+			   if (bikeflag==1)  $('#car').prop("disabled",true);
+
+         
   });
 } ;
                
@@ -1080,13 +1071,9 @@ if (lookupon==1) {
          directionsService.route(dirseroption, function(response, status) {
 
            if (status === google.maps.DirectionsStatus.OK) {
-           
-/*********************************/           
-           
-         
-           var roadresult=response.routes;
-           var tmpr=[];
-           var qqq;
+             var roadresult=response.routes;
+             var tmpr=[];
+             var qqq;
            if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) {
    /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/ 
            ropt=roadresult.length
@@ -1107,7 +1094,10 @@ if (lookupon==1) {
        /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/ 
             if (roadresult.length<1) 
 				{ 
-				callbackfunc(cnt);    
+				callbackfunc(cnt); 
+			   if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  $('#pb').prop("disabled",true);
+			   if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)  $('#bike').prop("disabled",true);
+			   if (travel_mode==google.maps.DirectionsTravelMode.DRIVING)  $('#car').prop("disabled",true);
             return;
             } 
             var ropt=roadresult.length;
@@ -1120,9 +1110,8 @@ if (lookupon==1) {
                 var vdurationinmin;
             var vcost1;
             vtotalmilage=parseFloat(roadresult[routeindex].legs[0].distance.text);
-           vdurationinmin=roadresult[0].legs[0].duration.value/60;
-         
-             vcost1=vtotalmilage*0.16 +15;
+            vdurationinmin=roadresult[0].legs[0].duration.value/60;
+            vcost1=vtotalmilage*0.16 +15;
             if (conditionid==4) vcost=vcost*0.5;
             var vdurationinmin;
             if (conditionid==2 || conditionid==4 ) vdurationinmin=vdurationinmin+vtotalmilage;
@@ -1138,31 +1127,29 @@ if (lookupon==1) {
                }
              }
             }
-         
-            
-        
             if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
             vdurationinmin=vdurationinmin+30;
             vtraveltime=vdurationinmin;
             if (tm==2) vcost1=0;
             if (tm==3) vcost1=vtotalmilage*0.318;
-
-           
          var www='';
         if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) 
         www='<tr><td>Metro</td>';
-      //  cnt.push('<tr><td>Metro</td><td>'+'</td><td>'+ vcost.toFixed(2)+' $</td><td>' + vtraveltime +' min</td></tr>');
          if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) 
          www='<tr><td>Bike</td>';
-      //  cnt.push('<tr><td>Bike</td><td>'+'</td><td>'+vcost.toFixed(2) +' $</td><td>' + ' min</td></tr>');
-         if (travel_mode==google.maps.DirectionsTravelMode.DRIVING) 
+         if (travel_mode==google.maps.DirectionsTravelMode.DRIVING &&  bikeflag!=1 && pbflag!=1) 
          www='<tr><td>Car</td>';
-        cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+vcost1+' $</td><td>' +
+        if (www.length!=0) cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+vcost1+' $</td><td>' +
         vtraveltime.toFixed(2) +' min</td></tr>');
-
-            
+   }  else {
+            if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  $('#pb').prop("disabled",true);
+			   if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)  $('#bike').prop("disabled",true);
+			   if (travel_mode==google.maps.DirectionsTravelMode.DRIVING)  $('#car').prop("disabled",true);
+         
+         
+           } 
         
-   } 
+        
          callbackfunc(cnt);   
    
   });
