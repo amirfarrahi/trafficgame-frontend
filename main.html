@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css" />
      <link rel="stylesheet" href="css/style.css" />
 
+
 <script>   
  if (sessionStorage.getItem('userinfo') == null) {
         window.location.replace("login.html");
@@ -223,13 +224,11 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY"
+    async defer></script> 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
  crossorigin="anonymous"></script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
-    async defer></script>
-
 
       <script>
     
@@ -248,6 +247,7 @@ var srcmyLatlng=-1;
 var desmyLatlng=-1;
 var desmarker;
 var srcmarker;
+var curlocmarker;
 var conditionid,tm;
 var gameid=-1;
 var qid=-1;
@@ -276,6 +276,7 @@ var temp;
 var delay=0;
 var trafficflag;
 var playsteps=0;
+var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 
 var lookupon=0;
 var cnt;
@@ -321,13 +322,17 @@ var bikeflag=0;
         directionsDisplayhist.setMap(hmap);
 
        
-      }
+      };
+   
+ 
+   
 
   
 
     $( document ).ready(function() {
 
-  
+  //loadScript();
+  initMap();
     $("#budget").text(budget+ ' $');
     $("#dt_ct").text("Departure Time:");
     $("#trafficnews").text("no traffic news availible");
@@ -457,11 +462,11 @@ var bikeflag=0;
          
                  //   $("#histtab").toggle();
                   //  
-google.maps.event.addListener(map, 'idle', function(){
-    //loaded fully
+            google.maps.event.addListener(map, 'idle', function(){
+         //loaded fully
     $("#car").click();
  //  alert('r');
-});
+               });
                     $("#gmaploc").hide();
                     $("#histtab").hide(); 
       
@@ -519,16 +524,9 @@ maploc.setZoom( maploc.getZoom() );
                       var  marker =  new google.maps.Marker({
             					position: uLatlng,
             					map: maploc,
-            					label:  userslocations[index].name //,
-
-            					//icon: 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' +
-            				// userslocations[index].name + '|FF0000|000000'
-                       });
-                      // marker.setMap(map)
-                
-                
-                 
-
+            					label:  userslocations[index].name 
+                });
+                      
                   });
                 })
                   .fail(function(msg) {
@@ -701,6 +699,14 @@ map.setZoom( map.getZoom() );
          winfowindow.open(map);
                return;
               }
+                if (curlocmarker!=null) curlocmarker.setMap(null);
+                curlocmarker= new google.maps.Marker({
+            					position: start,
+            					icon: iconBase + 'library_maps.png'
+ 
+                });
+                curlocmarker.setMap(map);
+                 // curlocmarker.setMap(map);
                if (tm==1) $("#car").click();
                if (tm==2) $("#bike").click();
                if (tm==3) $("#pb").click();
@@ -847,15 +853,18 @@ if (lookupon==1) {
         }); 
          
   
+  
+         	function mycomparator(a,b) {
+  					return parseInt(a.legs[0].duration.value, 10) - parseInt(b.legs[0].duration.value, 10);
+				}
       
       
          function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB,travel_mode,routeindex,imap) 
        {
          $("#traveltime").text('');
-                 $("#routegrp" ).empty();
-       //  $("#trafficnews").text('');
+         $("#routegrp" ).empty();
          $("#cost").text(''); 
-      //   $("#budget").text(budget+ ' $');        
+
          trafficflag=0;
          var dirseroption={
          origin: pointA,
@@ -863,7 +872,8 @@ if (lookupon==1) {
          provideRouteAlternatives:true,
          travelMode: travel_mode,
          drivingOptions: {
-           departureTime: gtime
+           departureTime: gtime,
+           trafficModel: 'pessimistic'
          }
          };
          
@@ -920,6 +930,7 @@ if (lookupon==1) {
              roadresult=[];
              if (tmpr.length>0) roadresult.push(tmpr[0]);
              }
+             
            //  alert(tmpindex.length);
        /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/ 
          //   alert(JSON.stringify(roadresult)); 
@@ -933,25 +944,27 @@ if (lookupon==1) {
             return;
             } 
             var ropt=roadresult.length;
+            
             if (ropt>3)  ropt=3;
 
             var li;
             for (li=0;li<ropt;li++) 
-              $("#routegrp").append("<div class='radio-inline'><label><input id='r" + li + "' type='radio' name='optradio' value='" + li+ "'>route " +(li+1)+"</label></div>");
+              $("#routegrp").append("<div class='radio-inline'><label><input id='r" + 
+              li + "' type='radio' name='optradio' value='" + li+ "'>route " +(li+1)+"</label></div>");
             $("#r" + routeindex).prop("checked", true);
             var myRoute;
+          //  roadresult[routeindex].legs[0].duration.value
+			     //       roadresult.sort(mycomparator);
+            
             if (roadresult.length>1) myRoute= roadresult[routeindex].legs[0];
             else myRoute= roadresult[0].legs[0];
-          // alert(JSON.stringify(myRoute.steps));
+
             if (myRoute.steps.length>1) temp=myRoute.steps[1].start_point; else temp=pointB;
             predistance=parseFloat(myRoute.steps[0].distance.text);
-         //  alert(JSON.stringify(myRoute.steps[0].distance));
-        //   alert(JSON.stringify(myRoute.steps[1].distance));
-        //   alert(JSON.stringify(myRoute.steps[2].distance));
-            var bounds = new google.maps.LatLngBounds();
+           var bounds = new google.maps.LatLngBounds();
             var tbounds = new google.maps.LatLngBounds();
             var legs;
-        //    alert(roadresult.length);
+
 
             if (roadresult.length>1)      legs= roadresult[routeindex].legs;
             else legs= roadresult[0].legs;
@@ -1050,7 +1063,8 @@ if (lookupon==1) {
          provideRouteAlternatives:true,
          travelMode: travel_mode, //google.maps.TravelMode.DRIVING
          drivingOptions: {
-           departureTime: gtime
+           departureTime: gtime,
+           trafficModel: 'pessimistic'
          }
      
          };
@@ -1139,7 +1153,7 @@ if (lookupon==1) {
          www='<tr><td>Bike</td>';
          if (travel_mode==google.maps.DirectionsTravelMode.DRIVING &&  bikeflag!=1 && pbflag!=1) 
          www='<tr><td>Car</td>';
-        if (www.length!=0) cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+vcost1+' $</td><td>' +
+        if (www.length!=0) cnt.push(www+'<td>'+vtotalmilage.toFixed(2)+' mile</td>' +'<td>'+vcost1.toFixed(2)+' $</td><td>' +
         vtraveltime.toFixed(2) +' min</td></tr>');
    }  else {
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  $('#pb').prop("disabled",true);
@@ -1174,13 +1188,17 @@ if (lookupon==1) {
          provideRouteAlternatives:true,
          travelMode: travel_mode, 
            drivingOptions: {
-           departureTime: gtime
+           departureTime: gtime,
+           trafficModel: 'pessimistic'
+
          }
          };
-         
+         var linkcolor='#0000FF';
+         if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) linkcolor='#008000';
+         if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) linkcolor='#e5e500';
          hpolyline = new google.maps.Polyline({
            					path: [],
-           					strokeColor: '#0000FF',
+           					strokeColor: linkcolor,
            					strokeWeight: 3
            });
          
