@@ -224,7 +224,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY"
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
     async defer></script> 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
@@ -234,6 +234,7 @@
     
 var map;
 var hr=0;
+var pretmcar=0;
 var routeselectedindex=0;
 var worktime;
 var totalmilage=0;
@@ -320,19 +321,23 @@ var bikeflag=0;
         directionsDisplay2.setMap(map);
         directionsDisplayloc.setMap(maploc);
         directionsDisplayhist.setMap(hmap);
+        
+        google.maps.event.addListener(map, 'idle', function(){
+               $("#car").click();
+              });
 
        
       };
    
  
-   
+              
 
   
 
     $( document ).ready(function() {
 
   //loadScript();
-  initMap();
+ // initMap();
     $("#budget").text(budget+ ' $');
     $("#dt_ct").text("Departure Time:");
     $("#trafficnews").text("no traffic news availible");
@@ -462,11 +467,7 @@ var bikeflag=0;
          
                  //   $("#histtab").toggle();
                   //  
-            google.maps.event.addListener(map, 'idle', function(){
-         //loaded fully
-    $("#car").click();
- //  alert('r');
-               });
+
                     $("#gmaploc").hide();
                     $("#histtab").hide(); 
       
@@ -564,12 +565,15 @@ map.setZoom( map.getZoom() );
 
         $('#startbtn').click(function() {
              
+           
+              if (tm==1) pretmcar=1;
+              if ((tm!=1) && (pretmcar==1)) precost=precost+15;
               $("#worktime").prop("disabled",true);
               gtmbtncntr=0;
               lookupon=0;
               playsteps=playsteps+1;
               infowindow.close();
-              pretripmile=totalmilage;
+              pregoogetripmile=totalmilage;
               $("#startbtn").prop("disabled",true);
               if (tm==2) bikeflag=1; //$("#car").prop("disabled",true);
               if (tm==3) pbflag=1;//$("#car").prop("disabled",true);
@@ -663,20 +667,23 @@ map.setZoom( map.getZoom() );
 
         function revert(){
         
+          //   pretmcar=0;
              $("#startbtn").prop("disabled",false);
-            $("#ccc").show();//removeClass('hidden');
+             $("#ccc").show();//removeClass('hidden');
              $("#animation").addClass('hidden');
              $("#routegrp").removeClass('hidden');
-  
-              $('#pb').prop("disabled",false);
-			     $('#bike').prop("disabled",false);
-			     $('#car').prop("disabled",false);
+             $('#pb').prop("disabled",false);
+			    $('#bike').prop("disabled",false);
+			    $('#car').prop("disabled",false);
          
+               if ((pretmcar==1) && (tm!=1)) pretmcar=0;
+          //   if ((pretmcar==1) && (tm=!1))  precost=precost+15;
   
               $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ precost.toFixed(2) + " $</td><td>"
                + kir.toFixed(2) +" min</td><td>"+predistance  +" m</td></tr>");
              calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
            start=temp;
+      //     pretmcar=0;
              if (start==desmyLatlng) {
         
                
@@ -733,12 +740,7 @@ map.setZoom( map.getZoom() );
              alert('work start time is invalid');
              return false;
           }
-          if ( srcmyLatlng==-1 || desmyLatlng==-1) 
-          {          
-          alert('choose source and destination');
-
-          return false;
-          }
+         
        //  $("#worktime").addClass('hidden');
 
           worktime=$("#worktime").val();
@@ -774,12 +776,7 @@ map.setZoom( map.getZoom() );
                         tmname='Metro';        
            }
            
-           if ( srcmyLatlng==-1 || desmyLatlng==-1 || gtm==-1) 
-          {          
-          alert('choose source, destination and travel mode');
        
-          return false;
-          };
 
 
         if(polyline!= null)  polyline.setMap(null);
@@ -1023,6 +1020,9 @@ if (lookupon==1) {
               cost=totalmilage*0.318;
               precost=predistance*0.318;
             }
+            if (pretmcar==1) {cost=cost+15;
+             //  pretmcar=0;
+            }
             $("#cost").text(cost.toFixed(2)+ ' $');
             $("#budget").text((budget-cost).toFixed(2)+ ' $');
            
@@ -1144,8 +1144,9 @@ if (lookupon==1) {
             if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
             vdurationinmin=vdurationinmin+30;
             vtraveltime=vdurationinmin;
-            if (tm==2) vcost1=0;
-            if (tm==3) vcost1=vtotalmilage*0.318;
+            if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)vcost1=0;
+            if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) vcost1=vtotalmilage*0.318;
+            if (pretmcar==1) vcost1=vcost1+15;
          var www='';
         if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) 
         www='<tr><td>Metro</td>';
