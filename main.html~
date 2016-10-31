@@ -95,7 +95,8 @@
 <div class="col-md-3">
   <button id="showusers" type="button" class="btn btn-primary hidden" data-toggle="tooltip" title="the location of other player(s) that are simultaneously in the game">players location</button>
 <div id='somediv'></div>
-  <button id="qprompt" type="button" class="btn btn-primary hidden" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" data-whatever="@mdo">Open modal for @mdo</button>
+  <button id="qprompt" type="button" class="btn btn-primary hidden" 
+  data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" data-whatever="@mdo">Open modal for @mdo</button>
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -144,9 +145,31 @@
 
 
 </div>
-<div class="col-md-3" data-toggle="tooltip" title="The amount of time that you have spent in THIS trip."><span class="hidden label label-default">Time elapsed:</span>
+<div class="col-md-3" ><span class="hidden label label-default">Time elapsed:</span>
 <span class="hidden" id="ttime" ><strong></strong></span>
+<a class="btn" data-toggle="modal" data-target="#loModal">
+  <img src="img/logout.jpg" width="40" /> 
+</a>
+
+ <div class="modal fade" id="loModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+       <div class="modal-body">
+       <p>Are you sure you want to exit the game? You need to start over again if you log out.</p>       
+       </div>
+          <div class="modal-footer">
+          <button id="logout-ok" type="button" class="btn btn-primary">OK</button>
+          <button id="logout-cancel" type="button" class="btn btn-primary">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div> 
+
+
+
+
 
 </div>
 <div class="top-buffer row">
@@ -561,6 +584,11 @@ map.setZoom( map.getZoom() );
        //       alert(tr3);
 
           });
+          
+              $('#loModal').on('hidden.bs.modal', function () {
+
+    
+       });
 /**************************/
 
         $('#startbtn').click(function() {
@@ -726,7 +754,17 @@ map.setZoom( map.getZoom() );
        });       
 
 
-
+ $("#logout-cancel").click(function() {
+$('#loModal').modal('toggle'); 
+ });
+ 
+ 
+ $("#logout-ok").click(function() {
+  $('#loModal').modal('toggle'); 
+  sessionStorage.setItem('userinfo') = null;
+   window.location.replace("login.html");
+ }); 
+ 
 
          
        $("#tmbtn button").click(function() {
@@ -1144,7 +1182,7 @@ if (lookupon==1) {
             if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
             vdurationinmin=vdurationinmin+30;
             vtraveltime=vdurationinmin;
-            if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)vcost1=0;
+            if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) vcost1=0;
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) vcost1=vtotalmilage*0.318;
             if (pretmcar==1) vcost1=vcost1+15;
          var www='';
