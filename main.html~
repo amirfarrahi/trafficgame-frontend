@@ -1087,7 +1087,7 @@ if (lookupon==1) {
             }
             
             fttime=meanco*durationinmin;
-            alert(conditionid);
+        
             fttimemin=meanco*durationinmin*(1-std*cof)-constant;
             fttimemax=meanco*durationinmin*(1+std*cof)+constant;
             
