@@ -173,13 +173,25 @@
 
 </div>
 <div class="top-buffer row">
-<div class="col-md-6">
+<div class="col-md-4">
   <div id="routegrp" class="form-group">
   </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-7">
+<div class="visual-indicator-holder">
+<div id="minli" class="vi-internal-element" style="width: 30%; background: linear-gradient(to right, #FFFFFF  ,green  );">
+    </div>
+<div  id="avgli" class="vi-internal-element" style="width: 30%; background: linear-gradient(to right ,green ,red ); color:white;">
+   
+    </div>
+
+<div  id="maxli" class="vi-internal-element" style="width: 10%; background: linear-gradient(to right ,none ,none );">
+    </div>
+   
+</div>
 
 </div>
+<div class="col-md-1"></div>
 </div>
 <div class="top-buffer row">
 
@@ -737,7 +749,7 @@ map.setZoom( map.getZoom() );
                 if (curlocmarker!=null) curlocmarker.setMap(null);
                 curlocmarker= new google.maps.Marker({
             					position: start,
-            					icon: iconBase + 'library_maps.png'
+            					icon: 'img/cr.png' //iconBase + 'library_maps.png'
  
                 });
                 curlocmarker.setMap(map);
@@ -1049,6 +1061,12 @@ if (lookupon==1) {
             if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
             durationinmin=durationinmin+30;
             $("#traveltime").text(durationinmin.toFixed(2) + ' min');
+            var cof=3;
+            if (tm==3) cof=1;
+            $("#avgli").html(durationinmin.toFixed(2) + ' min');
+            $("#minli").html((durationinmin*(1-cof*0.14)).toFixed(2) + ' min');
+            $("#maxli").html((durationinmin*(1+cof*0.14)).toFixed(2) + ' min');
+            
             traveltime=durationinmin;
             if (tm==2) { 
               cost=0;
