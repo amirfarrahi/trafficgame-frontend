@@ -467,11 +467,12 @@ var bikeflag=0;
                 }).done(function(data) {
                    $("#contxt").text(data[0].name);
                    conditionid=data[0].id;
+                   
 
                    if (conditionid==2)     $("#trafficnews").text("Inclement weather! Drive carefully.");
-                //   if (conditionid==3)     $("#trafficnews").text("Accident on I-66 expect delays");
+
                    if (conditionid==4)     $("#trafficnews").text("Inclement weather! 50% on transit.");
-                //   if (conditionid==5) $("#myform").removeClass('hidden');
+
                   
 
              
@@ -1061,10 +1062,38 @@ if (lookupon==1) {
             if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
             durationinmin=durationinmin+30;
             $("#traveltime").text(durationinmin.toFixed(2) + ' min');
+            var std=3;
+            var cof=0.14;
+            var meanco=1;
+            var fttime=0;
+            var fttimemin=0;
+            var fttimemax=0;
+            var constant=0;
+            if (((conditionid==2) || (conditionid==4)) && (tm==1)) { 
+              cof=0.11;
+              meanco=1.25;
+            }
+            if (((conditionid==3) || (conditionid==5)) && (tm==1)) { 
+               cof=0.30;
+               meanco=1.92;
+              
             
-            $("#avgli").html(durationinmin.toFixed(2) + ' min');
-            $("#minli").html((durationinmin*(1-3*0.14)).toFixed(2) + ' min');
-            $("#maxli").html((durationinmin*(1+3*0.14)).toFixed(2) + ' min');
+            }
+            if (tm==3) {
+                meanco=1;  
+                std=1;
+                cof=1;
+               constant=3;          
+            }
+            
+            fttime=meanco*durationinmin;
+            alert(conditionid);
+            fttimemin=meanco*durationinmin*(1-std*cof)-constant;
+            fttimemax=meanco*durationinmin*(1+std*cof)+constant;
+            
+            $("#avgli").html(fttime.toFixed(2) + ' min');
+            $("#minli").html(fttimemin.toFixed(2) + ' min');
+            $("#maxli").html(fttimemax.toFixed(2) + ' min');
             
             traveltime=durationinmin;
             if (tm==2) { 
@@ -1075,7 +1104,7 @@ if (lookupon==1) {
               cost=totalmilage*0.318;
               precost=predistance*0.318;
             }
-            if (pretmcar==1) {cost=cost+15;
+            if (pretmcar==1) {cost=cost+5;
              //  pretmcar=0;
             }
             $("#cost").text(cost.toFixed(2)+ ' $');
@@ -1201,7 +1230,7 @@ if (lookupon==1) {
             vtraveltime=vdurationinmin;
             if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) vcost1=0;
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) vcost1=vtotalmilage*0.318;
-            if (pretmcar==1) vcost1=vcost1+15;
+            if (pretmcar==1) vcost1=vcost1+5;
          var www='';
         if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) 
         www='<tr><td>Metro</td>';
@@ -1359,3 +1388,4 @@ if (lookupon==1) {
     </script>    
   </body>
 </html>
+conditionid
