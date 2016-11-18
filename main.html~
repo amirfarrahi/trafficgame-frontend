@@ -173,25 +173,26 @@
 
 </div>
 <div class="top-buffer row">
-<div class="col-md-4">
+<div class="col-md-6">
   <div id="routegrp" class="form-group">
   </div>
 </div>
-<div class="col-md-7">
+<div class="col-md-6">
 <div class="visual-indicator-holder">
-<div id="minli" class="vi-internal-element" style="width: 30%; background: linear-gradient(to right, #FFFFFF  ,green  );">
+
+
+<div id="minli" class="col-md-3 vi-internal-element" style="background: linear-gradient(to right, #FFFFFF  ,green  );">
     </div>
-<div  id="avgli" class="vi-internal-element" style="width: 30%; background: linear-gradient(to right ,green ,red ); color:white;">
+<div  id="avgli" class="col-md-3 vi-internal-element" style="background: linear-gradient(to right ,green ,#FFFFFF  ); color:white;">
    
     </div>
 
-<div  id="maxli" class="vi-internal-element" style="width: 10%; background: linear-gradient(to right ,none ,none );">
-    </div>
+
    
 </div>
 
 </div>
-<div class="col-md-1"></div>
+
 </div>
 <div class="top-buffer row">
 
@@ -358,7 +359,7 @@ var bikeflag=0;
         directionsDisplayhist.setMap(hmap);
         
         google.maps.event.addListener(map, 'idle', function(){
-               $("#car").click();
+              if (tm==0) $("#car").click();
               });
 
        
@@ -631,7 +632,7 @@ map.setZoom( map.getZoom() );
 
                if (playsteps==1) $("#histtable").empty();
         
-               if (conditionid==5 && trafficflag ) {
+               if ((conditionid==5) && (trafficflag )) {
                   var sysdate=new Date()
                   var pieces = worktime.trim().split(':')
                   var hhdiff=(Number(pieces[0])-sysdate.getHours())*60;
@@ -782,8 +783,8 @@ $('#loModal').modal('toggle');
          
        $("#tmbtn button").click(function() {
        
-
-          if (($("#worktime").val().length==0) && conditionid==5 ) 
+alert("w");
+          if (($("#worktime").val().length==0) && (conditionid==5 )) 
           {alert('Enter your departure time');
            return false;
           };
@@ -876,7 +877,7 @@ if (lookupon==1) {
        });
         var t1,t2;
        $(document).on('change', 'input:radio[id^="r"]', function (event) {
-       
+      
          if ( srcmyLatlng==-1 || desmyLatlng==-1 || gtm==-1) 
           {          
           alert('choose source, destination and travel mode');
@@ -909,6 +910,8 @@ if (lookupon==1) {
       
          function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB,travel_mode,routeindex,imap) 
        {
+  
+   // alert("caller is " + calculateAndDisplayRoute.caller.toString());       
          $("#traveltime").text('');
          $("#routegrp" ).empty();
          $("#cost").text(''); 
@@ -1388,4 +1391,3 @@ if (lookupon==1) {
     </script>    
   </body>
 </html>
-conditionid
