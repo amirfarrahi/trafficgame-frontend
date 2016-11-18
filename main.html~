@@ -177,22 +177,31 @@
   <div id="routegrp" class="form-group">
   </div>
 </div>
-<div class="col-md-6">
-<div class="visual-indicator-holder">
 
 
-<div id="minli" class="col-md-3 vi-internal-element" style="background: linear-gradient(to right, #FFFFFF  ,green  );">
-    </div>
-<div  id="avgli" class="col-md-3 vi-internal-element" style="background: linear-gradient(to right ,green ,#FFFFFF  ); color:white;">
-   
-    </div>
+
+<div class="col-md-4 visual-indicator-holder">
+
+<div class="row">
+<span id="minli"></span>
+<span>-------------------------</span>
+<span id="avgli" ></span>
+<span>------------------------</span>
+<span id="maxli" ></span>
 
 
-   
 </div>
+<div class="row">
+<div  class="vi-internal-element" style="width:100%; background: linear-gradient(to right, #FFFFFF  ,#006400,#FFFFFF  );">
+    </div>
 
 </div>
+   
 
+</div>
+<div class="col-md-2">
+
+</div>
 </div>
 <div class="top-buffer row">
 
@@ -783,7 +792,7 @@ $('#loModal').modal('toggle');
          
        $("#tmbtn button").click(function() {
        
-alert("w");
+
           if (($("#worktime").val().length==0) && (conditionid==5 )) 
           {alert('Enter your departure time');
            return false;
