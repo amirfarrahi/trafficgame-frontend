@@ -631,7 +631,7 @@ map.setZoom( map.getZoom() );
 
                if (playsteps==1) $("#histtable").empty();
         
-               if (conditionid==5 && trafficflag ) {
+               if ((conditionid==5) && (trafficflag )) {
                   var sysdate=new Date()
                   var pieces = worktime.trim().split(':')
                   var hhdiff=(Number(pieces[0])-sysdate.getHours())*60;
@@ -783,7 +783,7 @@ $('#loModal').modal('toggle');
        $("#tmbtn button").click(function() {
        
 
-          if (($("#worktime").val().length==0) && conditionid==5 ) 
+          if (($("#worktime").val().length==0) && (conditionid==5 )) 
           {alert('Enter your departure time');
            return false;
           };
@@ -1388,4 +1388,3 @@ if (lookupon==1) {
     </script>    
   </body>
 </html>
-conditionid
