@@ -58,11 +58,11 @@
         <script src="js/index.js"></script>
         <script type="text/javascript">
         $(document).ready(function () {
-        	
+        var baseurl='http://localhost:3000';
      	  $('#login').click( function () {
              if($('#lo-form')[0].checkValidity()){
                 $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/authenticate',
+                   url: baseurl + '/authenticate',
                    dataType: 'json',
 		             type: 'POST',
                    contentType: 'application/json; charset=utf-8',
@@ -93,7 +93,7 @@
               if($('#re-form')[0].checkValidity()){
                 
                 $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/users',
+                   url: baseurl + '/users',
                    dataType: 'json',
 		             async : false,
                    type: 'POST',
@@ -106,7 +106,7 @@
                //     window.location = 'main.html';
                  })
                   .fail(function(msg) {
-                  alert(JSON.stringify(msg));
+             //     alert(JSON.stringify(msg));
                   //   if (msg.status==500) 
                      $("#re-err").text("internal server error");
                   //   alert(msg.responseText[0]);

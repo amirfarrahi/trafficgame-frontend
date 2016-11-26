@@ -36,10 +36,11 @@
     
     
     
-<div class="col-md-2" data-toggle="tooltip" title="The user name associated with your account"><span class="label label-success" >User Name:</span>
+<div class="col-md-3" data-toggle="tooltip" title="The user name associated with your account">
+<span class="label label-success" >User Name:</span>
 <span id="username" ></span>
 </div> 
-<div class="col-md-2"><span class="label label-default hidden"> Condition:</span>
+<div class="col-md-3"><span class="label label-default hidden"> Condition:</span>
 <span id="contxt" class="hidden"><strong></strong></span>
 <button id="iwo" class="hidden"></button>
 <button id="iwc" class="hidden"></button>
@@ -53,11 +54,7 @@
 <span class="label label-default">Money Spent:</span>
 <span id="cost" ><strong></strong></span>
 </div>
-<div class="col-md-2">
-<a class="btn" data-toggle="modal" data-target="#loModal">
-  Exit
-</a>
-</div>
+
 
     </div>
         <div class="top-buffer row">
@@ -103,6 +100,18 @@
 <span id="budget" class="hidden" ><strong></strong></span>
 </div>
 <div class="col-md-3">
+
+
+<a class="btn label label-success" data-toggle="modal" data-target="#loModal">
+  Exit
+</a>
+<a class="btn label label-success" data-toggle="modal" data-target="#AboutusModal">
+  About Us
+</a>
+<a class="btn label label-success" data-toggle="modal" data-target="#loModal">
+  Help
+</a>
+
   <button id="showusers" type="button" class="btn btn-primary hidden" data-toggle="tooltip" title="the location of other player(s) that are simultaneously in the game">players location</button>
 <div id='somediv'></div>
   <button id="qprompt" type="button" class="btn btn-primary hidden" 
@@ -135,7 +144,7 @@
 
 </div>
 <div class="top-buffer row">
-<div  class="col-md-4" data-toggle="tooltip" title="The transportation mode that you prefer/decide to use while performing your trip. There are optional routes (if available) under each corresponding travel mode." >
+<div  class="col-md-3" data-toggle="tooltip" title="The transportation mode that you prefer/decide to use while performing your trip. There are optional routes (if available) under each corresponding travel mode." >
 <span class="label label-success">Travel Mode:</span>
 <div id="tmbtn" class="btn-group" role="group">
   <button data-tmid="1" id="car" type="button" class="btn btn-default">car</button>
@@ -143,19 +152,19 @@
   <button data-tmid="3" id="pb" type="button" class="btn btn-default">metro</button>
 </div>
 </div>
-<div class="col-md-2">
+<div class="col-md-3">
 <button id="startbtn" class="btn btn-default" type="button" >Go!</button>
 </div>
-<div class="col-md-3" data-toggle="tooltip" title="The latest weather/incident information impacting your commute.">
+<div class="col-md-4" data-toggle="tooltip" title="The latest weather/incident information impacting your commute.">
 
 <span class="label label-warning">Traffic Info:</span>
 
 
-  <h4><span id="trafficnews" class="label label-danger" ><strong></strong></span></h4>
+  <h4 style="display:inline"><span id="trafficnews" class="label label-danger" ><strong></strong></span></h4>
 
 
 </div>
-<div class="col-md-3" ><span class="hidden label label-default">Time elapsed:</span>
+<div class="col-md-2" ><span class="hidden label label-default">Time elapsed:</span>
 <span class="hidden" id="ttime" ><strong></strong></span>
 
 
@@ -172,6 +181,79 @@
       </div>
     </div>
   </div>
+  
+<div class="modal fade" id="AboutusModal" role="dialog">
+    <div class="modal-dialog">
+     <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p><h4 align="center">Information about the Research Study
+Game - Active Transportation and Demand Management (ATDM)
+Application of Tools for Tactical and Strategic Decision-making for
+Operations / Task 4: Data Collection and Research Plan
+Study Number 071614</h4>
+
+<p style="text-align: justify;">This research study is under the direction of Dr. Samer Hamdar of the Department of Civil and Environmental
+Engineering, George Washington University, and paid for by the US Department of Transportation. 
+Taking part in this research is entirely voluntary. Your academic standing and/or the status of your employment will not,
+ in any way, be affected should you choose not to participate or if you decide to withdraw from the study at any time.</p>
+
+<p style="text-align: justify;">The purpose of this study is to provide guidelines on motivations that lead travelers to change 
+their behavior when facing some disruptive events with and without Active Transportation and 
+Demand Management (ATDM) tools. This will allow devising pricing and information provision strategies 
+that lead to a less congested transportation system.</p>
+
+<p style="text-align: justify;">The part of the study consists of participating in an online game offered through the link below. 
+The game consists of hypothetical travel choices and questions regarding your socio-economic 
+characteristics, your travel patterns, and different attitudes/norms/motivations when faced with 
+hypothetical travel conditions. Your answers will be recorded in an anonymous manner where no 
+personal/private information will be linked to your answers (for example: email address/name …etc.).
+A game instance should take a maximum of 15 minutes. Your answers are expected at the end of the game 
+instance.</p>
+<p style="text-align: justify;">The total amount of time you will spend in connection with this part of the study will be 
+about 45 minutes a week (three game instances per week at your time/discretion and based on your 
+schedules/convenience). We do hope you can participate for a total of 6-month duration between December 1st,
+2016, and May 31st, 2017. You may refuse to answer any of the questions asked and you may stop your 
+participation in this study at any time.</p>
+
+<p style="text-align: justify;">The possible risks you may experience during this study are limited to a minimal risk of 
+loss in confidentiality when recording your driving behavioral characteristics in relationship 
+with your socio-demographical and physiological characteristics. 
+The experiment may be stopped at anytime if any discomfort is felt by the participant.</p>
+
+<p style="text-align: justify;">You will not benefit directly from your participation in the study. The main benefits 
+though are to science and to the commuter/traveler population population: this research is 
+intended to allow understanding the motivations making some travel decisions even if detrimental 
+to the transportation network performance. Such understanding through proper data collection generates 
+new knowledge towards devising new demand management strategies leading to better traveler 
+responsiveness and a mutually beneficial relationship between the users (i.e. travelers) and 
+the suppliers (transportation officials) with less congested and safer surface transportation networks.</p>
+
+<p style="text-align: justify;">Every effort will be made to keep your information confidential, however, this cannot be guaranteed;
+ the investigators in this study will not use your name when specifying your socio-demographic 
+  characteristics/physiological characteristics. Instead, pseudo-names (usernames) and subject IDs 
+will be used to link between the traveler characteristics and the corresponding traveling behavior. 
+Finally, all recorded information will be kept on servers and external hard disks owned by 
+the George Washington University and used solely for research purposes. 
+If results of this research study are reported in journals or at scientific meetings, 
+the people who participated in this study will not be named or identified.</p>
+
+<p style="text-align: justify;">The Office of Human Research of George Washington University, at telephone number (202)-994-2715, 
+can provide further information about your rights as a research participant. 
+Further information regarding this study may be obtained by contacting Dr. Samer Hamdar, 
+the research lead investigator, at telephone number (202)-994-6652.</p>
+
+<p style="text-align: justify;">To ensure anonymity, your signature is not required. Your willingness to participate in this research study is implied if you proceed replying to the announcement email or participating in the survey.
+*Please keep/print a copy of this document in case you want to read it again.</p>
+        </div>
+      </div>
+    </div>
+  </div>  
+  
+  
 
 </div> 
 
@@ -317,6 +399,7 @@ var nextnode;
 var r1,r2;
 var gtm=-1;
 var tm=0;
+var baseurl='http://localhost:3000'; //baseurl + '';
 var tmname="";
 var tmimagelink;
 var gtime;
@@ -340,6 +423,7 @@ var pretraveltime=0.0;
 var pbflag=0;
 var bikeflag=0;
 var infowindow;
+var markersArray = [];
 
 
       function initMap() {
@@ -377,7 +461,7 @@ var infowindow;
         directionsDisplayhist.setMap(hmap);
         
         google.maps.event.addListener(map, 'idle', function(){
-              if (tm==0) $("#car").click();
+              if (tm==0) { $("#car").click();
               
     var    iwlatlng = new google.maps.LatLng(38.919652, -76.930737);
            infowindow = new google.maps.InfoWindow({
@@ -386,7 +470,7 @@ var infowindow;
           });  
        
              
-         infowindow.open(map); 
+         infowindow.open(map); }
 
               });
 
@@ -424,7 +508,7 @@ $("#worktime" ).change(function() {
 
 
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/nodes/' +sss,
+                   url: baseurl + '/nodes/1' /*+sss*/,
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -442,6 +526,7 @@ $("#worktime" ).change(function() {
 
           				 srcmyLatlng = new google.maps.LatLng(lat,lon);
           				 start = srcmyLatlng;
+          				// alert(start.lat());
           				 srcmarker = new google.maps.Marker({
           				 position: srcmyLatlng,
           				 title:data.name//,
@@ -451,6 +536,27 @@ $("#worktime" ).change(function() {
           
                       startnode=data.name;
                       currnode=startnode;
+                             $.ajax({
+                   url: baseurl + '/updateuserloc',
+                   dataType: 'json',
+		             type: 'PUT',
+                   contentType: 'application/json; charset=utf-8',
+                   data: JSON.stringify({ "lat": start.lat(), "lon": start.lng() }),
+                   headers: { 'Authorization' : myObject.auth_token       } 
+                 }).done(function(msg) {
+                  // alert(JSON.stringify(msg));
+                   if (curlocmarker!=null) curlocmarker.setMap(null);
+                   curlocmarker= new google.maps.Marker({
+            					position: start,
+            					icon: 'img/cr.png' //iconBase + 'library_maps.png'
+ 
+                   });
+                   curlocmarker.setMap(map);
+                   
+    		        })
+                 .fail(function(msg) {
+                    alert(JSON.stringify(msg));
+                 });
      
                  })
                   .fail(function(msg) {
@@ -458,9 +564,10 @@ $("#worktime" ).change(function() {
                   alert(JSON.stringify(msg));
                              
                   });
+          
                   
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/nodes/10',
+                   url: baseurl + '/nodes/9',
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -492,7 +599,7 @@ $("#worktime" ).change(function() {
                  });
                   
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/activeconditions',
+                   url: baseurl + '/activeconditions',
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -518,7 +625,7 @@ $("#worktime" ).change(function() {
                   });                  
                   
                          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/getuserhrrate',
+                   url: baseurl + '/getuserhrrate',
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -567,17 +674,18 @@ hmap.setCenter(center);
         
             $("#gmap").hide();
             $("#histtab").hide();
-           // $("#gmaploc").show();
-           // $("#gmap").addClass('hidden');
-          //  $("#histtab").addClass('hidden');
            $("#gmaploc").show();//removeClass('hidden');
            var center=maploc.getCenter();   
 google.maps.event.trigger(maploc, 'resize');
 maploc.setZoom( maploc.getZoom() ); 
         maploc.setCenter(center);
          
+         
+              for (i in markersArray) {
+                markersArray[i].setMap(null);
+               }
               $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/listuserloc',
+                   url: baseurl + '/listuserloc',
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -589,8 +697,8 @@ maploc.setZoom( maploc.getZoom() );
                     var userslocations=data.usersloc;
                     var umarker,ulat,ulon,uLatlng;
                   $.each(userslocations, function(index) {
-                       ulat=userslocations[index].location[0];
-                       ulon=userslocations[index].location[1];
+                       ulat=parseFloat(userslocations[index].location[0]);
+                       ulon=parseFloat(userslocations[index].location[1]);
                        uLatlng = new google.maps.LatLng(ulat,ulon);
                      //  alert(userslocations[index].name);
                       var  marker =  new google.maps.Marker({
@@ -598,6 +706,7 @@ maploc.setZoom( maploc.getZoom() );
             					map: maploc,
             					label:  userslocations[index].name 
                 });
+                      markersArray.push(marker);
                       
                   });
                 })
@@ -743,7 +852,6 @@ map.setZoom( map.getZoom() );
 
         function revert(){
         
-          //   pretmcar=0;
              $("#startbtn").prop("disabled",false);
              $("#ccc").show();//removeClass('hidden');
              $("#animation").addClass('hidden');
@@ -753,21 +861,41 @@ map.setZoom( map.getZoom() );
 			    $('#car').prop("disabled",false);
          
                if ((pretmcar==1) && (tm!=1)) pretmcar=0;
-          //   if ((pretmcar==1) && (tm=!1))  precost=precost+15;
-  
-               if (start!=desmyLatlng)  
+
+
+               if ((start==desmyLatlng) && (tm==1)) precost=precost+15;  
               $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance  +" miles</td><td>"
                + kir.toFixed(2) +" min</td><td>"+ precost.toFixed(2) + " $</td></tr>");
              calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
-           start=temp;
-      //     pretmcar=0;
-             if (start==desmyLatlng) {
+           
+             if (tm==3) start=desmyLatlng;
+             else start=temp;    
+                 $.ajax({
+                   url: baseurl + '/updateuserloc',
+                   dataType: 'json',
+		             type: 'PUT',
+                   contentType: 'application/json; charset=utf-8',
+                   data: JSON.stringify({ "lat": start.lat(), "lon": start.lng() }),
+                   headers: { 'Authorization' : myObject.auth_token       } 
+                 }).done(function(msg) {
+                  // alert(JSON.stringify(msg));
+                   if (curlocmarker!=null) curlocmarker.setMap(null);
+                   curlocmarker= new google.maps.Marker({
+            					position: start,
+            					icon: 'img/cr.png' //iconBase + 'library_maps.png'
+ 
+                   });
+                   curlocmarker.setMap(map);
+                   
+    		        })
+                 .fail(function(msg) {
+                    alert(JSON.stringify(msg));
+                 });
              
-        $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance  +" miles</td><td>"
-               + kir.toFixed(2) +" min</td><td>"+ (precost+15).toFixed(2) + " $</td></tr>");
-               
+             
+             if (start==desmyLatlng) {
                $("#gmap").removeClass('hidden');
-         //      infowindow.close();
+               infowindow.close();
                $("#tmbtn button").prop("disabled",true);
                $("#traveltime").text('');
                $("#cost").text('');
@@ -782,17 +910,12 @@ map.setZoom( map.getZoom() );
           content: contentString,
           position:desmyLatlng
           });  
-         winfowindow.open(map);
+          winfowindow.open(map);
                return;
-              }
-                if (curlocmarker!=null) curlocmarker.setMap(null);
-                curlocmarker= new google.maps.Marker({
-            					position: start,
-            					icon: 'img/cr.png' //iconBase + 'library_maps.png'
- 
-                });
-                curlocmarker.setMap(map);
-                 // curlocmarker.setMap(map);
+              };
+              
+                
+
                if (tm==1) $("#car").click();
                if (tm==2) $("#bike").click();
                if (tm==3) $("#pb").click();
@@ -892,18 +1015,7 @@ lookupon++;
 
          infowindow.setContent(contentString);             
         calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,gtm,0,map);
-    /*     
-if (lookupon==1) {
-         var    iwlatlng = new google.maps.LatLng(38.919652, -76.930737);
-             infowindow = new google.maps.InfoWindow({
-            content: contentString,
-          position:iwlatlng
-          });  
-       
-             
-         infowindow.open(map);
-         } */
-   
+
             
 
 
@@ -1060,9 +1172,10 @@ if (lookupon==1) {
 
             if (roadresult.length>1)      legs= roadresult[routeindex].legs;
             else legs= roadresult[0].legs;
-            totalmilage=parseFloat(roadresult[routeindex].legs[0].distance.text);
-         //   alert(totalmilage);
-            $("#distance").text(totalmilage+ ' miles');        
+            
+            totalmilage=roadresult[routeindex].legs[0].distance.value*0.000621371;
+         
+            $("#distance").text(totalmilage.toFixed(2)+ ' miles');        
             var durationinmin=roadresult[routeindex].legs[0].duration.value/60;
             var pretraveltime=myRoute.steps[0].duration.value/parseFloat(60);
             kir=pretraveltime;
@@ -1071,10 +1184,11 @@ if (lookupon==1) {
           //  alert(JSON.stringify(myRoute.steps[0].duration));
        //     alert(JSON.stringify(myRoute.steps[1]));
 
-
+              if (tm==1) {
             
               cost=totalmilage*0.16 +15;
-              precost=predistance*0.16
+              precost=predistance*0.16 };
+         //      alert(totalmilage + ',' + cost +',' + conditionid + ',' + tm);
             
             if (conditionid==4) { 
               precost=precost*0.5;
@@ -1148,8 +1262,8 @@ if (lookupon==1) {
               cost=totalmilage*0.318;
               precost=predistance*0.318;
             }
-            if (pretmcar==1) {cost=cost+5;
-             //  pretmcar=0;
+            if ((pretmcar==1) && (tm!=1)) {cost=cost+5;
+
             }
             $("#cost").text('$ '+ cost.toFixed(2));
             $("#budget").text('$ ' + (budget-cost).toFixed(2) );
@@ -1420,7 +1534,7 @@ if (lookupon==1) {
           }
           else {$('#myModal').modal('toggle');  
              $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/bugs',
+                   url: baseurl + '/bugs',
                    dataType: 'json',
 		             async : false,
                    type: 'POST',

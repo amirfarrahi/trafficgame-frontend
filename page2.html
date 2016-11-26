@@ -26,18 +26,21 @@
 
     <script>
       var scenario=-1;
+      var useranswers=[];
+      var baseurl='http://localhost:3000';
       
       $(document).ready(function() {
       
      
         var uinfo=sessionStorage.getItem('userinfo');
         var myObject = JSON.parse(uinfo);
+        var gameid=2;//JSON.parse(uinfo).game_id;
+        var questionnum=0;
 
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/questions',
+                   url: baseurl + '/questions',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -46,10 +49,11 @@
                
                   $.each(data, function(index) {
                //     alert(data[index].id);
-                    if (data[index].id>=14)
-                   $("#main").append("<form id='q"+data[index].id + "'><h3><span class='label label-info'>" + 
-                    data[index].id + "-" + data[index].name +"</span></h3></form>");
-           
+                    if (data[index].id>=14) {
+                     $("#main").append("<form id='q"+data[index].id + "'><h3><span class='label label-info'>" + 
+                     data[index].id + "-" + data[index].name +"</span></h3></form>");
+                     questionnum++;
+                    }
                   });
                 })
                   .fail(function(msg) {
@@ -59,10 +63,9 @@
                   });
                   
                    $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/answers',
+                   url: baseurl + '/answers',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -71,9 +74,12 @@
                
                   $.each(data, function(index) {
                 //  alert(JSON.stringify(data[index]));
-                    if (data[index].question_id>=14)
-                    $("#q"+data[index].question_id).append("<div class='radio'><label><input type='radio' name='optradio' value='" + data[index].answer_id+ "'>" + 
-                    data[index].answer + "</label></div>");
+                    if (data[index].question_id>=14) 
+                     $("#q"+data[index].question_id).append("<div id='"+ data[index].question_id +
+                     "_" + data[index].answer_id + "' " +                    
+                     "class='radio'><h4><label><input  required type='radio' name='optradio' value='" + data[index].answer_id+ "'>" + 
+                     data[index].answer + "</label></h4></div>");
+
                   });
                 })
                   .fail(function(msg) {
@@ -83,10 +89,35 @@
                   
                   
          $('#submit').click(function() {
-          $("#cntr").empty();
-             $("#cntr").append("<h2>Thanks for your participation.Please come back again!</h2>");
-        setTimeout(function(){ window.location = 'login.html'; }, 1300);
-        //  
+
+           if ($('input[name=optradio]:checked').length!=questionnum) {
+                  alert('please answer all questions');
+                  return;                
+           };
+           for (j = 14; j < 14+questionnum; j++) {
+            useranswers.push({'q_id':j, 'a_id':$('input[name=optradio]:checked', '#q'+j).val()});
+           }
+           $.ajax({
+                   url: baseurl + '/surveyanswer',
+                   dataType: 'json',
+		             type: 'POST',
+                   contentType: 'application/json; charset=utf-8',
+                   headers: { 'Authorization' : myObject.auth_token       } ,
+                   data: JSON.stringify({ 'useranswers':useranswers,'game_id':gameid  }) 
+                }).done(function(msg) {
+                  $("#cntr").empty();
+                  $("#cntr").append("<h2>Thanks for your participation.Please come back again!</h2>");
+                  setTimeout(function(){ window.location = 'login.html'; }, 1300);
+                
+                
+                })    
+                .fail(function(msg) {
+                    alert("fail");
+                }); 
+         
+
+
+        
        });                  
                      
       });

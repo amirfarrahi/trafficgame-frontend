@@ -23,14 +23,15 @@
       
 </div>
 
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
-    async defer></script>
+  
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
  crossorigin="anonymous"></script>
 
     <script>
       var scenario=-1;
+      var useranswers=[];
+      var baseurl='http://localhost:3000' //'https://mighty-inlet-46722.herokuapp.com
       
       $(document).ready(function() {
       
@@ -39,10 +40,9 @@
         var myObject = JSON.parse(uinfo);
 
          $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/questions',
+                   url: baseurl + '/questions',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -63,10 +63,9 @@
                   });
                   
                    $.ajax({
-                   url: 'https://mighty-inlet-46722.herokuapp.com/answers',
+                   url: baseurl + '/answers',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -105,22 +104,39 @@
             if ( salaryin==5) hr= 149000/2080;
             if ( salaryin>5 ) hr= 200000/2080;   
               $.ajax({
-                  url: 'https://mighty-inlet-46722.herokuapp.com/users',
+                  url: baseurl+'/users',
                      dataType: 'json',
-		               async : false,
-                     type: 'PUT',
+		               type: 'PUT',
                      contentType: 'application/json; charset=utf-8',
                      headers: { 'Authorization' : myObject.auth_token ,  "X-HTTP-Method-Override": "PUT"    },
                      data: JSON.stringify({ "loginbefore": 1,"hrrate":hr}) 
           }).done(function(msg) {
                  //  alert( JSON.stringify(msg));
-                    window.location = 'main.html';
+                //    window.location = 'main.html';
                    
     		 })
           .fail(function(msg) {
                     alert("fail");
           });  
-          
+          for (j = 1; j < 14; j++) {
+            useranswers.push({'q_id':j, 'a_id':$('input[name=optradio]:checked', '#q'+j).val()});
+          }
+         // alert(JSON.stringify(useranswers));
+          $.ajax({
+                   url: baseurl +'/surveyanswer',
+                   dataType: 'json',
+		             type: 'POST',
+                   contentType: 'application/json; charset=utf-8',
+                   headers: { 'Authorization' : myObject.auth_token       } ,
+                   data: JSON.stringify({ 'useranswers':useranswers,'game_id':1  }) 
+                }).done(function(msg) {
+                    window.location = 'main.html';
+                
+                
+                })    
+                .fail(function(msg) {
+                    alert("fail");
+                }); 
       
 
        });                  

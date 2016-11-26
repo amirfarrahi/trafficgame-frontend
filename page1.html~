@@ -23,14 +23,14 @@
       
 </div>
 
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
-    async defer></script>
+  
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
  crossorigin="anonymous"></script>
 
     <script>
       var scenario=-1;
+      var useranswers=[];
       
       $(document).ready(function() {
       
@@ -42,7 +42,6 @@
                    url: 'https://mighty-inlet-46722.herokuapp.com/questions',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -66,7 +65,6 @@
                    url: 'https://mighty-inlet-46722.herokuapp.com/answers',
                    dataType: 'json',
                    type: 'GET',
-                   async: false,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
@@ -78,8 +76,8 @@
                     if (data[index].question_id<=13)
                     $("#q"+data[index].question_id).append("<div id='"+ data[index].question_id +
                     "_" + data[index].answer_id + "' " +                    
-                     "class='radio'><h1><label><input  required type='radio' name='optradio' value='" + data[index].answer_id+ "'>" + 
-                    data[index].answer + "</label></h1></div>");
+                     "class='radio'><h4><label><input  required type='radio' name='optradio' value='" + data[index].answer_id+ "'>" + 
+                    data[index].answer + "</label></h4></div>");
                   });
                 })
                   .fail(function(msg) {
@@ -107,20 +105,37 @@
               $.ajax({
                   url: 'https://mighty-inlet-46722.herokuapp.com/users',
                      dataType: 'json',
-		               async : false,
-                     type: 'PUT',
+		               type: 'PUT',
                      contentType: 'application/json; charset=utf-8',
                      headers: { 'Authorization' : myObject.auth_token ,  "X-HTTP-Method-Override": "PUT"    },
                      data: JSON.stringify({ "loginbefore": 1,"hrrate":hr}) 
           }).done(function(msg) {
                  //  alert( JSON.stringify(msg));
-                    window.location = 'main.html';
+                //    window.location = 'main.html';
                    
     		 })
           .fail(function(msg) {
                     alert("fail");
           });  
-          
+          for (j = 1; j < 14; j++) {
+            useranswers.push({'q_id':j, 'a_id':$('input[name=optradio]:checked', '#q'+j).val()});
+          }
+         // alert(JSON.stringify(useranswers));
+          $.ajax({
+                   url: 'https://mighty-inlet-46722.herokuapp.com/surveyanswer',
+                   dataType: 'json',
+		             type: 'POST',
+                   contentType: 'application/json; charset=utf-8',
+                   headers: { 'Authorization' : myObject.auth_token       } ,
+                   data: JSON.stringify({ 'useranswers':useranswers,'game_id':1  }) 
+                }).done(function(msg) {
+                    window.location = 'main.html';
+                
+                
+                })    
+                .fail(function(msg) {
+                    alert("fail");
+          }); 
       
 
        });                  
