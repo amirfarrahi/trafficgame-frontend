@@ -359,8 +359,7 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
-    async defer></script> 
+ 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
  crossorigin="anonymous"></script>
@@ -400,7 +399,7 @@ var nextnode;
 var r1,r2;
 var gtm=-1;
 var tm=0;
-var baseurl='http://localhost:3000'; //baseurl + '';
+var baseurl='https://mighty-inlet-46722.herokuapp.com'; //baseurl + '';
 var tmname="";
 var tmimagelink;
 var gtime;
@@ -443,7 +442,6 @@ var markersArray = [];
           zoomControl: true
         }); 
         var uloclatloncntr=new google.maps.LatLng(38.8992646,  -77.1549962);
-        
         maploc = new google.maps.Map(document.getElementById('gmaploc'), {
           center: uloclatloncntr,
           zoom: 11,
@@ -485,10 +483,12 @@ google.maps.event.addListener(infowindow,'closeclick',function(){
 
        
       };
-   
+   </script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
+    ></script> 
            
               
-
+<script>
   
 
     $( document ).ready(function() {
@@ -499,8 +499,7 @@ $("#worktime" ).change(function() {
   if (tm==2) $("#bike").click();
   if (tm==3) $("#pb").click();
 });
-  //loadScript();
- // initMap();
+
     $("#budget").text('$ '+ budget);
     $("#dt_ct").text("Departure Time:");
     $("#trafficnews").text("no traffic news availible");
@@ -799,6 +798,7 @@ map.setZoom( map.getZoom() );
                    
     		 })
           .fail(function(msg) {
+                      
                     alert(JSON.stringify(msg));
           });
           else   $.ajax({
@@ -898,7 +898,11 @@ map.setZoom( map.getZoom() );
 
 
                if ((start==desmyLatlng) && (tm==1)) precost=precost+15; 
-               if ( tm==3) predistance=totalmilage;   
+               if ( tm==3) { predistance=totalmilage;
+                             precost=cost;
+                             kir=traveltime;
+                             temp=desmyLatlng;
+               }   
               $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance.toFixed(2)  +" miles</td><td>"
                + kir.toFixed(2) +" min</td><td>"+ precost.toFixed(2) + " $</td></tr>");
              calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
@@ -1102,7 +1106,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
         var t1,t2;
        $(document).on('change', 'input:radio[id^="r"]', function (event) {
       
-        
+
          if ( srcmyLatlng==-1 || desmyLatlng==-1 || gtm==-1) 
           {          
           alert('choose source, destination and travel mode');
