@@ -37,7 +37,7 @@
         var myObject = JSON.parse(uinfo);
         var gameid=JSON.parse(gameinfo).id;
         var questionnum=0;
-       alert(JSON.parse(gameinfo).id);
+     //  alert(JSON.parse(gameinfo).id);
 
          $.ajax({
                    url: baseurl + '/questions',

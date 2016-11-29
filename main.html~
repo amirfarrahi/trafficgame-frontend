@@ -945,8 +945,8 @@ map.setZoom( map.getZoom() );
 		             type: 'PUT',
                    contentType: 'application/json; charset=utf-8',
                    data: JSON.stringify({  'current_loc_lat':start.lat(), 
-                   'current_loc_lon':start.lng(), 'travel_mode':tm,
-                    'departure_time': gtime.toString() }),
+                   'current_loc_lon':start.lng()
+                    }),
                    headers: { 'Authorization' : myObject.auth_token       } 
                  }).done(function(msg) {
                       $("#startbtn").prop("disabled",true);

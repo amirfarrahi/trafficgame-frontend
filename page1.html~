@@ -105,7 +105,7 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
       
       $(document).ready(function() {
       
-
+$('#AboutusModal').modal('toggle'); 
         var uinfo=sessionStorage.getItem('userinfo');
         var myObject = JSON.parse(uinfo);
 
