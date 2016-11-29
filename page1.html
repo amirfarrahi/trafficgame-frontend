@@ -15,6 +15,76 @@
 
 <div id="main" class="col-md-12">
 
+<div class="modal fade" id="AboutusModal" role="dialog">
+    <div class="modal-dialog">
+     <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p><h4 align="center">Information about the Research Study
+Game - Active Transportation and Demand Management (ATDM)
+Application of Tools for Tactical and Strategic Decision-making for
+Operations / Task 4: Data Collection and Research Plan
+Study Number 071614</h4>
+
+<p style="text-align: justify;">This research study is under the direction of Dr. Samer Hamdar of the Department of Civil and Environmental
+Engineering, George Washington University, and paid for by the US Department of Transportation. 
+Taking part in this research is entirely voluntary. Your academic standing and/or the status of your employment will not,
+ in any way, be affected should you choose not to participate or if you decide to withdraw from the study at any time.</p>
+
+<p style="text-align: justify;">The purpose of this study is to provide guidelines on motivations that lead travelers to change 
+their behavior when facing some disruptive events with and without Active Transportation and 
+Demand Management (ATDM) tools. This will allow devising pricing and information provision strategies 
+that lead to a less congested transportation system.</p>
+
+<p style="text-align: justify;">The part of the study consists of participating in an online game offered through the link below. 
+The game consists of hypothetical travel choices and questions regarding your socio-economic 
+characteristics, your travel patterns, and different attitudes/norms/motivations when faced with 
+hypothetical travel conditions. Your answers will be recorded in an anonymous manner where no 
+personal/private information will be linked to your answers (for example: email address/name …etc.).
+A game instance should take a maximum of 15 minutes. Your answers are expected at the end of the game 
+instance.</p>
+<p style="text-align: justify;">The total amount of time you will spend in connection with this part of the study will be 
+about 45 minutes a week (three game instances per week at your time/discretion and based on your 
+schedules/convenience). We do hope you can participate for a total of 6-month duration between December 1st,
+2016, and May 31st, 2017. You may refuse to answer any of the questions asked and you may stop your 
+participation in this study at any time.</p>
+
+<p style="text-align: justify;">The possible risks you may experience during this study are limited to a minimal risk of 
+loss in confidentiality when recording your driving behavioral characteristics in relationship 
+with your socio-demographical and physiological characteristics. 
+The experiment may be stopped at anytime if any discomfort is felt by the participant.</p>
+
+<p style="text-align: justify;">You will not benefit directly from your participation in the study. The main benefits 
+though are to science and to the commuter/traveler population population: this research is 
+intended to allow understanding the motivations making some travel decisions even if detrimental 
+to the transportation network performance. Such understanding through proper data collection generates 
+new knowledge towards devising new demand management strategies leading to better traveler 
+responsiveness and a mutually beneficial relationship between the users (i.e. travelers) and 
+the suppliers (transportation officials) with less congested and safer surface transportation networks.</p>
+
+<p style="text-align: justify;">Every effort will be made to keep your information confidential, however, this cannot be guaranteed;
+ the investigators in this study will not use your name when specifying your socio-demographic 
+  characteristics/physiological characteristics. Instead, pseudo-names (usernames) and subject IDs 
+will be used to link between the traveler characteristics and the corresponding traveling behavior. 
+Finally, all recorded information will be kept on servers and external hard disks owned by 
+the George Washington University and used solely for research purposes. 
+If results of this research study are reported in journals or at scientific meetings, 
+the people who participated in this study will not be named or identified.</p>
+
+<p style="text-align: justify;">The Office of Human Research of George Washington University, at telephone number (202)-994-2715, 
+can provide further information about your rights as a research participant. 
+Further information regarding this study may be obtained by contacting Dr. Samer Hamdar, 
+the research lead investigator, at telephone number (202)-994-6652.</p>
+
+<p style="text-align: justify;">To ensure anonymity, your signature is not required. Your willingness to participate in this research study is implied if you proceed replying to the announcement email or participating in the survey.
+*Please keep/print a copy of this document in case you want to read it again.</p>
+        </div>
+      </div>
+    </div>
+  </div>  
 
 
 </div>
@@ -31,11 +101,11 @@
     <script>
       var scenario=-1;
       var useranswers=[];
-      var baseurl='http://localhost:3000' //'https://mighty-inlet-46722.herokuapp.com
+      var baseurl='http://localhost:3000'; //'https://mighty-inlet-46722.herokuapp.com
       
       $(document).ready(function() {
       
-
+$('#AboutusModal').modal('toggle'); 
         var uinfo=sessionStorage.getItem('userinfo');
         var myObject = JSON.parse(uinfo);
 

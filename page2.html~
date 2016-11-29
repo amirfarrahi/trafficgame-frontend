@@ -33,9 +33,11 @@
       
      
         var uinfo=sessionStorage.getItem('userinfo');
+        var gameinfo=sessionStorage.getItem('gameinfo');
         var myObject = JSON.parse(uinfo);
-        var gameid=2;//JSON.parse(uinfo).game_id;
+        var gameid=JSON.parse(gameinfo).id;
         var questionnum=0;
+       alert(JSON.parse(gameinfo).id);
 
          $.ajax({
                    url: baseurl + '/questions',
@@ -107,7 +109,7 @@
                 }).done(function(msg) {
                   $("#cntr").empty();
                   $("#cntr").append("<h2>Thanks for your participation.Please come back again!</h2>");
-             //   setTimeout(function(){ window.location = 'login.html'; }, 1300);
+                  setTimeout(function(){ window.location = 'login.html'; }, 1300);
                 
                 
                 })    
