@@ -38,35 +38,37 @@
     
 <div class="col-md-3" data-toggle="tooltip" title="The user name associated with your account">
 <span class="label label-success" >User Name:</span>
-<span id="username" ></span>
+<strong><span id="username" ></span></strong>
 </div> 
 <div class="col-md-3"><span class="label label-default hidden"> Condition:</span>
 <span id="contxt" class="hidden"><strong></strong></span>
 <button id="iwo" class="hidden"></button>
 <button id="iwc" class="hidden"></button>
 <span class="label label-info">Time Elapsed:</span>
-<span id="traveltime" ><strong></strong></span>
+<strong><span id="traveltime" ></strong></span>
 </div> 
 <div class="col-md-3"><span class="label label-default">Distance Traveled:</span>
-<span id="distance" ><strong></strong></span>
+<strong><span id="distance" ></strong></span>
 </div> 
 <div class="col-md-3" data-toggle="tooltip" title="The out-of-pocket monetary cost that you have spent in THIS trip">
 <span class="label label-default">Money Spent:</span>
-<span id="cost" ><strong></strong></span>
+<strong><span id="cost" ></strong></span>
 </div>
 
 
     </div>
         <div class="top-buffer row">
 <div class="col-md-3" data-toggle="tooltip" title="The start node of your trip."><span class="label label-info">Origin:</span>
- <span id="origin" ><strong></strong></span>
+ <strong><span id="origin" ></strong></span>
 
 </div> 
 <div class="col-md-3" data-toggle="tooltip" title="The end node of your trip."><span class="label label-info">Destination:</span>
- <span id="destination" ><strong></strong></span>
+ <strong><span id="destination" ></strong></span>
 </div> 
-<div class="col-md-3" data-toggle="tooltip" title="The time you decide to begin your trip/The virtual time at the moment in the game.">
-<span id='dt_ct' class="label label-success"></span>
+<div class="col-md-3" data-toggle="tooltip" 
+title="The time you decide to begin your trip/The virtual time at the moment in the game.">
+<span id='dt_ct' class="label label-success"></span><strong>
+<span id="currtime" class="hidden"></span></strong>
  <select  id="worktime">
   <option value="6:00">6:00 AM</option>
   <option value="6:15">6:15 AM</option>
@@ -297,12 +299,12 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
 
 
 <nav class="navbar navbar-default"> <div class="container-fluid"> 
- <div class="navbar-header"> <a id="hist" class="navbar-brand" href="#">Trip History</a> </div> 
+ <div class="navbar-header"> <strong><a id="hist" class="navbar-brand" href="#">Trip History</a></strong> </div> 
  <div class="col-md-4"> </div>
- <div class="navbar-header"> <a id="main" class="navbar-brand" href="#">Main</a> </div> 
+ <div class="navbar-header"> <strong><a id="main" class="navbar-brand" href="#">Main</a></strong> </div> 
   <div class="col-md-4"> </div>
  <div class="navbar-header" data-toggle="tooltip" title="Location of other players">
- <a id="loc" class="navbar-brand" href="#">Players Location</a> </div> 
+<strong> <a id="loc" class="navbar-brand" href="#">Players Location</a></strong> </div> 
  </div> </nav>
 
 
@@ -363,6 +365,7 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
  crossorigin="anonymous"></script>
+ <script src="js/moment.js"></script>
 
       <script>
     
@@ -483,12 +486,11 @@ google.maps.event.addListener(infowindow,'closeclick',function(){
 
        
       };
-   </script>
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
-    ></script> 
+
+
            
               
-<script>
+
   
 
     $( document ).ready(function() {
@@ -749,6 +751,11 @@ map.setZoom( map.getZoom() );
 /**************************/
 
         $('#startbtn').click(function() {
+              $("#dt_ct").text("Current Time:");
+              $("#worktime").addClass('hidden');
+              $("#currtime").removeClass('hidden');
+              $("#currtime").text(gtime.toLocaleTimeString());
+              $("#currtime").text(moment(gtime).add(30,"minutes").toDate().toLocaleTimeString() );
               if (tm==1) pretmcar=1;
               if ((tm!=1) && (pretmcar==1)) precost=precost+5;
               $("#worktime").prop("disabled",true);
@@ -1532,5 +1539,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
      
   
     </script>    
+    <script  async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
+    ></script> 
   </body>
 </html>
