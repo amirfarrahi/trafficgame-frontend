@@ -907,10 +907,13 @@ map.setZoom( map.getZoom() );
              $('#pb').prop("disabled",false);
 			    $('#bike').prop("disabled",false);
 			    $('#car').prop("disabled",false);
+			    
          
                if ((pretmcar==1) && (tm!=1)) pretmcar=0;
+             calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
 
-
+ if (tm==3) start=desmyLatlng;
+             else start=temp;  
                if ((start==desmyLatlng) && (tm==1)) precost=precost+15; 
                if ( tm==3) { predistance=totalmilage;
                              precost=cost;
@@ -924,10 +927,9 @@ map.setZoom( map.getZoom() );
 
               $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance.toFixed(2)  +" miles</td><td>"
                + kir.toFixed(2) +" min</td><td>"+ precost.toFixed(2) + " $</td></tr>");
-             calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
+
            
-             if (tm==3) start=desmyLatlng;
-             else start=temp;    
+              
                  $.ajax({
                    url: baseurl + '/updateuserloc',
                    dataType: 'json',

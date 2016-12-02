@@ -920,7 +920,7 @@ map.setZoom( map.getZoom() );
             //   alert(kir);
             //   alert(currenttime);
               currenttime= add_minutes(currenttime,kir);
-         $("#currtime").text(currenttime);
+         $("#currtime").text(currenttime.toLocaleTimeString());
 
               $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance.toFixed(2)  +" miles</td><td>"
                + kir.toFixed(2) +" min</td><td>"+ precost.toFixed(2) + " $</td></tr>");
