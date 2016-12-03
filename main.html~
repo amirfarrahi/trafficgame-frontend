@@ -411,7 +411,7 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
 </div>
 <div id="animation" class="col-md-12 hidden"><img id="ride" class="center-block" src="" /></div>
 </div>
-<div class="row">
+<div class="top-buffer row">
 <div class="col-md-12 text-center">
 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">report a bug</button>
 </div>
@@ -1628,4 +1628,4 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
     <script  async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
     ></script> 
   </body>
-</html>startbtn
+</html>
