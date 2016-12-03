@@ -27,7 +27,7 @@
     <script>
       var scenario=-1;
       var useranswers=[];
-      var baseurl='http://localhost:3000';
+      var baseurl='https://mighty-inlet-46722.herokuapp.com';
       
       $(document).ready(function() {
       

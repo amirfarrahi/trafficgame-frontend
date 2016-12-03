@@ -121,18 +121,13 @@ $('#AboutusModal').modal('toggle');
                
                   $.each(data, function(index) {
                   //  alert(data[index].id);
-                    if (data[index].id<=13)
+                    if (data[index].id<=28)
                     $("#main").append("<form id='q"+data[index].id + "'><h3><span class='label label-info'>" + 
                     data[index].id + "-" + data[index].name +"</span></h3></form>");
                    
                   });
-                })
-                  .fail(function(msg) {
-                  alert("failed");
-                             
-                  });
                   
-                   $.ajax({
+                                 $.ajax({
                    url: baseurl + '/answers',
                    dataType: 'json',
                    type: 'GET',
@@ -144,7 +139,7 @@ $('#AboutusModal').modal('toggle');
                
                   $.each(data, function(index) {
                 //  alert(JSON.stringify(data[index]));
-                    if (data[index].question_id<=13)
+                    if (data[index].question_id<=28)
                     $("#q"+data[index].question_id).append("<div id='"+ data[index].question_id +
                     "_" + data[index].answer_id + "' " +                    
                      "class='radio'><h4><label><input  required type='radio' name='optradio' value='" + data[index].answer_id+ "'>" + 
@@ -154,12 +149,21 @@ $('#AboutusModal').modal('toggle');
                   .fail(function(msg) {
                   alert("failed");
                              
-                  });                  
+                  });                   
+                  
+                  
+                })
+                  .fail(function(msg) {
+                  alert("failed");
+                             
+                  });
+                  
+                         
                   
                   
          $('#submit').click(function() {
    
-            if ($('input[name=optradio]:checked').length!=13) 
+            if ($('input[name=optradio]:checked').length!=28) 
                 {
                   alert('please answer all questions');
                   return;                
@@ -188,7 +192,7 @@ $('#AboutusModal').modal('toggle');
           .fail(function(msg) {
                     alert("fail");
           });  
-          for (j = 1; j < 14; j++) {
+          for (j = 1; j < 29; j++) {
             useranswers.push({'q_id':j, 'a_id':$('input[name=optradio]:checked', '#q'+j).val()});
           }
          // alert(JSON.stringify(useranswers));

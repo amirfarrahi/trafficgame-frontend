@@ -37,39 +37,37 @@
     
     
 <div class="col-md-3" data-toggle="tooltip" title="The user name associated with your account">
-<span class="label label-success" >User Name:</span>
+<span class="label label-default" >User Name:</span>
 <strong><span id="username" ></span></strong>
 </div> 
+<div class="col-md-3" data-toggle="tooltip" title="The distance you have already traveled from the origin in this trip."><span class="label label-default">Distance Traveled:</span>
+<strong><span id="distance" ></span></strong>
+</div> 
+<div class="col-md-3" data-toggle="tooltip" title="The out-of-pocket monetary cost that you have spent in this trip">
+<span class="label label-default">Money Spent:</span>
+<strong><span id="cost" ></span></strong>
+</div>
 <div class="col-md-3"><span class="label label-default hidden"> Condition:</span>
 <span id="contxt" class="hidden"><strong></strong></span>
 <button id="iwo" class="hidden"></button>
 <button id="iwc" class="hidden"></button>
-<span class="label label-info">Time Elapsed:</span>
-<strong><span id="traveltime" ></strong></span>
+<span class="label label-default" data-toggle="tooltip" title="The amount of time you have already spent after departure in this trip.">Time Elapsed:</span>
+<strong><span id="traveltime"></span></strong>
 </div> 
-<div class="col-md-3"><span class="label label-default">Distance Traveled:</span>
-<strong><span id="distance" ></strong></span>
-</div> 
-<div class="col-md-3" data-toggle="tooltip" title="The out-of-pocket monetary cost that you have spent in THIS trip">
-<span class="label label-default">Money Spent:</span>
-<strong><span id="cost" ></strong></span>
-</div>
-
 
     </div>
         <div class="top-buffer row">
 <div class="col-md-3" data-toggle="tooltip" title="The start node of your trip."><span class="label label-info">Origin:</span>
- <strong><span id="origin" ></strong></span>
+ <strong><span id="origin" ></span></strong>
 
 </div> 
 <div class="col-md-3" data-toggle="tooltip" title="The end node of your trip."><span class="label label-info">Destination:</span>
- <strong><span id="destination" ></strong></span>
+ <strong><span id="destination" ></span></strong>
 </div> 
-<div class="col-md-3" data-toggle="tooltip" 
-title="The time you decide to begin your trip/The virtual time at the moment in the game.">
+<div class="col-md-3">
 <span id='dt_ct' class="label label-success"></span><strong>
-<span id="currtime" class="hidden"></span></strong>
- <select  id="worktime">
+<span id="currtime" class="hidden" data-toggle="tooltip" title="The virtual time of the moment in the game"></span></strong>
+ <select  id="worktime" data-toggle="tooltip" title="The time you decide to begin your trip">
   <option value="6:00">6:00 AM</option>
   <option value="6:15">6:15 AM</option>
   <option value="6:30">6:30 AM</option>    
@@ -104,14 +102,14 @@ title="The time you decide to begin your trip/The virtual time at the moment in 
 <div class="col-md-3">
 
 
-<a class="btn label label-success" data-toggle="modal" data-target="#loModal">
-  Exit
-</a>
-<a class="btn label label-success" data-toggle="modal" data-target="#AboutusModal">
-  About Us
-</a>
-<a class="btn label label-success" data-toggle="modal" data-target="#loModal">
+<a class="btn label label-primary" data-toggle="modal" data-target="#HelpModal">
   Help
+</a>&nbsp
+<a class="btn label label-primary" data-toggle="modal" data-target="#AboutusModal">
+  About Us
+</a>&nbsp
+<a class="btn label label-danger" data-toggle="modal" data-target="#loModal">
+  Exit
 </a>
 
   <button id="showusers" type="button" class="btn btn-primary hidden" data-toggle="tooltip" title="the location of other player(s) that are simultaneously in the game">players location</button>
@@ -162,7 +160,7 @@ title="The time you decide to begin your trip/The virtual time at the moment in 
 <span class="label label-warning">Traffic Info:</span>
 
 
-  <h4 style="display:inline"><span id="trafficnews" class="label label-danger" ><strong></strong></span></h4>
+  <h4 style="display:inline"><span id="trafficnews" class="label label-primary" ><strong></strong></span></h4>
 
 
 </div>
@@ -183,7 +181,70 @@ title="The time you decide to begin your trip/The virtual time at the moment in 
       </div>
     </div>
   </div>
-  
+ 
+
+
+<div class="modal fade" id="HelpModal" role="dialog">
+    <div class="modal-dialog">
+     <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+  <p><h4 align="center">      
+Game Instruction
+</h4></p>
+<p>
+To start with the game:</p>
+<p>
+1-Please keep in mind that you are expected to arrive your destination by 9 AM; decide your departure time accordingly.
+</p><p>
+2-Select your preferred mode/route (if available) and click ‘Go’.</p>
+<p>
+3-You may have opportunities to transfer/reroute on the way, simply repeat Step 2. 
+</p><p>
+4-When you arrive your destination please complete a post-game survey based on your game experience.
+</p>
+
+<p style="text-align: justify;">
+Specification on cost:
+Car: gas based on mileage and parking fee (parking in Rosslyn takes $15; however, park & ride/bike on the way takes only $5).
+Metro: ticket fee based on mileage.
+Bike: for free.
+</p>
+<p style="text-align: justify;">
+* If you find any problem/bug in the game, please tell us via ‘Report a bug’. 
+</p>        
+        
+
+        </div>
+      </div>
+    </div>
+  </div>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 <div class="modal fade" id="AboutusModal" role="dialog">
     <div class="modal-dialog">
      <!-- Modal content-->
@@ -274,49 +335,54 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
 
 <div class="col-md-4 visual-indicator-holder">
 
-<div class="row">
-<span id="minli"></span>
-<span>---------------------</span>
-<span id="avgli" ></span>
-<span>----------------------</span>
-<span id="maxli" ></span>
 
 
+
+
+
+<span id="minli"  class="pull-left" ></span>
+<span id="maxli" class="pull-right"></span>
+
+
+
+<div  class="vi-internal-element" style="width:100%; background: linear-gradient(to right, green  ,yellow,red  );">
 </div>
-<div class="row">
-<div  class="vi-internal-element" style="width:100%; background: linear-gradient(to right, #FFFFFF  ,#006400,#FFFFFF  );">
-    </div>
-
-</div>
-   
-
 </div>
 <div class="col-md-2">
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-6">
+</div>
+
+<div id="avgli" class="col-md-4 text-center">
+</div>
+
+<div class="col-md-2">
+</div>
 
 </div>
-</div>
+
+
+
+
+
+
+
+
 <div class="top-buffer row">
-
-
-<nav class="navbar navbar-default"> <div class="container-fluid"> 
- <div class="navbar-header"> <strong><a id="hist" class="navbar-brand" href="#">Trip History</a></strong> </div> 
- <div class="col-md-4"> </div>
- <div class="navbar-header"> <strong><a id="main" class="navbar-brand" href="#">Main</a></strong> </div> 
-  <div class="col-md-4"> </div>
- <div class="navbar-header" data-toggle="tooltip" title="Location of other players">
-<strong> <a id="loc" class="navbar-brand" href="#">Players Location</a></strong> </div> 
- </div> </nav>
-
+<div class="container">
+<ul class="nav nav-tabs nav-justified">
+    <li id="hist"><a href="#">Trip History</a></li>
+    <li id="main" class="active"><a  href="#">Main</a></li>
+    <li id="loc"><a href="#">Players Location</a></li>
+  </ul>
+</div>
 
 <div id="ccc" class="col-md-12 map">
 <div id="gmap" class="col-md-12 map">
 </div>
-
-       
-        
-    
-
-
 
 <div id="histtab" class="col-md-12"> 
 <div id="gmaphist" class="col-md-7 map"></div>
@@ -375,7 +441,6 @@ var pretmcar=0;
 var routeselectedindex=0;
 var worktime;
 var totalmilage=0;
-var ttime=0;
 var currenttime=-1;
 var start;
 var pretripcost;
@@ -425,11 +490,15 @@ var sss;
 var cnt;
 var predistance=0;
 var precost=0;
-var pretraveltime=0.0;
+var pretraveltime=0;
 var pbflag=0;
 var bikeflag=0;
 var infowindow;
 var markersArray = [];
+var Ttime=0;
+var Tmile=0;
+var Tcost=0;
+
 
 
       function initMap() {
@@ -503,7 +572,7 @@ $("#worktime" ).change(function() {
   if (tm==3) $("#pb").click();
 });
 
-    $("#budget").text('$ '+ budget);
+
     $("#dt_ct").text("Departure Time:");
     $("#trafficnews").text("no traffic news availible");
  
@@ -667,6 +736,9 @@ $("#worktime" ).change(function() {
        });
        
        $('#hist').click(function() {
+       $('#hist').addClass('active');
+       $('#main').removeClass('active');
+       $('#loc').removeClass('active');
 $("#gmap").hide();
 $("#gmaploc").hide();
 $("#histtab").show();
@@ -674,14 +746,12 @@ var center=hmap.getCenter();
 google.maps.event.trigger(hmap, 'resize');
 hmap.setZoom( hmap.getZoom() );
 hmap.setCenter(center);
-//$('#gmap').css('display','none');
-//$("#gmaploc").hide();
-//$('#gmaploc').css('display','none');
-      //   $("#gmap").addClass('hidden');
-      //   $("#gmaploc").addClass('hidden');
-      //  $("#histtab").removeClass('hidden');
        });
         $('#loc').click(function() {
+        
+           $('#hist').removeClass('active');
+       $('#main').removeClass('active');
+       $('#loc').addClass('active');
         
             $("#gmap").hide();
             $("#histtab").hide();
@@ -733,6 +803,10 @@ maploc.setZoom( maploc.getZoom() );
            
        });
        $('#main').click(function() {
+       
+        $('#hist').removeClass('active');
+       $('#loc').removeClass('active');
+       $('#main').addClass('active');
          $("#histtab").hide();//addClass('hidden');
                   $("#gmaploc").hide();//addClass('hidden');
          $("#gmap").show();//removeClass('hidden');
@@ -769,9 +843,9 @@ map.setZoom( map.getZoom() );
               if (tm==3) pbflag=1;//$("#car").prop("disabled",true);
               $("#ccc").hide();//addClass('hidden');
               budget=(budget-cost).toFixed(2);
-              $("#budget").text('$ ' + budget );
-              ttime=traveltime+ttime;
-              $("#ttime").text(ttime.toFixed(2) +' min');
+            //  $("#budget").text('$ ' + budget );
+           //   ttime=traveltime+ttime;
+           //   $("#ttime").text(ttime.toFixed(2) +' min');
               $("#animation").removeClass('hidden');
               $('#ride').attr("src",tmimagelink);
               $("#routegrp").addClass('hidden');
@@ -911,23 +985,28 @@ map.setZoom( map.getZoom() );
                if ((pretmcar==1) && (tm!=1)) pretmcar=0;
 
 
-               if ((start==desmyLatlng) && (tm==1)) precost=precost+15; 
+               if ((temp==desmyLatlng) && (tm==1)) precost=precost+15; 
                if ( tm==3) { predistance=totalmilage;
                              precost=cost;
                              kir=traveltime;
                              temp=desmyLatlng;
                }   ;
-            //   alert(kir);
-            //   alert(currenttime);
-              currenttime= add_minutes(currenttime,kir);
+               Ttime=Ttime+kir;
+            //   alert(Ttime);
+               Tcost=Tcost+precost;
+               Tmile=Tmile+predistance;
+               $("#distance").text(Tmile.toFixed(2)+ ' mile(s)');
+               $("#traveltime").text(Ttime.toFixed(2)+ ' min');
+               $("#cost").text('$ ' + Tcost.toFixed(2) );
+          currenttime= add_minutes(currenttime,kir);
          $("#currtime").text(currenttime.toLocaleTimeString());
 
-              $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance.toFixed(2)  +" miles</td><td>"
-               + kir.toFixed(2) +" min</td><td>"+ precost.toFixed(2) + " $</td></tr>");
+              $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance.toFixed(2)  +" mile(s)</td>"
+               + "<td>$ "+ precost.toFixed(2) + "</td><td>" + kir.toFixed(2) +" min</td></tr>");
              calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
            
-             if (tm==3) start=desmyLatlng;
-             else start=temp;    
+
+              start=temp;    
                  $.ajax({
                    url: baseurl + '/updateuserloc',
                    dataType: 'json',
@@ -951,17 +1030,21 @@ map.setZoom( map.getZoom() );
                  });
              
              
-             if (start==desmyLatlng) {
+             if (start===desmyLatlng) {
+           //  alert('www');
                $("#gmap").removeClass('hidden');
-               infowindow.close();
-               $("#tmbtn button").prop("disabled",true);
-               $("#traveltime").text('');
-               $("#cost").text('');
+            //   infowindow.close();
+                $("#tmbtn button").prop("disabled",true);
+
+             
                $("#startbtn").prop("disabled",true);
                $("#trafficnews").text('');
-               $("#distance").text("");
+              // $("#distance").text('');
+             //  $("#traveltime").text('');
+             //  $("#cost").text('');
                 var contentString = '<div id="content">'+
             'You have reached your destination; please click <a href="page2.html">here</a> to answer a post-game survey</div>';
+                   infowindow.setContent(contentString);              
                   $.ajax({
                    url: baseurl + '/games/'+gameid,
                    dataType: 'json',
@@ -972,22 +1055,16 @@ map.setZoom( map.getZoom() );
                     }),
                    headers: { 'Authorization' : myObject.auth_token       } 
                  }).done(function(msg) {
-                      $("#startbtn").prop("disabled",true);
-                           var winfowindow = new google.maps.InfoWindow({
-          content: contentString,
-          position:desmyLatlng
-          });  
-          winfowindow.open(map);
-          
-               return;
-                   
+                      //$("#startbtn").prop("disabled",true);
+                
     		        })
                  .fail(function(msg) {
                     alert(JSON.stringify(msg));
                  });
+                 
+                 return;
 
-   
-              };
+            };
               
                 
 
@@ -1038,12 +1115,12 @@ $('#loModal').modal('toggle');
           tm=this.getAttribute("data-tmid") ;  
            if (tm==1) { gtm=google.maps.DirectionsTravelMode.DRIVING;
                         tmimagelink='img/car.gif';
-                        tmname='car';
+                        tmname='Car';
            }
            if (tm==2) { gtm=google.maps.DirectionsTravelMode.BICYCLING;
            					//$('#ride').attr("src",'img/bike.jpg');
            					tmimagelink='img/bike.jpg';
-           					tmname='bike';
+           					tmname='Bike';
            }
            if (tm==3) { gtm=google.maps.DirectionsTravelMode.TRANSIT;
                         //$('#ride').attr("src",'img/bus.gif');
@@ -1058,11 +1135,10 @@ $('#loModal').modal('toggle');
 calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,
 google.maps.DirectionsTravelMode.DRIVING,0,map,false,function(a,b,c,d,e,f){
   if (a!=-1) {w='<tr id="infowindowcarrow"><td>Car</td>';
-             w=w+ '<td>'+b.toFixed(2)+' mile</td>' +
+             w=w+ '<td>'+b.toFixed(2)+' mile(s)</td>' +
                   '<td>$ '+a.toFixed(2)+'</td>'+
                   '<td>'+c.toFixed(2) +' min</td>'+
                   '<td>'+d.toFixed(2) +' min</td>'+
-                  '<td>'+e.toFixed(2) +' min</td>'+
                   '<td>'+f.toFixed(2) +' min</td>'+              
                   '</tr>';}
        else  $('#car').prop("disabled",true);
@@ -1070,22 +1146,20 @@ google.maps.DirectionsTravelMode.DRIVING,0,map,false,function(a,b,c,d,e,f){
 calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,
 google.maps.DirectionsTravelMode.BICYCLING,0,map,false,function(a,b,c,d,e,f){
   if (a!=-1) {w=w+'<tr id="infowindowbikerow"><td>Bike</td>';
-             w=w+ '<td>'+b.toFixed(2)+' mile</td>' +
+             w=w+ '<td>'+b.toFixed(2)+' mile(s)</td>' +
                   '<td>$ '+a.toFixed(2)+'</td>'+
                   '<td>'+c.toFixed(2) +' min</td>'+
                   '<td>'+d.toFixed(2) +' min</td>'+
-                  '<td>'+e.toFixed(2) +' min</td>'+
                   '<td>'+f.toFixed(2) +' min</td>'+                
                   '</tr>';}
                   else    $('#bike').prop("disabled",true);
 calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,
 google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
   if (a!=-1)  {w=w+'<tr id="infowindowpbrow"><td>Metro</td>';
-             w=w+ '<td>'+b.toFixed(2)+' mile</td>' +
+             w=w+ '<td>'+b.toFixed(2)+' mile(s)</td>' +
                  '<td>$ '+a.toFixed(2)+'</td>'+
                   '<td>'+c.toFixed(2) +' min</td>'+
                   '<td>'+d.toFixed(2) +' min</td>'+
-                  '<td>'+e.toFixed(2) +' min</td>'+
                   '<td>'+f.toFixed(2) +' min</td>'+
                   '</tr>';}
     else $('#pb').prop("disabled",true);
@@ -1093,8 +1167,8 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
  calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,gtm,0,map,true,function(a,b,c){
      
      var contentString='<div id="content">'+'<table class="table table-striped">'+
-'<tr><th>Mode</th><th>Mile</th><th>Cost</th><th>Travel Time</th><th>TTR Min</th>'+
-'<th>TTR Avg</th><th>TTR Max</th></tr>'+w+'</table></div>';
+'<tr><th>Mode</th><th>Distance</th><th>Cost</th><th>Travel Time</th><th>Min</th>'+
+'<th>Max</th></tr>'+w+'</table></div>';
 
         infowindow.setContent(contentString);  
          if ((pbflag==1) ||  (bikeflag==1)) {
@@ -1166,9 +1240,9 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
          fttime=-1;
          fttimemin=-1;
          fttimemax=-1;
-         $("#traveltime").text('');
+
          $("#routegrp" ).empty();
-         $("#cost").text(''); 
+
 
          trafficflag=0;
          var dirseroption={
@@ -1243,7 +1317,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
          //   if (roadresult.length==0)      $("#startbtn").prop("disabled",true);   
             if (roadresult.length<1) 
 				{ 
-              $("#distance").text("");
+           //   $("#distance").text("");
               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  $('#pb').prop("disabled",true);
 			     if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)  $('#bike').prop("disabled",true);
 			     if (travel_mode==google.maps.DirectionsTravelMode.DRIVING)  $('#car').prop("disabled",true);
@@ -1273,7 +1347,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             
             totalmilage=roadresult[routeindex].legs[0].distance.value*0.000621371;
          
-            $("#distance").text(totalmilage.toFixed(2)+ ' miles');        
+          //  $("#distance").text(totalmilage.toFixed(2)+ ' miles');        
             var durationinmin=roadresult[routeindex].legs[0].duration.value/60;
             var pretraveltime=myRoute.steps[0].duration.value/parseFloat(60);
             kir=pretraveltime;
@@ -1313,7 +1387,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
               var li;
             for (li=0;li<ropt;li++) 
               $("#routegrp").append("<div class='radio-inline'><label><input id='r" + 
-              li + "' type='radio' name='optradio' value='" + li+ "'>route " +(li+1)+"</label></div>");
+              li + "' type='radio' name='optradio' value='" + li+ "'>Route " +(li+1)+"</label></div>");
             $("#r" + routeindex).prop("checked", true);
          
              polyline.setMap(imap);
@@ -1321,7 +1395,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             }
             if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
             durationinmin=durationinmin+30;
-            $("#traveltime").text(durationinmin.toFixed(2) + ' min');
+        //    $("#traveltime").text(durationinmin.toFixed(2) + ' min');
             var std=3;
             var cof=0.14;
             var meanco=1;
@@ -1346,6 +1420,8 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             fttime=meanco*durationinmin;
         
             fttimemin=meanco*durationinmin*(1-std*cof)-constant;
+            var lowerfft=totalmilage/55;
+            if (lowerfft>=fttimemin) fttimemin=lowerfft;
             fttimemax=meanco*durationinmin*(1+std*cof)+constant;
             
             $("#avgli").html(fttime.toFixed(2) + ' min');
@@ -1364,36 +1440,33 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             if ((pretmcar==1) && (travel_mode!=google.maps.DirectionsTravelMode.DRIVING)) {cost=cost+5;
 
             }
-            $("#cost").text('$ '+ cost.toFixed(2));
-            $("#budget").text('$ ' + (budget-cost).toFixed(2) );
+         //   $("#cost").text('$ '+ cost.toFixed(2));
+        //    $("#budget").text('$ ' + (budget-cost).toFixed(2) );
            
-            $("#ttime").text((traveltime+ttime).toFixed(2) +' min');
+        //    $("#ttime").text((traveltime+ttime).toFixed(2) +' min');
 
 
          if (tm==1)   { $("#infowindowcarrow").empty();
-                        $("#infowindowcarrow").append('<td>Car</td><td>'+totalmilage.toFixed(2)+' mile</td>' 
+                        $("#infowindowcarrow").append('<td>Car</td><td>'+totalmilage.toFixed(2)+' mile(s)</td>' 
                         +'<td>$ '+cost.toFixed(2)+'</td><td>' +
                         traveltime.toFixed(2) +' min</td>'+
                         '<td>'+fttimemin.toFixed(2) +' min</td>'+
-                        '<td>'+fttime.toFixed(2) +' min</td>'+
                         '<td>'+fttimemax.toFixed(2) +' min</td>'+                          
                         '</tr>');
                       };
          if (tm==2)   { $("#infowindowbikerow").empty();
-                        $("#infowindowbikerow").append('<td>Bike</td><td>'+totalmilage.toFixed(2)+' mile</td>' 
+                        $("#infowindowbikerow").append('<td>Bike</td><td>'+totalmilage.toFixed(2)+' mile(s)</td>' 
                         +'<td>$ '+cost.toFixed(2)+'</td><td>' +
                         traveltime.toFixed(2) +' min</td>'+
                         '<td>'+fttimemin.toFixed(2) +' min</td>'+
-                        '<td>'+fttime.toFixed(2) +' min</td>'+
                         '<td>'+fttimemax.toFixed(2) +' min</td>'+                          
                         '</tr>');
                       };
          if (tm==3)   {$("#infowindowpbrow").empty();
-                       $("#infowindowpbrow").append('<td>Metro</td><td>'+totalmilage.toFixed(2)+' mile</td>' 
+                       $("#infowindowpbrow").append('<td>Metro</td><td>'+totalmilage.toFixed(2)+' mile(s)</td>' 
                         +'<td>$ '+cost.toFixed(2)+'</td><td>' +
                         traveltime.toFixed(2) +' min</td>'+
                         '<td>'+fttimemin.toFixed(2) +' min</td>'+
-                        '<td>'+fttime.toFixed(2) +' min</td>'+
                         '<td>'+fttimemax.toFixed(2) +' min</td>'+                        
                         '</tr>');
                       };
@@ -1554,4 +1627,4 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
     <script  async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVHCSIgYfsYUdCjpevjf00e0RsOyAAvDY&callback=initMap"
     ></script> 
   </body>
-</html>
+</html>startbtn

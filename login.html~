@@ -29,7 +29,7 @@
 <!-- Form Module-->
 <div class="module form-module">
   <div class="toggle"><i class="fa fa-times fa-pencil"></i>
-    <div class="tooltip">Click Me to login/ register</div>
+    <div id="divhelp" class="tooltip">Click me to register</div>
   </div>
   <div class="form">
     <h2>Login to your account</h2>
@@ -58,7 +58,7 @@
         <script src="js/index.js"></script>
         <script type="text/javascript">
         $(document).ready(function () {
-        var baseurl=' https://mighty-inlet-46722.herokuapp.com';
+        var baseurl='https://mighty-inlet-46722.herokuapp.com';
      	  $('#login').click( function () {
              if($('#lo-form')[0].checkValidity()){
                 $.ajax({
@@ -86,6 +86,13 @@
            });
           
 
+ $('#register').click(function (){
+ 
+  $('#divhelp').innerHTML('test');)
+ 
+ }
+ );
+            divhelp
             $('#register').click( function () {
 
 
