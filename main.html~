@@ -103,7 +103,7 @@
 
 
 <a class="btn label label-primary" data-toggle="modal" data-target="#HelpModal">
-  Help
+  Instructions
 </a>&nbsp
 <a class="btn label label-primary" data-toggle="modal" data-target="#AboutusModal">
   About Us
@@ -153,7 +153,7 @@
 </div>
 </div>
 <div class="col-md-3">
-<button id="startbtn" class="btn btn-default" type="button" >Go!</button>
+<button id="startbtn" class="btn btn-success" type="button" >&nbsp&nbspGo!&nbsp&nbsp</button>
 </div>
 <div class="col-md-4" data-toggle="tooltip" title="The latest weather/incident information impacting your commute.">
 
@@ -196,27 +196,37 @@
 Game Instruction
 </h4></p>
 <p>
-To start with the game:</p>
+<u>During the game:</u></p>
 <p>
 1-Please keep in mind that you are expected to arrive your destination by 9 AM; decide your departure time accordingly.
 </p><p>
 2-Select your preferred mode/route (if available) and click ‘Go’.</p>
 <p>
 3-You may have opportunities to transfer/reroute on the way, simply repeat Step 2. 
-</p><p>
+</p>
+<p>
 4-When you arrive your destination please complete a post-game survey based on your game experience.
 </p>
+<p>
+5-If you find any problem/bug in the game, please tell us via ‘Report a bug’.
+</p>
+<p>
+6-The availability of the travel modes (i.e. car, metro or bike) depends on the location.
+Some modes may not be available at some locations.
+</p>
+<p>
+7-Once you choose metro, you cannot change modes.
+</p>
+
 
 <p>
-Specification on cost:</p>
+<u>Specification of cost:</u></p>
 <p>Car: gas based on mileage and parking fee (parking in Rosslyn takes $15; however, park & ride/bike on the way takes only $5).
 </p>
 <p>Metro: ticket fee based on mileage.</p>
 <p>Bike: for free.
 </p>
-<p style="text-align: justify;">
-* If you find any problem/bug in the game, please tell us via ‘Report a bug’. 
-</p>        
+      
         
 
         </div>
@@ -413,7 +423,7 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
 </div>
 <div class="top-buffer row">
 <div class="col-md-12 text-center">
-<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">report a bug</button>
+<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal"><strong>report a bug</strong></button>
 </div>
 </div>
 
@@ -831,7 +841,7 @@ map.setZoom( map.getZoom() );
               $("#worktime").addClass('hidden');
               $("#currtime").removeClass('hidden');
               if (playsteps==0) currenttime=gtime;
-              $("#currtime").text(currenttime.toLocaleTimeString());
+              $("#currtime").text(currenttime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
               
               if (tm==1) pretmcar=1;
               if ((tm!=1) && (pretmcar==1)) precost=precost+5;
@@ -991,6 +1001,7 @@ map.setZoom( map.getZoom() );
                              precost=cost;
                              kir=traveltime;
                              temp=desmyLatlng;
+                          //   start=temp;
                }   ;
                Ttime=Ttime+kir;
             //   alert(Ttime);
@@ -1032,6 +1043,10 @@ map.setZoom( map.getZoom() );
              
              
              if (start===desmyLatlng) {
+                     if(polyline!= null)  polyline.setMap(null);
+              $("#startbtn").text('Arrived');
+            //   $("#startbtn").addClass('btn-error');         
+               $("#startbtn").addClass('btn-danger');
            //  alert('www');
                $("#gmap").removeClass('hidden');
             //   infowindow.close();
@@ -1167,7 +1182,8 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
  calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,gtm,0,map,true,function(a,b,c){
      
-     var contentString='<div id="content">'+'<table class="table table-striped">'+
+     var contentString='<div id="content">'+'<span style="color:#0000FF"><strong>You are still on the road.You may choose travel options then press Go!</strong></span>'+
+     '<table class="table table-striped">'+
 '<tr><th>Mode</th><th>Distance</th><th>Cost</th><th>Travel Time</th><th>Min</th>'+
 '<th>Max</th></tr>'+w+'</table></div>';
 
