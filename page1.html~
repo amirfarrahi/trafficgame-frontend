@@ -142,7 +142,7 @@ $('#AboutusModal').modal('toggle');
                     if (data[index].question_id<=28)
                     $("#q"+data[index].question_id).append("<div id='"+ data[index].question_id +
                     "_" + data[index].answer_id + "' " +                    
-                     "class='radio'><h4><label><input  required type='radio' name='optradio' value='" + data[index].answer_id+ "'>" + 
+                     " class='radio yellow'><h4><label><input  required type='radio' name='optradio' value='" + data[index].answer_id+ "'>" + 
                     data[index].answer + "</label></h4></div>");
                   });
                 })

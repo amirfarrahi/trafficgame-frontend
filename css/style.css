@@ -11,7 +11,8 @@ body {
       }
 
 
-/*.gm-style-iw + div {display:none};*/
+
+.gm-style-iw + div {display:none};
 .visual-indicator-holder .vi-internal-element
 {
 font-size:11px;

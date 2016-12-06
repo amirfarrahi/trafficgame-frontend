@@ -1,1 +1,1 @@
-<?php echo file_get_contents('login.html'); ?>
+<?php echo file_get_contents('int.html'); ?>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>welcome</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+ 
+
+  </head>
+  <body>
+
+<div id="main" class="col-md-12">
+
+<div class="modal fade" id="AboutusModal" role="dialog">
+    <div class="modal-dialog">
+     <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p><h4 align="center"><b>Important Information</b></h4>
+
+<p><li>Please log in/register using a VALID email address, a user name and a password. The emails will be used to communicate with the players without retaining their personal information or linking the email addresses to the players’ characteristics. 
+The log in/register information should be kept the same for each player for the duration of the study.</li>
+</p>
+<p><li>Each Sunday, an email communication will be sent to the players while providing game instructions.</li>
+</p>
+<p><li>In such communication, if asked to play, each player will be asked to play 3 times a week from 
+Monday until Thursday, at his/her convenience.</li></p>
+
+<p><li>The student should end on May 31, 2017. Additional information on the study will be presented 
+once you log in.</li></p>
+
+<p><u>This week’s instructions:</u></p>
+
+<p>1- Please feel free to test the game this week (from Monday December 5, 2016, 
+through Saturday December 10, 2016) and ask for clarifications (through the “report” function in the game).
+</p>
+
+<p>2- It is preferable to use the latest versions of the browsers Firefox or Chrome when playing the game.</p>
+
+<p>3- Please play the game use a desktop or a laptop.</p>
+
+<p>4- Please refresh the browser if you feel the graphics are not properly presented. Use the fully enlarged browser for a clearer display.
+</p>
+ 
+
+        </div>
+      </div>
+    </div>
+  </div>  
+
+
+
+</div>
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+ crossorigin="anonymous"></script>
+
+    <script>
+    
+      $(document).ready(function() {
+      
+      $('#AboutusModal').modal('toggle'); 
+      
+$('#AboutusModal').on('hidden.bs.modal', function (e) {
+window.location.href='login.html';
+}) ;           
+
+ });
+         </script>
+   
+    
+  </body>
+</html>

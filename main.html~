@@ -64,10 +64,10 @@
 <div class="col-md-3" data-toggle="tooltip" title="The end node of your trip."><span class="label label-info">Destination:</span>
  <strong><span id="destination" ></span></strong>
 </div> 
-<div class="col-md-3">
+<div class="col-md-3" data-toggle="tooltip" title="The time you decide to begin your trip" >
 <span id='dt_ct' class="label label-success"></span><strong>
-<span id="currtime" class="hidden" data-toggle="tooltip" title="The virtual time of the moment in the game"></span></strong>
- <select  id="worktime" data-toggle="tooltip" title="The time you decide to begin your trip">
+<span id="currtime" class="hidden" ></span></strong>
+ <select  id="worktime">
   <option value="6:00">6:00 AM</option>
   <option value="6:15">6:15 AM</option>
   <option value="6:30">6:30 AM</option>    
@@ -102,10 +102,10 @@
 <div class="col-md-3">
 
 
-<a class="btn label label-primary" data-toggle="modal" data-target="#HelpModal">
+<a class="btn label label-default" data-toggle="modal" data-target="#HelpModal">
   Instructions
 </a>&nbsp
-<a class="btn label label-primary" data-toggle="modal" data-target="#AboutusModal">
+<a class="btn label label-default" data-toggle="modal" data-target="#AboutusModal">
   About Us
 </a>&nbsp
 <a class="btn label label-danger" data-toggle="modal" data-target="#loModal">
@@ -160,7 +160,7 @@
 <span class="label label-warning">Traffic Info:</span>
 
 
-  <h4 style="display:inline"><span id="trafficnews" class="label label-primary" ><strong></strong></span></h4>
+  <h4 style="display:inline"><span id="trafficnews" class="label label-default" ><strong></strong></span></h4>
 
 
 </div>
@@ -403,8 +403,8 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
       <tr>
         <th>Mode</th>
         <th>Distance</th>
-        <th>Travel Time</th>
         <th>Cost</th>
+        <th>Travel Time</th>
       </tr>
     </thead>
     <tbody id="histtable">
@@ -585,7 +585,7 @@ $("#worktime" ).change(function() {
 
 
     $("#dt_ct").text("Departure Time:");
-    $("#trafficnews").text("no traffic news availible");
+    $("#trafficnews").text("no traffic/ transit news availible");
  
 
     $('#desbtn').prop("disabled",true);
@@ -599,7 +599,7 @@ $("#worktime" ).change(function() {
 
 
          $.ajax({
-                   url: baseurl + '/nodes/1' /*+sss*/,
+                   url: baseurl + '/nodes/'+ sss,
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -838,6 +838,7 @@ map.setZoom( map.getZoom() );
 
         $('#startbtn').click(function() {
               $("#dt_ct").text("Current Time:");
+              $("#tdiv").prop('title', 'The virtual time of the moment in the game.');
               $("#worktime").addClass('hidden');
               $("#currtime").removeClass('hidden');
               if (playsteps==0) currenttime=gtime;
@@ -1120,7 +1121,7 @@ $('#loModal').modal('toggle');
           gtime = new Date();
           gtime.setDate(gtime.getDate() + 1);
           gtime.setHours(hhmm[0],hhmm[1],00);
-      //    alert(gtime);
+        //  alert(gtime);
           var b1 = document.getElementById("bike");
           var b2 = document.getElementById("car");
           var b3 = document.getElementById("pb");
@@ -1268,7 +1269,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
          provideRouteAlternatives:true,
          travelMode: travel_mode,
          drivingOptions: {
-           departureTime: gtime,
+           departureTime: new Date(gtime),
            trafficModel: 'pessimistic'
          }
          };
@@ -1433,6 +1434,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                 cof=1;
                constant=3;          
             }
+       
             
             fttime=meanco*durationinmin;
         
@@ -1440,6 +1442,13 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             var lowerfft=totalmilage/55;
             if (lowerfft>=fttimemin) fttimemin=lowerfft;
             fttimemax=meanco*durationinmin*(1+std*cof)+constant;
+            
+            if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) {
+                         
+                         fttimemin=0.8*durationinmin;
+                         fttimemax=1.2*durationinmin;
+            };
+            
             
             $("#avgli").html(fttime.toFixed(2) + ' min');
             $("#minli").html(fttimemin.toFixed(2) + ' min');
