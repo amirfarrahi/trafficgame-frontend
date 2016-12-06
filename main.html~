@@ -64,7 +64,7 @@
 <div class="col-md-3" data-toggle="tooltip" title="The end node of your trip."><span class="label label-info">Destination:</span>
  <strong><span id="destination" ></span></strong>
 </div> 
-<div class="col-md-3" data-toggle="tooltip" title="The time you decide to begin your trip" >
+<div id='tdiv' class="col-md-3" data-toggle="tooltip" title="The time you decide to begin your trip" >
 <span id='dt_ct' class="label label-success"></span><strong>
 <span id="currtime" class="hidden" ></span></strong>
  <select  id="worktime">
