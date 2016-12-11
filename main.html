@@ -92,7 +92,7 @@
   <option value="11:15">11:15 AM</option>
   <option value="11:30">11:30 AM</option>
   <option value="11:45">11:45 AM</option>
-  <option value="12:00">12:00 AM</option>                  
+
 </select> 
 
 </div> 
@@ -102,10 +102,10 @@
 <div class="col-md-3">
 
 
-<a class="btn label label-default" data-toggle="modal" data-target="#HelpModal">
+<a class="btn label label-default" style="color:black;background-color:white;" data-toggle="modal" data-target="#HelpModal">
   Instructions
 </a>&nbsp
-<a class="btn label label-default" data-toggle="modal" data-target="#AboutusModal">
+<a class="btn label label-default" style="color:black;background-color:white;" data-toggle="modal" data-target="#AboutusModal">
   About Us
 </a>&nbsp
 <a class="btn label label-danger" data-toggle="modal" data-target="#loModal">
@@ -160,7 +160,7 @@
 <span class="label label-warning">Traffic Info:</span>
 
 
-  <h4 style="display:inline"><span id="trafficnews" class="label label-default" ><strong></strong></span></h4>
+  <h4 style="display:inline"><span id="trafficnews" style="color:black;background-color:white;" class="label label-default" ><strong></strong></span></h4>
 
 
 </div>
@@ -365,6 +365,7 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
 
 <div class="row">
 <div class="col-md-6">
+<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal"><strong>report a bug</strong></button>
 </div>
 
 <div id="avgli" class="col-md-4 text-center">
@@ -421,11 +422,7 @@ the research lead investigator, at telephone number (202)-994-6652.</p>
 </div>
 <div id="animation" class="col-md-12 hidden"><img id="ride" class="center-block" src="" /></div>
 </div>
-<div class="top-buffer row">
-<div class="col-md-12 text-center">
-<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal"><strong>report a bug</strong></button>
-</div>
-</div>
+
 
 
 
@@ -599,7 +596,7 @@ $("#worktime" ).change(function() {
 
 
          $.ajax({
-                   url: baseurl + '/nodes/'+ sss,
+                   url: baseurl + '/nodes/' +sss,
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -689,18 +686,20 @@ $("#worktime" ).change(function() {
                              
                  });
                   
+             
+                  
          $.ajax({
                    url: baseurl + '/activeconditions',
                    dataType: 'json',
                    type: 'GET',
-                   async: true,
                    headers: { 'Authorization' : myObject.auth_token       },
                    contentType: 'application/json; charset=utf-8'
                
                 }).done(function(data) {
-                   $("#contxt").text(data[0].name);
+                
+               //    $("#contxt").text(data[0].name);
                    conditionid=data[0].id;
-                   
+             //   alert(JSON.stringify(data));   
 
                    if (conditionid==2)     $("#trafficnews").text("Inclement weather! Drive carefully.");
 
@@ -1182,9 +1181,9 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
     else $('#pb').prop("disabled",true);
 
  calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,gtm,0,map,true,function(a,b,c){
-     
-     var contentString='<div id="content">'+'<span style="color:#0000FF"><strong>You are still on the road.You may choose travel options then press Go!</strong></span>'+
-     '<table class="table table-striped">'+
+     var imsg='';
+     if (playsteps>0) imsg='<span style="color:#0000FF"><strong>You are still on the road.You may choose travel options then press Go!</strong></span>';
+     var contentString='<div id="content">'+imsg+'<table class="table table-striped">'+
 '<tr><th>Mode</th><th>Distance</th><th>Cost</th><th>Travel Time</th><th>Min</th>'+
 '<th>Max</th></tr>'+w+'</table></div>';
 
@@ -1269,8 +1268,8 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
          provideRouteAlternatives:true,
          travelMode: travel_mode,
          drivingOptions: {
-           departureTime: gtime,
-           trafficModel: 'pessimistic'
+           departureTime: new Date(Date.now() + 10000000000000),//gtime,
+           trafficModel: 'optimistic'
          }
          };
        //  alert(dirseroption);
@@ -1289,6 +1288,11 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
           }; 
          directionsService.route(dirseroption, function(response, status) {
            if (status === google.maps.DirectionsStatus.OK) {
+           
+          //  alert((new Date(Date.now() + 10000000000)).toLocaleTimeString());
+            // console.log(JSON.stringify(response.routes[0]));
+           //  console.log('----------');
+
             polyline = new google.maps.Polyline({
            					path: [],
            					strokeColor: '#0000FF',
@@ -1439,7 +1443,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             fttime=meanco*durationinmin;
         
             fttimemin=meanco*durationinmin*(1-std*cof)-constant;
-            var lowerfft=totalmilage/55;
+            var lowerfft=totalmilage/55*60;
             if (lowerfft>=fttimemin) fttimemin=lowerfft;
             fttimemax=meanco*durationinmin*(1+std*cof)+constant;
             
