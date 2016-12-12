@@ -160,7 +160,7 @@
 <span class="label label-warning">Traffic Info:</span>
 
 
-  <h4 style="display:inline"><span id="trafficnews" style="color:black;background-color:white;" class="label label-default" ><strong></strong></span></h4>
+  <strong><span id="trafficnews" style="color:black;background-color:white;" class="label label-default" ></span></strong>
 
 
 </div>
