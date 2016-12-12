@@ -51,20 +51,14 @@
                
                   $.each(data, function(index) {
                //     alert(data[index].id);
-                    if (data[index].id>=14) {
+                    if (data[index].id>=29) {
                      $("#main").append("<form id='q"+data[index].id + "'><h3><span class='label label-info'>" + 
-                     data[index].id + "-" + data[index].name +"</span></h3></form>");
+                     (data[index].id-28) + "--" + data[index].name +"</span></h3></form>");
                      questionnum++;
                     }
                   });
-                })
-                  .fail(function(msg) {
-
-                  alert("failed");
-                             
-                  });
                   
-                   $.ajax({
+                                  $.ajax({
                    url: baseurl + '/answers',
                    dataType: 'json',
                    type: 'GET',
@@ -76,7 +70,7 @@
                
                   $.each(data, function(index) {
                 //  alert(JSON.stringify(data[index]));
-                    if (data[index].question_id>=14) 
+                    if (data[index].question_id>=29) 
                      $("#q"+data[index].question_id).append("<div id='"+ data[index].question_id +
                      "_" + data[index].answer_id + "' " +                    
                      "class='radio'><h4><label><input  required type='radio' name='optradio' value='" + data[index].answer_id+ "'>" + 
@@ -87,7 +81,16 @@
                   .fail(function(msg) {
                   alert("failed");
                              
-                  });                  
+                  });                    
+                  
+                })
+                  .fail(function(msg) {
+
+                  alert("failed");
+                             
+                  });
+                  
+                     
                   
                   
          $('#submit').click(function() {
@@ -96,7 +99,7 @@
                   alert('please answer all questions');
                   return;                
            };
-           for (j = 14; j < 14+questionnum; j++) {
+           for (j = 14; j < 29+questionnum; j++) {
             useranswers.push({'q_id':j, 'a_id':$('input[name=optradio]:checked', '#q'+j).val()});
            }
            $.ajax({
