@@ -17,10 +17,11 @@
      <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <p><h4 align="center"><b>Important Information</b>
+          <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
         </div>
         <div class="modal-body">
-          <p><h4 align="center"><b>Important Information</b></h4>
+         
 
 <p><li>Please log in/register using a VALID email address, a user name and a password. The emails will be used to communicate with the players without retaining their personal information or linking the email addresses to the players’ characteristics. 
 The log in/register information should be kept the same for each player for the duration of the study.</li>
@@ -35,8 +36,9 @@ once you log in.</li></p>
 
 <p><u>This week’s instructions:</u></p>
 
-<p>1- Please feel free to test the game this week (from Monday December 5, 2016, 
-through Saturday December 10, 2016) and ask for clarifications (through the “report” function in the game).
+<p>1. Please feel free to test the game this week (from Monday December 12, 2016, through Saturday December 17, 2016) 
+and ask for clarifications (through the “report” function in the game or through sending an email to: 
+<a>GWTCExperiments@gmail.com</a>).
 </p>
 
 <p>2- It is preferable to use the latest versions of the browsers Firefox or Chrome when playing the game.</p>
@@ -69,7 +71,7 @@ through Saturday December 10, 2016) and ask for clarifications (through the “r
       $('#AboutusModal').modal('toggle'); 
       
 $('#AboutusModal').on('hidden.bs.modal', function (e) {
-  alert('o');
+window.location.href='login.html';
 }) ;           
 
  });
