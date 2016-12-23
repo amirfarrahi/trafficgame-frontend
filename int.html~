@@ -17,7 +17,7 @@
      <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-         <p><h4 align="center"><b>Important Information</b>
+         <h4 align="center"><b>Important Information</b>
           <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
         </div>
         <div class="modal-body">
