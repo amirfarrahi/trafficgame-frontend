@@ -18,6 +18,13 @@
        };
 </script>
   
+<script>
+function blinker() {
+	$('.blinking').fadeOut(500);
+	$('.blinking').fadeIn(500);
+}
+setInterval(blinker, 1000);
+</script>
 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -160,7 +167,7 @@
 <span class="label label-warning">Traffic Info:</span>
 
 
-  <strong><span id="trafficnews" style="color:black;background-color:white;" class="label label-default" ></span></strong>
+  <strong><span id="trafficnews" style="color:black;background-color:white; font-size:15px;" class="label label-default blinking" ></span></strong>
 
 
 </div>
@@ -599,7 +606,7 @@ $("#worktime" ).change(function() {
 
 
     $("#dt_ct").text("Departure Time:");
-    $("#trafficnews").text("No traffic/transit news availible");
+    $("#trafficnews").text("50% discount on metro rate");
  
 
     $('#desbtn').prop("disabled",true);
@@ -871,9 +878,7 @@ map.setZoom( map.getZoom() );
               if (tm==3) pbflag=1;//$("#car").prop("disabled",true);
               $("#ccc").hide();//addClass('hidden');
               budget=(budget-cost).toFixed(2);
-            //  $("#budget").text('$ ' + budget );
-           //   ttime=traveltime+ttime;
-           //   $("#ttime").text(ttime.toFixed(2) +' min');
+
               $("#animation").removeClass('hidden');
               $('#ride').attr("src",tmimagelink);
               $("#routegrp").addClass('hidden');
@@ -1396,7 +1401,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             
               cost=totalmilage*0.16 +15;
               precost=predistance*0.16 };
-         //      alert(totalmilage + ',' + cost +',' + conditionid + ',' + tm);
+
             
             if (conditionid==4) { 
               precost=precost*0.5;
@@ -1483,14 +1488,13 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  {
               cost=totalmilage*0.318;
               precost=predistance*0.318;
+              cost=cost*0.5;
+              precost=precost*0.5;
             }
             if ((pretmcar==1) && (travel_mode!=google.maps.DirectionsTravelMode.DRIVING)) {cost=cost+5;
 
             }
-         //   $("#cost").text('$ '+ cost.toFixed(2));
-        //    $("#budget").text('$ ' + (budget-cost).toFixed(2) );
-           
-        //    $("#ttime").text((traveltime+ttime).toFixed(2) +' min');
+  
 
 
          if (tm==1)   { $("#infowindowcarrow").empty();
