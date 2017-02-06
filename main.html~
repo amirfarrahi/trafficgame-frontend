@@ -905,7 +905,7 @@ map.setZoom( map.getZoom() );
                     'current_loc_lat':start.lat(), 'current_loc_lon':start.lng(), 'travel_mode':tm,
                     'departure_time': gtime.toString(), 'car_best_opt':$("#infowindowcarrow").text(), 
                     'bike_best_opt':$("#infowindowbikerow").text(),
-                     'metro_best_opt':$("#infowindowmetrorow").text() }),
+                     'metro_best_opt':$("#infowindowpbrow").text() }),
                    headers: { 'Authorization' : myObject.auth_token       } 
           }).done(function(msg) {
           sessionStorage.setItem('gameinfo', JSON.stringify(msg));
@@ -926,7 +926,7 @@ map.setZoom( map.getZoom() );
                    'current_loc_lon':start.lng(), 'travel_mode':tm,
                     'departure_time': gtime.toString(), 'car_best_opt':$("#infowindowcarrow").text(), 
                     'bike_best_opt':$("#infowindowbikerow").text(),
-                     'metro_best_opt':$("#infowindowmetrorow").text() }),
+                     'metro_best_opt':$("#infowindowpbrow").text() }),
                    headers: { 'Authorization' : myObject.auth_token       } 
                  }).done(function(msg) {
                   
