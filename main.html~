@@ -201,18 +201,18 @@ setInterval(blinker, 1000);
         </div>
         <div class="modal-body">
  <p><u>This week’s instructions:</u></p>
-
-<p>1- Please register again in the game (through a valid email address – possibly an email 
-address you used before) this week (from Monday February 06, 2017, through Thursday February 09, 2017) 
+<p>1- THIS WEEK, WE HAVE A 50% DISCOUNT ON METRO RATES</p>
+<p>2- Please register again in the game (through a valid email address – possibly an email 
+address you used before) this week (from Monday February 13, 2017, through Thursday February 16, 2017) 
 and log in/play three times (from the start of the log in until answering the post-game survey. 
 Your answers will be compiled over the weekend of December 31 2016/January 1 2017.
 </p>
 
-<p>2- It is preferable to use the latest versions of the browsers Firefox or Chrome when playing the game.</p>
+<p>3- It is preferable to use the latest versions of the browsers Firefox or Chrome when playing the game.</p>
 
-<p>3- Please play the game using a desktop or a laptop.</p>
+<p>4- Please play the game using a desktop or a laptop.</p>
 
-<p>4- Please refresh the browser if you do not get the table on the map or origin, destination are blank. Use the fully enlarged browser for a clearer display.
+<p>5- Please refresh the browser if you do not get the table on the map or origin, destination are blank. Use the fully enlarged browser for a clearer display.
 </p>
 <p>
 <u>During the game:</u></p>
@@ -606,7 +606,7 @@ $("#worktime" ).change(function() {
 
 
     $("#dt_ct").text("Departure Time:");
-    $("#trafficnews").text("50% discount on metro rate");
+  //  $("#trafficnews").text("50% discount on metro rate");
  
 
     $('#desbtn').prop("disabled",true);
@@ -890,7 +890,8 @@ map.setZoom( map.getZoom() );
                   var mindiff=(Number(pieces[1])-sysdate.getMinutes());
                   var timediffinmin=hhdiff+mindiff;
                   delay=timediffinmin-traveltime;
-                  if ((delay<0) && (playsteps>3)) $("#trafficnews").text((delay*-1).toFixed(2) + ' min delay / loosing ' + (delay*-1/60*hr).toFixed(2)+'$');
+                  if ((delay<0) && (playsteps>3)) $("#trafficnews").text((delay*-1).toFixed(2) + 
+                  ' min delay / loosing ' + (delay*-1/60*hr).toFixed(2)+'$');
                };
                if ((conditionid==3) && (playsteps>3)) $("#trafficnews").text("Accident on I-66 expect delays");
               
@@ -1142,7 +1143,6 @@ $('#loModal').modal('toggle');
           gtime = new Date();
           gtime.setDate(gtime.getDate() + 1);
           gtime.setHours(hhmm[0],hhmm[1],00);
-        //  alert(gtime);
           var b1 = document.getElementById("bike");
           var b2 = document.getElementById("car");
           var b3 = document.getElementById("pb");
@@ -1151,24 +1151,24 @@ $('#loModal').modal('toggle');
           b3.style.background = "white"; 
           document.getElementById(this.id).style.background="olive";           
           tm=this.getAttribute("data-tmid") ;  
-           if (tm==1) { gtm=google.maps.DirectionsTravelMode.DRIVING;
+          if (tm==1) { gtm=google.maps.DirectionsTravelMode.DRIVING;
                         tmimagelink='img/car.gif';
                         tmname='Car';
-           }
-           if (tm==2) { gtm=google.maps.DirectionsTravelMode.BICYCLING;
+          }
+          if (tm==2) { gtm=google.maps.DirectionsTravelMode.BICYCLING;
            					//$('#ride').attr("src",'img/bike.jpg');
            					tmimagelink='img/bike.jpg';
            					tmname='Bike';
-           }
-           if (tm==3) { gtm=google.maps.DirectionsTravelMode.TRANSIT;
+          }
+          if (tm==3) { gtm=google.maps.DirectionsTravelMode.TRANSIT;
                         //$('#ride').attr("src",'img/bus.gif');
                         tmimagelink='img/bus.gif';   
                         tmname='Metro';        
-           }
-        if(polyline!= null)  polyline.setMap(null);
-        if(trafficpolyline!= null)  trafficpolyline.setMap(null);
-        cnt=[];
-        var w='';
+          }
+          if(polyline!= null)  polyline.setMap(null);
+          if(trafficpolyline!= null)  trafficpolyline.setMap(null);
+          cnt=[];
+          var w='';
   if (lu==0) {
 calculateAndDisplayRoute(directionsService,directionsDisplay1,start,desmyLatlng,
 google.maps.DirectionsTravelMode.DRIVING,0,map,false,function(a,b,c,d,e,f){
@@ -1273,6 +1273,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
          routeindex,imap,draw,callbackfunc) 
        {
   
+
          cost=-1;
          totalmilage=-1;
          traveltime=-1;
@@ -1311,10 +1312,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
          directionsService.route(dirseroption, function(response, status) {
            if (status === google.maps.DirectionsStatus.OK) {
            
-          //  alert((new Date(Date.now() + 10000000000)).toLocaleTimeString());
-            // console.log(JSON.stringify(response.routes[0]));
-           //  console.log('----------');
-
+        
             polyline = new google.maps.Polyline({
            					path: [],
            					strokeColor: '#0000FF',
@@ -1344,21 +1342,16 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
           if (JSON.stringify(tmpr[li1].legs[0]).indexOf('BUS')!=-1) 
            {
             tmpindex.push(li1);
-           // break;          
+
            }
-         //  alert(JSON.stringify(tmpr.length));
+
            for (var i = tmpindex.length -1; i >= 0; i--)
              tmpr.splice(tmpindex[i],1);
-        //     alert(tmpr.length);
+
              roadresult=[];
              if (tmpr.length>0) roadresult.push(tmpr[0]);
              }
-             
-           //  alert(tmpindex.length);
-       /*hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*/ 
-         //   alert(JSON.stringify(roadresult)); 
-    //      window.open('about:blank').document.body.innerText += JSON.stringify(roadresult);
-         //   if (roadresult.length==0)      $("#startbtn").prop("disabled",true);   
+ 
             if (roadresult.length<1) 
 				{ 
            //   $("#distance").text("");
@@ -1484,13 +1477,13 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) { 
               cost=0;
               precost=0;
-            }
+            };
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  {
               cost=totalmilage*0.318;
               precost=predistance*0.318;
-              cost=cost*0.5;
-              precost=precost*0.5;
-            }
+              cost=cost;
+              precost=precost;
+            };
             if ((pretmcar==1) && (travel_mode!=google.maps.DirectionsTravelMode.DRIVING)) {cost=cost+5;
 
             }
@@ -1504,6 +1497,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                         '<td>'+fttimemin.toFixed(2) +' min</td>'+
                         '<td>'+fttimemax.toFixed(2) +' min</td>'+                          
                         '</tr>');
+
                       };
          if (tm==2)   { $("#infowindowbikerow").empty();
                         $("#infowindowbikerow").append('<td>Bike</td><td>'+totalmilage.toFixed(2)+' mile(s)</td>' 
@@ -1512,6 +1506,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                         '<td>'+fttimemin.toFixed(2) +' min</td>'+
                         '<td>'+fttimemax.toFixed(2) +' min</td>'+                          
                         '</tr>');
+
                       };
          if (tm==3)   {$("#infowindowpbrow").empty();
                        $("#infowindowpbrow").append('<td>Metro</td><td>'+totalmilage.toFixed(2)+' mile(s)</td>' 
@@ -1520,9 +1515,19 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                         '<td>'+fttimemin.toFixed(2) +' min</td>'+
                         '<td>'+fttimemax.toFixed(2) +' min</td>'+                        
                         '</tr>');
+
                       };
+                      
+                      var dollar=((fttimemax+traveltime-60)/60*hr).toFixed(2);
+                      var lmsg='';
+                      if (dollar>0) {
+                        lmsg='You are loosing $' + dollar;
+                        $("#trafficnews").removeClass('hidden');
+                      }
+                      else $("#trafficnews").addClass('hidden');
+                      $("#trafficnews").text(lmsg);
     
- 
+
     } else {
      // window.alert('No route is available');
       $("#startbtn").prop("disabled",true);
