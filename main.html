@@ -598,6 +598,10 @@ google.maps.event.addListener(infowindow,'closeclick',function(){
     $( document ).ready(function() {
 
 
+
+$('#worktime').val('8:00');
+
+
 $("#worktime" ).change(function() {
   if (tm==1) $("#car").click();
   if (tm==2) $("#bike").click();
@@ -1518,13 +1522,13 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
                       };
                       
-                      var dollar=((fttimemax+traveltime-60)/60*hr).toFixed(2);
-                      var lmsg='';
+                      var dollar=((fttimemax+traveltime-60)/60*hr).toFixed(0);
+                      var lmsg='No Risk of loosing income';
                       if (dollar>0) {
-                        lmsg='You are loosing $' + dollar;
-                        $("#trafficnews").removeClass('hidden');
+                        lmsg='Risk of loosing $' + dollar;
+                     //   $("#trafficnews").removeClass('hidden');
                       }
-                      else $("#trafficnews").addClass('hidden');
+                  //    else $("#trafficnews").addClass('hidden');
                       $("#trafficnews").text(lmsg);
     
 

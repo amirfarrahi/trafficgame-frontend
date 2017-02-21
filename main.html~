@@ -203,7 +203,7 @@ setInterval(blinker, 1000);
  <p><u>This week’s instructions:</u></p>
 <p>1- THIS WEEK, WE HAVE A 50% DISCOUNT ON METRO RATES</p>
 <p>2- Please register again in the game (through a valid email address – possibly an email 
-address you used before) this week (from Monday February 13, 2017, through Thursday February 16, 2017) 
+address you used before) this week (from Monday February 20, 2017, through Thursday February 23, 2017) 
 and log in/play three times (from the start of the log in until answering the post-game survey. 
 Your answers will be compiled over the weekend of December 31 2016/January 1 2017.
 </p>
@@ -596,6 +596,10 @@ google.maps.event.addListener(infowindow,'closeclick',function(){
   
 
     $( document ).ready(function() {
+
+
+
+$('#worktime').val('8:00');
 
 
 $("#worktime" ).change(function() {
@@ -1518,13 +1522,13 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
                       };
                       
-                      var dollar=((fttimemax+traveltime-60)/60*hr).toFixed(2);
-                      var lmsg='';
+                      var dollar=((fttimemax+traveltime-60)/60*hr).toFixed(0);
+                      var lmsg='No Risk of loosing income';
                       if (dollar>0) {
-                        lmsg='You are loosing $' + dollar;
-                        $("#trafficnews").removeClass('hidden');
+                        lmsg='Risk of loosing $' + dollar;
+                     //   $("#trafficnews").removeClass('hidden');
                       }
-                      else $("#trafficnews").addClass('hidden');
+                  //    else $("#trafficnews").addClass('hidden');
                       $("#trafficnews").text(lmsg);
     
 
