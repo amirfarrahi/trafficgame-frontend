@@ -204,7 +204,7 @@ setInterval(blinker, 1000);
 <p>1- THIS WEEK, NO DISCOUNT IS APPLIED ON ANY TRANSPORTATION COST. INSTEAD, YOU WILL BE INFORMED ABOUT THE RISK OF 
 LOOSING PART OF YOUR INCOME DUE TO DELAY BEYOND 9:00 AM (under “Traffic Info”).</p>
 <p>2- Please register again in the game (through a valid email address – possibly an email 
-address you used before) this week (from Monday February 20, 2017, through Thursday February 23, 2017) 
+address you used before) this week (from Monday February 27, 2017, through Thursday March 02, 2017) 
 and log in/play three times (from the start of the log in until answering the post-game survey. 
 Your answers will be compiled over the weekend of December 31 2016/January 1 2017.
 </p>
@@ -531,6 +531,7 @@ var markersArray = [];
 var Ttime=0;
 var Tmile=0;
 var Tcost=0;
+var tsdmin=-1;
 
 
 
@@ -600,14 +601,30 @@ google.maps.event.addListener(infowindow,'closeclick',function(){
 
 
 
-$('#worktime').val('8:00');
 
 
-$("#worktime" ).change(function() {
+
+
+
+
+
+
+$("#worktime").change(function() {
   if (tm==1) $("#car").click();
   if (tm==2) $("#bike").click();
   if (tm==3) $("#pb").click();
+  var destime='9:00';
+  var despiece=destime.trim().split(':');
+  worktime=$("#worktime").val();
+  var pieces1 = worktime.trim().split(':');
+  var hhdiffsd=(Number(despiece[0])-Number(pieces1[0]))*60;
+  var mindiffsd=Number(despiece[1])-Number(pieces1[1]);
+
+  tsdmin=hhdiffsd+mindiffsd;
+ // alert(tsdmin);
+
 });
+
 
 
     $("#dt_ct").text("Departure Time:");
@@ -625,7 +642,7 @@ $("#worktime" ).change(function() {
 
 
          $.ajax({
-                   url: baseurl + '/nodes/' +sss,
+                   url: baseurl + '/nodes/8' /*+sss*/,
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -763,6 +780,8 @@ $("#worktime" ).change(function() {
                   });  
                   
        
+$("#worktime").val('8:00');
+$("#worktime").trigger("change");         
          
              
                     $("#gmaploc").hide();
@@ -873,7 +892,7 @@ map.setZoom( map.getZoom() );
               $("#currtime").text(currenttime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
               
               if (tm==1) pretmcar=1;
-              if ((tm!=1) && (pretmcar==1)) precost=precost+5;
+             // if ((tm!=1) && (pretmcar==1)) precost=precost+5;
               $("#worktime").prop("disabled",true);
               gtmbtncntr=0;
               playsteps=playsteps+1;
@@ -888,11 +907,16 @@ map.setZoom( map.getZoom() );
               $('#ride').attr("src",tmimagelink);
               $("#routegrp").addClass('hidden');
               if (playsteps==1) $("#histtable").empty();
+              
+             var pieces = worktime.trim().split(':');
+                
               if ((conditionid==5) && (trafficflag )) {
                   var sysdate=new Date()
-                  var pieces = worktime.trim().split(':')
+         
                   var hhdiff=(Number(pieces[0])-sysdate.getHours())*60;
                   var mindiff=(Number(pieces[1])-sysdate.getMinutes());
+                  
+                
                   var timediffinmin=hhdiff+mindiff;
                   delay=timediffinmin-traveltime;
                   if ((delay<0) && (playsteps>3)) $("#trafficnews").text((delay*-1).toFixed(2) + 
@@ -1021,29 +1045,25 @@ map.setZoom( map.getZoom() );
 			    $('#bike').prop("disabled",false);
 			    $('#car').prop("disabled",false);
          
-               if ((pretmcar==1) && (tm!=1)) pretmcar=0;
 
 
-               if ((temp==desmyLatlng) && (tm==1)) precost=precost+15; 
-               if ( tm==3) { predistance=totalmilage;
-                             precost=cost;
-                             kir=traveltime;
-                             temp=desmyLatlng;
-                          //   start=temp;
-               }   ;
-               Ttime=Ttime+kir;
-            //   alert(Ttime);
-               Tcost=Tcost+precost;
-               Tmile=Tmile+predistance;
-               $("#distance").text(Tmile.toFixed(2)+ ' mile(s)');
-               $("#traveltime").text(Ttime.toFixed(2)+ ' min');
-               $("#cost").text('$ ' + Tcost.toFixed(2) );
-          currenttime= add_minutes(currenttime,kir);
-         $("#currtime").text(currenttime.toLocaleTimeString());
 
-              $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance.toFixed(2)  +" mile(s)</td>"
-               + "<td>$ "+ precost.toFixed(2) + "</td><td>" + kir.toFixed(2) +" min</td></tr>");
-             calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
+             //  if ((temp==desmyLatlng) && (tm==1)) alert('yes'); //Tcost=Tcost+15;//precost=precost+15; 
+               calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
+
+             //  Ttime=Ttime+kir;
+
+            //   Tcost=Tcost+precost;
+           //    Tmile=Tmile+predistance;
+        //       $("#distance").text(Tmile.toFixed(2)+ ' mile(s)');
+         //      $("#traveltime").text(Ttime.toFixed(2)+ ' min');
+         //      $("#cost").text('$ ' + Tcost.toFixed(2) );
+       //   currenttime= add_minutes(currenttime,kir);
+     //    $("#currtime").text(currenttime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
+
+           //   $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance.toFixed(2)  +" mile(s)</td>"
+         //      + "<td>$ "+ precost.toFixed(2) + "</td><td>" + kir.toFixed(2) +" min</td></tr>");
+            // calculateAndDisplayHRoute(directionsServicehist, directionsDisplayhist, start,temp,gtm,routeselectedindex,hmap);
            
 
               start=temp;    
@@ -1377,8 +1397,16 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             if (roadresult.length>1) myRoute= roadresult[routeindex].legs[0];
             else myRoute= roadresult[0].legs[0];
 
-            if (myRoute.steps.length>1) temp=myRoute.steps[1].start_point; else temp=pointB;
-            predistance=parseFloat(roadresult[routeindex].legs[0].steps[0].distance.value*0.000621371);
+         //          alert(roadresult[0].overview_path[Math.round((roadresult[0].overview_path.length/2)-1)])  ; 
+        //    if (myRoute.steps.length>1) temp=myRoute.steps[1].start_point; else temp=pointB;
+        var xxx=Math.round((roadresult[0].overview_path.length/2)-1);
+
+     //   if (Math.round((roadresult[0].overview_path.length/2)-1)<30) xxx=roadresult[0].overview_path.length-1;
+        
+           if ((myRoute.steps.length>1) && (roadresult[routeindex].legs[0].distance.value*0.000621371>1))
+           temp=roadresult[0].overview_path[xxx]; 
+           else temp=pointB;
+         //*   predistance=parseFloat(roadresult[routeindex].legs[0].steps[0].distance.value*0.000621371);
            var bounds = new google.maps.LatLngBounds();
             var tbounds = new google.maps.LatLngBounds();
             var legs;
@@ -1389,20 +1417,21 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             
             totalmilage=roadresult[routeindex].legs[0].distance.value*0.000621371;
          
-          //  $("#distance").text(totalmilage.toFixed(2)+ ' miles');        
+
             var durationinmin=roadresult[routeindex].legs[0].duration.value/60;
             var pretraveltime=myRoute.steps[0].duration.value/parseFloat(60);
-            kir=pretraveltime;
+           // kir=pretraveltime;
 
      
               if (travel_mode==google.maps.DirectionsTravelMode.DRIVING) {
             
               cost=totalmilage*0.16 +15;
-              precost=predistance*0.16 };
+            //  precost=predistance*0.16 
+              };
 
             
             if (conditionid==4) { 
-              precost=precost*0.5;
+             // precost=precost*0.5;
               cost=cost*0.5;
             }
             if (conditionid==2 || conditionid==4 )  {
@@ -1481,13 +1510,13 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             traveltime=durationinmin;
             if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) { 
               cost=0;
-              precost=0;
+            //  precost=0;
             };
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  {
               cost=totalmilage*0.318;
-              precost=predistance*0.318;
-              cost=cost;
-              precost=precost;
+            //  precost=predistance*0.318;
+
+
             };
             if ((pretmcar==1) && (travel_mode!=google.maps.DirectionsTravelMode.DRIVING)) {cost=cost+5;
 
@@ -1523,13 +1552,16 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
                       };
                       
-                      var dollar=((fttimemax+traveltime-60)/60*hr).toFixed(0);
+                      var dollar=0;
+                      if (((fttimemax+traveltime-tsdmin)>0) && (tsdmin!=-1))
+                      dollar=Math.ceil((fttimemax+traveltime-tsdmin)/60)*hr;
+                  //    alert(tsdmin);
                       var lmsg='No risk of loosing income';
-                      if (dollar>0) {
+                      if ((dollar>0) && (tsdmin!=-1)) {
                         lmsg='Risk of loosing $' + dollar;
-                     //   $("#trafficnews").removeClass('hidden');
+                        $("#trafficnews").removeClass('hidden');
                       }
-                  //    else $("#trafficnews").addClass('hidden');
+                      else $("#trafficnews").addClass('hidden');
                       $("#trafficnews").text(lmsg);
     
 
@@ -1603,6 +1635,30 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
          directionsService.route(dirseroption, function(response, status) {
            if (status === google.maps.DirectionsStatus.OK) {
                
+               //*
+               predistance=response.routes[routeindex].legs[0].distance.value*0.000621371;
+               kir=response.routes[0].legs[routeindex].duration.value/60;
+               precost=predistance*0.16;
+               if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)  precost=0;
+               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318;
+
+
+            
+               Tmile=Tmile+predistance;
+               Ttime=Ttime+kir;
+               if ((tm!=1) && (pretmcar==1)) precost=precost+5;
+               if ((pretmcar==1) && (tm!=1)) pretmcar=0;            
+               if ((temp==desmyLatlng) && (tm==1)) {  precost=precost+15};
+               Tcost=Tcost+precost;
+               $("#traveltime").text(Ttime.toFixed(2)+ ' min');
+               $("#distance").text(Tmile.toFixed(2)+ ' mile(s)');
+               $("#cost").text('$ ' + Tcost.toFixed(2) );
+               currenttime= add_minutes(currenttime,kir);
+               $("#currtime").text(currenttime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
+                  $('#histtable').append("<tr><td>"+ tmname +"</td><td>"+ predistance.toFixed(2)  +" mile(s)</td>"
+               + "<td>$ "+ precost.toFixed(2) + "</td><td>" + kir.toFixed(2) +" min</td></tr>");
+           
+ 
            var roadresult=response.routes;
            var tmpr=[];
            var qqq;
