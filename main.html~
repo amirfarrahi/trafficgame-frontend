@@ -201,10 +201,10 @@ setInterval(blinker, 1000);
         </div>
         <div class="modal-body">
  <p><u>This week’s instructions:</u></p>
-<p>1- THIS WEEK, NO DISCOUNT IS APPLIED ON ANY TRANSPORTATION COST. INSTEAD, YOU WILL BE INFORMED ABOUT THE RISK OF 
-LOOSING PART OF YOUR INCOME DUE TO DELAY BEYOND 9:00 AM (under “Traffic Info”).</p>
+<p>1- THIS WEEK, BAD WEATHER CONDITIONS (i.e. snow and rain) WILL CHANGE TRAVEL TIMES ON ROADWAYS. NO SPECIAL PRICING OR INFORMATION WILL 
+BE PROVIDED TO TRAVELERS. BE CAREFUL IN YOUR COMMUTE TO WORK.</p>
 <p>2- Please register again in the game (through a valid email address – possibly an email 
-address you used before) this week (from Monday March 06, 2017, through Thursday March 09, 2017) 
+address you used before) this week (from Monday March 13, 2017, through Thursday March 16, 2017) 
 and log in/play three times (from the start of the log in until answering the post-game survey. 
 Your answers will be compiled over the weekend of December 31 2016/January 1 2017.
 </p>
@@ -532,6 +532,7 @@ var Ttime=0;
 var Tmile=0;
 var Tcost=0;
 var tsdmin=-1;
+var motionpictime=2000;
 
 
 
@@ -628,7 +629,7 @@ $("#worktime").change(function() {
 
 
     $("#dt_ct").text("Departure Time:");
-  //  $("#trafficnews").text("50% discount on metro rate");
+    $("#trafficnews").text("Bad Weather Condition!");
  
 
     $('#desbtn').prop("disabled",true);
@@ -920,7 +921,7 @@ map.setZoom( map.getZoom() );
                   var timediffinmin=hhdiff+mindiff;
                   delay=timediffinmin-traveltime;
                   if ((delay<0) && (playsteps>3)) $("#trafficnews").text((delay*-1).toFixed(2) + 
-                  ' min delay / loosing ' + (delay*-1/60*hr).toFixed(2)+'$');
+                  ' min delay / losing ' + (delay*-1/60*hr).toFixed(2)+'$');
                };
                if ((conditionid==3) && (playsteps>3)) $("#trafficnews").text("Accident on I-66 expect delays");
               
@@ -968,10 +969,11 @@ map.setZoom( map.getZoom() );
           
           
                
-               
-               
-               setTimeout(revert, 5000);
+
+              // if (traveltime*1000>motionpictime ) setTimeout(revert, traveltime*1000);
+              // else setTimeout(revert, motionpictime);
                           
+                          setTimeout(revert, motionpictime);
        });       
                   
        $('#desmenu li').click(function() {
@@ -1553,16 +1555,16 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                       };
                       
                       var dollar=0;
-                      if (((fttimemax+traveltime-tsdmin)>0) && (tsdmin!=-1))
-                      dollar=Math.ceil((fttimemax+traveltime-tsdmin)/60)*hr;
-                  //    alert(tsdmin);
-                      var lmsg='No risk of loosing income';
-                      if ((dollar>0) && (tsdmin!=-1)) {
-                        lmsg='Risk of loosing $' + dollar;
+                      if (((fttimemax-tsdmin)>0) && (tsdmin!=-1))
+                      dollar=Math.ceil((fttimemax-tsdmin)/60)*hr;
+
+                      var lmsg='No risk of losing income';
+                 /*     if ((dollar>0) && (tsdmin!=-1)) {
+                        lmsg='Risk of losing $' + dollar;
                         $("#trafficnews").removeClass('hidden');
                       }
                       else $("#trafficnews").addClass('hidden');
-                      $("#trafficnews").text(lmsg);
+                      $("#trafficnews").text(lmsg); */
     
 
     } else {
