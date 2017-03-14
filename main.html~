@@ -746,9 +746,10 @@ $("#worktime").change(function() {
                 
                //    $("#contxt").text(data[0].name);
                    conditionid=data[0].id;
-             //   alert(JSON.stringify(data));   
+             //   alert(JSON.stringify(data));
+                      conditionid=2;
 
-                   if (conditionid==2)     $("#trafficnews").text("Inclement weather! Drive carefully.");
+            //       if (conditionid==2)     $("#trafficnews").text("Inclement weather! Drive carefully.");
 
                    if (conditionid==4)     $("#trafficnews").text("Inclement weather! 50% on transit.");
 
@@ -1437,7 +1438,8 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
               cost=cost*0.5;
             }
             if (conditionid==2 || conditionid==4 )  {
-              durationinmin=durationinmin+totalmilage;
+
+            //  durationinmin=durationinmin+totalmilage;
               pretraveltime=pretraveltime+predistance;
             }
             for (i = 0; i < legs.length; i++) {
@@ -1494,7 +1496,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             fttime=meanco*durationinmin;
         
             fttimemin=meanco*durationinmin*(1-std*cof)-constant;
-            var lowerfft=totalmilage/55*60;
+            var lowerfft=totalmilage/50*60;
             if (lowerfft>=fttimemin) fttimemin=lowerfft;
             fttimemax=meanco*durationinmin*(1+std*cof)+constant;
             
@@ -1512,11 +1514,11 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             traveltime=durationinmin;
             if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING) { 
               cost=0;
-            //  precost=0;
+
             };
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  {
               cost=totalmilage*0.318;
-            //  precost=predistance*0.318;
+
 
 
             };
@@ -1526,7 +1528,9 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
   
 
 
-         if (tm==1)   { $("#infowindowcarrow").empty();
+         if (tm==1)   { 
+         				   if (conditionid==2) traveltime=fttime;
+                        $("#infowindowcarrow").empty();
                         $("#infowindowcarrow").append('<td>Car</td><td>'+totalmilage.toFixed(2)+' mile(s)</td>' 
                         +'<td>$ '+cost.toFixed(2)+'</td><td>' +
                         traveltime.toFixed(2) +' min</td>'+
@@ -1645,7 +1649,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318;
 
 
-            
+					if (conditionid==2) kir=kir*1.25;            
                Tmile=Tmile+predistance;
                Ttime=Ttime+kir;
                if ((tm!=1) && (pretmcar==1)) precost=precost+5;
