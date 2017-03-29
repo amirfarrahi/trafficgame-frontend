@@ -201,10 +201,9 @@ setInterval(blinker, 1000);
         </div>
         <div class="modal-body">
  <p><u>This week’s instructions:</u></p>
-<p>1- THIS WEEK, BAD WEATHER CONDITIONS (i.e. snow and rain) WILL CHANGE TRAVEL TIMES ON ROADWAYS. NO SPECIAL PRICING OR INFORMATION WILL 
-BE PROVIDED TO TRAVELERS. BE CAREFUL IN YOUR COMMUTE TO WORK.</p>
+<p>1- THIS WEEK, BAD WEATHER CONDITIONS (i.e. snow and rain) WILL REMAIN AND WILL CHANGE TRAVEL TIME  ON ROADWAYS. MOREOVER, 50% DISCOUNT ON METRO RATES WILL BE APPLIED. BE CAREFUL IN YOUR COMMUTE TO WORK.</p>
 <p>2- Please register again in the game (through a valid email address – possibly an email 
-address you used before) this week (from Monday March 13, 2017, through Thursday March 16, 2017) 
+address you used before) this week (from Monday March 27, 2017, through Thursday March 31, 2017) 
 and log in/play three times (from the start of the log in until answering the post-game survey. 
 Your answers will be compiled over the weekend of December 31 2016/January 1 2017.
 </p>
@@ -643,7 +642,7 @@ $("#worktime").change(function() {
 
 
          $.ajax({
-                   url: baseurl + '/nodes/8' /*+sss*/,
+                   url: baseurl + '/nodes/' +sss,
                    dataType: 'json',
                    type: 'GET',
                    async: true,
@@ -1517,7 +1516,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
             };
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  {
-              cost=totalmilage*0.318;
+              cost=totalmilage*0.318*0.5;
 
 
 
@@ -1646,7 +1645,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                kir=response.routes[0].legs[routeindex].duration.value/60;
                precost=predistance*0.16;
                if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)  precost=0;
-               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318;
+               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318*0.5;
 
 
 					if (conditionid==2) kir=kir*1.25;            
