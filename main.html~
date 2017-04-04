@@ -628,7 +628,7 @@ $("#worktime").change(function() {
 
 
     $("#dt_ct").text("Departure Time:");
-    $("#trafficnews").text("Bad Weather Condition!");
+    $("#trafficnews").text("Bad Weather Conditions! 50% Discount on Metro Rates.");
  
 
     $('#desbtn').prop("disabled",true);
