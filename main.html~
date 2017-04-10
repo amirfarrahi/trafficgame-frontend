@@ -1641,6 +1641,8 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
     
          directionsService.route(dirseroption, function(response, status) {
            if (status === google.maps.DirectionsStatus.OK) {
+           
+               if (routeindex > response.routes.length-1) routeindex=response.routes.length-1;
                
                //*
                predistance=response.routes[routeindex].legs[0].distance.value*0.000621371;
