@@ -167,7 +167,7 @@ setInterval(blinker, 1000);
 <span class="label label-warning">Traffic Info:</span>
 
 
-  <strong><span id="trafficnews" style="color:black;background-color:white; font-size:15px;" class="label label-default blinking" ></span></strong>
+  <strong><span id="trafficnews" style="color:red;background-color:white; font-size:15px;" class="label label-default blinking" ></span></strong>
 
 
 </div>
@@ -201,9 +201,10 @@ setInterval(blinker, 1000);
         </div>
         <div class="modal-body">
  <p><u>This week’s instructions:</u></p>
-<p>1- THIS WEEK, BAD WEATHER CONDITIONS (i.e. snow and rain) WILL REMAIN AND WILL CHANGE TRAVEL TIME  ON ROADWAYS. MOREOVER, 50% DISCOUNT ON METRO RATES WILL BE APPLIED. BE CAREFUL IN YOUR COMMUTE TO WORK.</p>
+<p>THIS WEEK, BAD WEATHER CONDITIONS (i.e. snow and rain) WILL REMAIN AND WILL CHANGE TRAVEL TIME  ON ROADWAYS. MOREOVER, YOU WILL BE INFORMED ABOUT THE RISK OF LOOSING PART OF YOUR INCOME DUE TO DELAY BEYOND 9:00 AM (under “Traffic Info”).
+</p>
 <p>2- Please register again in the game (through a valid email address – possibly an email 
-address you used before) this week (from Monday April 3, 2017, through Thursday April 6, 2017) 
+address you used before) this week (from Monday April 10, 2017, through Thursday April 14, 2017) 
 and log in/play three times (from the start of the log in until answering the post-game survey. 
 Your answers will be compiled over the weekend of December 31 2016/January 1 2017.
 </p>
@@ -630,7 +631,7 @@ $("#worktime").change(function() {
     $("#dt_ct").text("Departure Time:");
    // $("#trafficnews").text("Bad Weather Conditions! 50% Discount on Metro Rates.");
  
-
+                        $("#trafficnews").addClass('hidden');
     $('#desbtn').prop("disabled",true);
     $("#startbtn").prop("disabled",true);
     var uinfo=sessionStorage.getItem('userinfo');
@@ -746,7 +747,7 @@ $("#worktime").change(function() {
                //    $("#contxt").text(data[0].name);
                    conditionid=data[0].id;
              //   alert(JSON.stringify(data));
-                      conditionid=2;
+                      conditionid=3;
 
             //       if (conditionid==2)     $("#trafficnews").text("Inclement weather! Drive carefully.");
 
@@ -923,7 +924,13 @@ map.setZoom( map.getZoom() );
                   if ((delay<0) && (playsteps>3)) $("#trafficnews").text((delay*-1).toFixed(2) + 
                   ' min delay / losing ' + (delay*-1/60*hr).toFixed(2)+'$');
                };
-               if ((conditionid==3) && (playsteps>3)) $("#trafficnews").text("Accident on I-66 expect delays");
+            //   alert(conditionid);
+               if ((conditionid==3) && (playsteps>2)) 
+               {
+                 $("#trafficnews").text("Accident on I-66 expect delays"); 
+                 $("#trafficnews").removeClass('hidden');
+               
+               }
               
           if (playsteps==1)  
 
@@ -1448,7 +1455,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
               for (j = 0; j < steps.length; j++) {
                 var nextSegment = steps[j].path;
                 for (k = 0; k < nextSegment.length; k++) {
-                if ((steps[j].instructions.search('I-66 E')!=-1) && (playsteps>3) &&((conditionid==3 || conditionid==5 )) ) {
+                if ((steps[j].instructions.search('I-66 E')!=-1) && (playsteps>2) &&((conditionid==3 || conditionid==5 )) ) {
             																trafficpolyline.getPath().push(nextSegment[k]);
             																tbounds.extend(nextSegment[k]);
             																trafficflag=1;
@@ -1471,7 +1478,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
             }
             if ( (conditionid==3 || conditionid==5 ) &&trafficflag )  
             durationinmin=durationinmin+30;
-        //    $("#traveltime").text(durationinmin.toFixed(2) + ' min');
+
             var std=3;
             var cof=0.14;
             var meanco=1;
@@ -1562,14 +1569,14 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                       var dollar=0;
                       if (((fttimemax-tsdmin)>0) && (tsdmin!=-1))
                       dollar=Math.ceil((fttimemax-tsdmin)/60)*hr;
-
+/*
                       var lmsg='No risk of losing income';
                       if ((dollar>0) && (tsdmin!=-1)) {
                         lmsg='Risk of losing $' + dollar;
                         $("#trafficnews").removeClass('hidden');
                       }
                       else $("#trafficnews").addClass('hidden');
-                      $("#trafficnews").text(lmsg); 
+                      $("#trafficnews").text(lmsg); */
     
 
     } else {
@@ -1631,7 +1638,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                destination: pointB,
                travelMode: 'TRANSIT',
                transitOptions:{
-                 modes: ['SUBWAY']  ,
+                 modes: ['SUBWAY']  , 
                  routingPreference: 'LESS_WALKING'
                },
                provideRouteAlternatives:true
