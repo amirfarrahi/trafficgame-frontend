@@ -925,12 +925,12 @@ map.setZoom( map.getZoom() );
                   ' min delay / losing ' + (delay*-1/60*hr).toFixed(2)+'$');
                };
             //   alert(conditionid);
-               if ((conditionid==3) && (playsteps>2)) 
+         /*      if ((conditionid==3) && (playsteps>1) && (tm==1) )
                {
                  $("#trafficnews").text("Accident on I-66 expect delays"); 
                  $("#trafficnews").removeClass('hidden');
                
-               }
+               } */
               
           if (playsteps==1)  
 
@@ -1186,6 +1186,13 @@ $('#loModal').modal('toggle');
           b3.style.background = "white"; 
           document.getElementById(this.id).style.background="olive";           
           tm=this.getAttribute("data-tmid") ;  
+
+      if ((conditionid==3) && (playsteps>1) && (tm==1) )
+               {
+                 $("#trafficnews").text("Accident on I-66 expect delays"); 
+                 $("#trafficnews").removeClass('hidden');
+               
+               } else $("#trafficnews").addClass('hidden');
           if (tm==1) { gtm=google.maps.DirectionsTravelMode.DRIVING;
                         tmimagelink='img/car.gif';
                         tmname='Car';
@@ -1455,7 +1462,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
               for (j = 0; j < steps.length; j++) {
                 var nextSegment = steps[j].path;
                 for (k = 0; k < nextSegment.length; k++) {
-                if ((steps[j].instructions.search('I-66 E')!=-1) && (playsteps>2) &&((conditionid==3 || conditionid==5 )) ) {
+                if ((steps[j].instructions.search('I-66 E')!=-1) && (playsteps>1) &&((conditionid==3 || conditionid==5 )) ) {
             																trafficpolyline.getPath().push(nextSegment[k]);
             																tbounds.extend(nextSegment[k]);
             																trafficflag=1;

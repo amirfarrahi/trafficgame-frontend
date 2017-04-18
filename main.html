@@ -201,10 +201,11 @@ setInterval(blinker, 1000);
         </div>
         <div class="modal-body">
  <p><u>This week’s instructions:</u></p>
-<p>THIS WEEK, BAD WEATHER CONDITIONS (i.e. snow and rain) WILL REMAIN AND WILL CHANGE TRAVEL TIME  ON ROADWAYS. MOREOVER, YOU WILL BE INFORMED ABOUT THE RISK OF LOOSING PART OF YOUR INCOME DUE TO DELAY BEYOND 9:00 AM (under “Traffic Info”).
+<p>THIS WEEK THIS WEEK, AN INCIDENT WILL OCCUR ALONG THE ROADWAY 
+(on a major freeway) AND WILL CHANGE TRAVEL TIME IF YOU ARE DRIVING
 </p>
 <p>2- Please register again in the game (through a valid email address – possibly an email 
-address you used before) this week (from Monday April 10, 2017, through Thursday April 14, 2017) 
+address you used before) this week (Monday April 17, 2017, through Friday April 21, 2017) 
 and log in/play three times (from the start of the log in until answering the post-game survey. 
 Your answers will be compiled over the weekend of December 31 2016/January 1 2017.
 </p>
@@ -925,12 +926,12 @@ map.setZoom( map.getZoom() );
                   ' min delay / losing ' + (delay*-1/60*hr).toFixed(2)+'$');
                };
             //   alert(conditionid);
-               if ((conditionid==3) && (playsteps>1)) 
+         /*      if ((conditionid==3) && (playsteps>1) && (tm==1) )
                {
                  $("#trafficnews").text("Accident on I-66 expect delays"); 
                  $("#trafficnews").removeClass('hidden');
                
-               }
+               } */
               
           if (playsteps==1)  
 
@@ -1186,6 +1187,13 @@ $('#loModal').modal('toggle');
           b3.style.background = "white"; 
           document.getElementById(this.id).style.background="olive";           
           tm=this.getAttribute("data-tmid") ;  
+
+      if ((conditionid==3) && (playsteps>1) && (tm==1) )
+               {
+                 $("#trafficnews").text("Accident on I-66 expect delays"); 
+                 $("#trafficnews").removeClass('hidden');
+               
+               } else $("#trafficnews").addClass('hidden');
           if (tm==1) { gtm=google.maps.DirectionsTravelMode.DRIVING;
                         tmimagelink='img/car.gif';
                         tmname='Car';
