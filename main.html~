@@ -630,7 +630,7 @@ $("#worktime").change(function() {
     $("#dt_ct").text("Departure Time:");
    // $("#trafficnews").text("Bad Weather Conditions! 50% Discount on Metro Rates.");
  
-                        $("#trafficnews").addClass('hidden');
+                      //  $("#trafficnews").addClass('hidden');
     $('#desbtn').prop("disabled",true);
     $("#startbtn").prop("disabled",true);
     var uinfo=sessionStorage.getItem('userinfo');
