@@ -746,7 +746,7 @@ $("#worktime").change(function() {
                //    $("#contxt").text(data[0].name);
                    conditionid=data[0].id;
              //   alert(JSON.stringify(data));
-                      conditionid=2;
+                      conditionid=4;
 
             //       if (conditionid==2)     $("#trafficnews").text("Inclement weather! Drive carefully.");
 
@@ -1443,6 +1443,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
               if (travel_mode==google.maps.DirectionsTravelMode.DRIVING) {
             
               cost=totalmilage*0.16 +15;
+          //    alert(cost);
             //  precost=predistance*0.16 
               };
 
@@ -1528,7 +1529,9 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
             };
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  {
-              cost=totalmilage*0.318;
+              cost=totalmilage*0.318*0.5;
+              alert(totalmilage);
+              alert(cost);
 
 
 
@@ -1540,7 +1543,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
 
          if (tm==1)   { 
-         				   if ((conditionid==2) || (conditionid==4)) traveltime=fttime;
+         				 //  if ((conditionid==2) || (conditionid==4)) traveltime=fttime;
                         $("#infowindowcarrow").empty();
                         $("#infowindowcarrow").append('<td>Car</td><td>'+totalmilage.toFixed(2)+' mile(s)</td>' 
                         +'<td>$ '+cost.toFixed(2)+'</td><td>' +
@@ -1572,14 +1575,14 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                       var dollar=0;
                       if (((fttimemax-tsdmin)>0) && (tsdmin!=-1))
                       dollar=Math.ceil((fttimemax-tsdmin)/60)*hr;
-                  
+                /*  
                       var lmsg='No risk of losing income';
                       if ((dollar>0) && (tsdmin!=-1)) {
                         lmsg='Risk of losing $' + dollar;
                         $("#trafficnews").removeClass('hidden');
                       }
                       else $("#trafficnews").addClass('hidden');
-                      $("#trafficnews").text(lmsg);  
+                      $("#trafficnews").text(lmsg);  */
     
 
     } else {
@@ -1659,7 +1662,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                kir=response.routes[0].legs[routeindex].duration.value/60;
                precost=predistance*0.16;
                if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)  precost=0;
-               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318;
+               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318*0.5;
 
 
 					if ((conditionid==2) || (conditionid==4)) kir=kir*1.25;            
