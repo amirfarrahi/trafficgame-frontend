@@ -201,8 +201,8 @@ setInterval(blinker, 1000);
         </div>
         <div class="modal-body">
  <p><u>This week’s instructions:</u></p>
-<p>1- BAD WEATHER CONDITIONS (i.e. snow and rain) WILL CHANGE TRAVEL TIME  ON ROADWAYS. MOREOVER, 50% DISCOUNT ON METRO RATES WILL BE APPLIED. 
-BE CAREFUL IN YOUR COMMUTE TO WORK.
+<p>1. BAD WEATHER CONDITIONS (i.e. snow and rain) WILL CHANGE TRAVEL TIME  ON ROADWAYS. NO DISCOUNT IS APPLIED ON ANY TRANSPORTATION COST. INSTEAD, YOU WILL BE INFORMED ABOUT THE RISK OF LOSING PART 
+OF YOUR INCOME DUE TO DELAY BEYOND 9:00 AM (under “Traffic Info”).
 </p>
 <p>2- Please register/log in the game (through a valid email address) in the following few days and play three times (from the start of the log in 
 until answering the post-game survey).
@@ -1191,7 +1191,7 @@ $('#loModal').modal('toggle');
                  $("#trafficnews").text("Accident on I-66 expect delays"); 
                  $("#trafficnews").removeClass('hidden');
                
-               } //else $("#trafficnews").addClass('hidden');
+               } // else $("#trafficnews").addClass('hidden');
           if (tm==1) { gtm=google.maps.DirectionsTravelMode.DRIVING;
                         tmimagelink='img/car.gif';
                         tmname='Car';
@@ -1447,10 +1447,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
               };
 
             
-            if (conditionid==4) { 
-             // precost=precost*0.5;
-              cost=cost*0.5;
-            }
+       
             if (conditionid==2 || conditionid==4 )  {
 
             //  durationinmin=durationinmin+totalmilage;
@@ -1531,7 +1528,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
             };
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  {
-              cost=totalmilage*0.318*0.5;
+              cost=totalmilage*0.318;
 
 
 
@@ -1543,7 +1540,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
 
          if (tm==1)   { 
-         				   if (conditionid==2) traveltime=fttime;
+         				   if ((conditionid==2) || (conditionid==4)) traveltime=fttime;
                         $("#infowindowcarrow").empty();
                         $("#infowindowcarrow").append('<td>Car</td><td>'+totalmilage.toFixed(2)+' mile(s)</td>' 
                         +'<td>$ '+cost.toFixed(2)+'</td><td>' +
@@ -1575,14 +1572,14 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                       var dollar=0;
                       if (((fttimemax-tsdmin)>0) && (tsdmin!=-1))
                       dollar=Math.ceil((fttimemax-tsdmin)/60)*hr;
-                  /*
+                  
                       var lmsg='No risk of losing income';
                       if ((dollar>0) && (tsdmin!=-1)) {
                         lmsg='Risk of losing $' + dollar;
                         $("#trafficnews").removeClass('hidden');
                       }
                       else $("#trafficnews").addClass('hidden');
-                      $("#trafficnews").text(lmsg);  */
+                      $("#trafficnews").text(lmsg);  
     
 
     } else {
@@ -1662,10 +1659,10 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                kir=response.routes[0].legs[routeindex].duration.value/60;
                precost=predistance*0.16;
                if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)  precost=0;
-               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318*0.5;
+               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318;
 
 
-					if (conditionid==2) kir=kir*1.25;            
+					if ((conditionid==2) || (conditionid==4)) kir=kir*1.25;            
                Tmile=Tmile+predistance;
                Ttime=Ttime+kir;
                if ((tm!=1) && (pretmcar==1)) precost=precost+5;
