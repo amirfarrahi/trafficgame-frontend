@@ -201,13 +201,11 @@ setInterval(blinker, 1000);
         </div>
         <div class="modal-body">
  <p><u>This week’s instructions:</u></p>
-<p>1-THIS WEEK THIS WEEK, AN INCIDENT WILL OCCUR ALONG THE ROADWAY (on a major freeway) AND WILL CHANGE TRAVEL TIME IF YOU ARE DRIVING. 
-MOREOVER, 50% METRO RATE DISCOUNT WILL BE APPLIED.
+<p>1- BAD WEATHER CONDITIONS (i.e. snow and rain) WILL CHANGE TRAVEL TIME  ON ROADWAYS. MOREOVER, 50% DISCOUNT ON METRO RATES WILL BE APPLIED. 
+BE CAREFUL IN YOUR COMMUTE TO WORK.
 </p>
-<p>2- Please register again in the game (through a valid email address – possibly an email 
-address you used before) this week (Monday April 24, 2017, through Friday April 28, 2017) 
-and log in/play three times (from the start of the log in until answering the post-game survey. 
-Your answers will be compiled over the weekend of December 31 2016/January 1 2017.
+<p>2- Please register/log in the game (through a valid email address) in the following few days and play three times (from the start of the log in 
+until answering the post-game survey).
 </p>
 
 <p>3- It is preferable to use the latest versions of the browsers Firefox or Chrome when playing the game.</p>
@@ -748,7 +746,7 @@ $("#worktime").change(function() {
                //    $("#contxt").text(data[0].name);
                    conditionid=data[0].id;
              //   alert(JSON.stringify(data));
-                      conditionid=3;
+                      conditionid=4;
 
             //       if (conditionid==2)     $("#trafficnews").text("Inclement weather! Drive carefully.");
 
@@ -1533,7 +1531,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
 
             };
             if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT)  {
-              cost=totalmilage*0.318;
+              cost=totalmilage*0.318*0.5;
 
 
 
@@ -1577,14 +1575,14 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                       var dollar=0;
                       if (((fttimemax-tsdmin)>0) && (tsdmin!=-1))
                       dollar=Math.ceil((fttimemax-tsdmin)/60)*hr;
-
+                  /*
                       var lmsg='No risk of losing income';
                       if ((dollar>0) && (tsdmin!=-1)) {
                         lmsg='Risk of losing $' + dollar;
                         $("#trafficnews").removeClass('hidden');
                       }
                       else $("#trafficnews").addClass('hidden');
-                      $("#trafficnews").text(lmsg); 
+                      $("#trafficnews").text(lmsg);  */
     
 
     } else {
@@ -1664,7 +1662,7 @@ google.maps.DirectionsTravelMode.TRANSIT,0,map,false,function(a,b,c,d,e,f){
                kir=response.routes[0].legs[routeindex].duration.value/60;
                precost=predistance*0.16;
                if (travel_mode==google.maps.DirectionsTravelMode.BICYCLING)  precost=0;
-               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318;
+               if (travel_mode==google.maps.DirectionsTravelMode.TRANSIT) precost=predistance*0.318*0.5;
 
 
 					if (conditionid==2) kir=kir*1.25;            
